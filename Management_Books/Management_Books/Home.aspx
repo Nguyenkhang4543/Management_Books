@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Management Books Home</title>
-    <link rel="shortcut icon" type="image/x-icon" href="Nissei.ico" />
-    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../Nissei.ico" />
+    <link rel="stylesheet" href="../Css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
 </head>
 <body>

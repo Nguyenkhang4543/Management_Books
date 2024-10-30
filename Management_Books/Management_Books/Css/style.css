@@ -160,3 +160,19 @@ footer {
 .logout:hover {
     color: #feffb9;
 }
+
+.font {
+    font-weight: bold;
+    text-align: center;
+    background-color: #feffa9;
+}
+.font1 {
+    font-weight: bold;
+}
+.textbox1 {
+    width: 80%;
+}
+
+.textbox2 {
+    width: 90%;
+}
