@@ -35,7 +35,7 @@
             <label>Sổ Quản Lý Cắt Cable</label>
         </div>
         <div style="width:100%;margin-top:10px;">
-            <table>
+            <table style="width:100%">
                 <tr style="text-align:center">
                     <td class="TieuDe">
                         <asp:Label runat ="server">Lot Nguyên Liệu</asp:Label>
@@ -96,7 +96,7 @@
                 </tr>
             </table>
         </div>
-           <div style="width:100%;text-align:center;margin-top:10px;">
+        <div style="width:100%;text-align:center;margin-top:10px;">
             <asp:Label Font-Size="20px" runat="server">TÌM KIẾM</asp:Label>
         </div>
         <div style="width:100%;text-align:center">
@@ -107,7 +107,59 @@
             <asp:Button Cssclass="button2" runat="server" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
-            <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="true" ID="GridView1">
+            <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="false" ID="GridView1" HeaderStyle-BackColor="#feffa9">
+                <Columns>
+                    <asp:TemplateField  HeaderText="ID">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("ID_Phieu")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="LOT NL">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("LOT_NL")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Số Bobin">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("LOT_Doan")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Ngày Cắt">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("NGAYCAT")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="LOT Cắt">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("LOT_Cat")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Sản Phẩm">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("SanPham")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Kích Thước <br/> Cắt">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("KichThuocCat")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Số Đơn">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("So_Don")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Số Đoạn">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("So_Doan")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Leader <br/> Xác Nhận">
+                        <ItemTemplate>
+                            <asp:Label runat="server" Text='<%# Eval("Leader_XacNhan")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
             </asp:GridView>
         </div>
         <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
