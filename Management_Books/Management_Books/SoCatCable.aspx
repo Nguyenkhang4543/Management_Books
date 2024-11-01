@@ -17,6 +17,7 @@
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Label ID="lblID" Style="display: none;" runat="server"></asp:Label>
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -106,7 +107,7 @@
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
             <asp:TextBox runat="server" type="Date" ID="txtToDate"></asp:TextBox>
             <asp:TextBox runat="server" ID="txtLotNL_Search"></asp:TextBox>
-            <asp:Button Cssclass="button2" runat="server" Text="Search"/>
+            <asp:Button Cssclass="button2" runat="server" OnClick="btnSearch_Click" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
             <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#feffa9">

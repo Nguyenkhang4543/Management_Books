@@ -17,17 +17,22 @@ namespace Management_Books
         ThaoTacDuLieu SQLhelper = new ThaoTacDuLieu();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["MaNV"] == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("Login.aspx");
-            }
-            else
-            {
-                lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
-                txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                Load_Gridview();
+                if (Session["MaNV"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    //Load_Gridview();
+                    btnSearch_Click(null, null);
+                    lblID.Text = null;
 
+                }
             }
         }
         public static string convertToUnSign3(string s)
@@ -143,39 +148,53 @@ namespace Management_Books
             txtSoDoan.Enabled = flag;
             txtLeaderXacNhan.Enabled = flag;
         }
+        private bool CheckData()
+        {
+            bool kq = true;
+            if (string.IsNullOrEmpty(txtLotNL.Text) || string.IsNullOrEmpty(txtDoan.Text) || string.IsNullOrEmpty(txtNgayCat.Text) || string.IsNullOrEmpty(txtSanPham.Text) || string.IsNullOrEmpty(txtKichThuocCat.Text)
+              || string.IsNullOrEmpty(txtSoDon.Text) || string.IsNullOrEmpty(txtSoDoan.Text))
+            {
+                kq = false;
+            }
 
+            if (kq == false)
+            {
+                MsgBox("Vui lòng nhập đầy đủ thông tin");
+            }
+            return kq;
+        }
         protected void btnSave_Click(object sender, EventArgs e)
         {
             int insert = 0;
             string ID = string.IsNullOrEmpty(hdfID.Value) ? null : hdfID.Value;
-            insert = SQLhelper.ExecuteNonQuery("Books_LineCut_Insert_SoCatCable", new SqlParameter[]
+            if (CheckData() == true)
             {
-                new SqlParameter("@ID",ID),
-                new SqlParameter("@LOT_NL",txtLotNL.Text.Trim()),
-                new SqlParameter("@LOT_Doan",txtDoan.Text.Trim()),
-                new SqlParameter("@NGAYCAT",txtNgayCat.Text.Trim()),
-                new SqlParameter("@LOT_Cat",txtLotCat.Text.Trim()),
-                new SqlParameter("@SanPham",txtSanPham.Text.Trim()),
-                new SqlParameter("@KichThuocCat",txtKichThuocCat.Text.Trim()),
-                new SqlParameter("@So_Don",txtSoDon.Text.Trim()),
-                new SqlParameter("@So_Doan",txtSoDoan.Text.Trim()),
-                new SqlParameter("@Leader_XacNhan",txtLeaderXacNhan.Text.Trim()),
-                new SqlParameter("@MaBP",Session["MaBP"].ToString()),
-                new SqlParameter("@Fatory",Session["Factory"].ToString()),
-                new SqlParameter("@NgayGhiNhan",DateTime.Now.ToString("yyyy-MM-dd")),
-                new SqlParameter("@NguoiGhiNhan",Session["Ten"].ToString()),
-            });
-            if (insert > 0)
-            {
+                insert = SQLhelper.ExecuteNonQuery("Books_LineCut_Insert_SoCatCable", new SqlParameter[]
+                {
+                        new SqlParameter("@ID", ID),
+                        new SqlParameter("@LOT_NL", txtLotNL.Text.Trim()),
+                        new SqlParameter("@LOT_Doan", txtDoan.Text.Trim()),
+                        new SqlParameter("@NGAYCAT", txtNgayCat.Text.Trim()),
+                        new SqlParameter("@LOT_Cat", txtLotCat.Text.Trim()),
+                        new SqlParameter("@SanPham", txtSanPham.Text.Trim()),
+                        new SqlParameter("@KichThuocCat", txtKichThuocCat.Text.Trim()),
+                        new SqlParameter("@So_Don", txtSoDon.Text.Trim()),
+                        new SqlParameter("@So_Doan", txtSoDoan.Text.Trim()),
+                        new SqlParameter("@Leader_XacNhan", txtLeaderXacNhan.Text.Trim()),
+                        new SqlParameter("@MaBP", Session["BoPhan"].ToString()),
+                        new SqlParameter("@Fatory", Session["Factory"].ToString()),
+                        new SqlParameter("@NgayGhiNhan", DateTime.Now.ToString()),
+                        new SqlParameter("@NguoiGhiNhan", Session["Ten"].ToString()),
+                });
                 MsgBox("Lưu dữ liệu thành công");
                 ResetData();
                 Enable_field();
-            }
-            else
-            {
-                MsgBox("Lỗi: Có lỗi xảy ra kiểm tra lại!");
+                btnSearch_Click(null, null);
+                lblID.Text = null;
+              
             }
         }
+
         private void ResetData()
         {
             txtLotNL.Text = "";
@@ -187,6 +206,7 @@ namespace Management_Books
             txtSoDon.Text = "";
             txtSoDoan.Text = "";
             txtLeaderXacNhan.Text = "";
+            hdfID.Value = "";
         }
     }
 }
