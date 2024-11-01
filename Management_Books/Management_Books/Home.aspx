@@ -31,40 +31,41 @@
         <label style="margin-left:15px;font-size:25px; font-weight:bold;color:#0C599F">Kashime :</label>
     </div>
     <div style="border-bottom: 3px solid #0C599F;padding: 0 10px 10px 10px; text-align: center;">
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ Thao Tác" OnClick="btnSoThaoTac_Click" />
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ Test Line" OnClick="btnSoTestLine_Click"/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
-        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..."/>
+        <asp:Checkbox runat="server" style="display:none" ID="CheckAdmin"></asp:Checkbox>
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ Thao Tác" OnClick="btnSoThaoTac_Click" ID="btnSoThaoTac" Visible="false"/>
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ Test Line" OnClick="btnSoTestLine_Click" ID="btnSoTestLine" Visible="false"/>
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." Visible="false"/>
     </div>
      <div style="margin-top:10px">
         <label style="margin-left:15px;font-size:25px; font-weight:bold;color:#ff9999">Line Cut :</label>
     </div>
     <div style ="border-bottom: 3px solid #ff9999;padding: 0 10px 10px 10px; text-align: center;">
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ Cắt Cable" OnClick="btnSoCatCable_Click" />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
-        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ Cắt Cable" OnClick="btnSoCatCable_Click" ID="btnSoCatCable" Visible="false"/>
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
+        <asp:button Cssclass="button4" type="submit" runat="server" Text="Sổ ..." Visible="false" />
         
     </div>
     <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
