@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Management_Books
 {
@@ -11,7 +13,21 @@ namespace Management_Books
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["MaNV"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
 
+            }
+        }
+        public static string convertToUnSign3(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
 

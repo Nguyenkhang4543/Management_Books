@@ -16,7 +16,7 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click" />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -67,34 +67,35 @@
                 </tr>
                 <tr style="width:100%;text-align:center">
                     <td>
-                        <asp:Textbox style="width:90%;" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotNL" style="width:90%;" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtDoan" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNgayCat" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotCat" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSanPham" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKichThuocCat" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDon" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDoan" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeaderXacNhan" style="width:90%" runat ="server"></asp:Textbox>
                     </td>
                 </tr>
             </table>
+            <asp:HiddenField runat="server" ID="hdfID" />
         </div>
         <div style="width:100%;text-align:center;margin-top:10px;">
             <asp:Label Font-Size="20px" runat="server">TÌM KIẾM</asp:Label>
@@ -104,60 +105,61 @@
             <asp:TextBox runat="server" type="Date" ID="txtFromDate"></asp:TextBox>
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
             <asp:TextBox runat="server" type="Date" ID="txtToDate"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtLotNL_Search"></asp:TextBox>
             <asp:Button Cssclass="button2" runat="server" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
-            <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="false" ID="GridView1" HeaderStyle-BackColor="#feffa9">
+            <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#feffa9">
                 <Columns>
-                    <asp:TemplateField  HeaderText="ID">
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ID_Phieu")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="LOT NL">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("LOT_NL")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLotNL" Text='<%# Eval("LOT_NL")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Số Bobin">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("LOT_Doan")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLotDoan" Text='<%# Eval("LOT_Doan")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Ngày Cắt">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("NGAYCAT")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblNgayCat" Text='<%# Eval("NGAYCAT")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="LOT Cắt">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("LOT_Cat")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLotCat" Text='<%# Eval("LOT_Cat")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Sản Phẩm">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("SanPham")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSanPham" Text='<%# Eval("SanPham")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Kích Thước <br/> Cắt">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("KichThuocCat")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblKichThuocCat" Text='<%# Eval("KichThuocCat")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Số Đơn">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("So_Don")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSoDon" Text='<%# Eval("So_Don")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Số Đoạn">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("So_Doan")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSoDoan" Text='<%# Eval("So_Doan")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Leader <br/> Xác Nhận">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("Leader_XacNhan")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLeaderXacNhan" Text='<%# Eval("Leader_XacNhan")%>'></asp:Label>
                         </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button CssClass="button2" ID="btnEdit" Text="Edit" runat="server" OnClick="btnEdit_Click" CommandArgument='<%# Eval("ID") %>' />
+                                </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
