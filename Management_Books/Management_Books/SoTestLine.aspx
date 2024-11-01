@@ -197,8 +197,8 @@
                 <asp:TableCell><asp:TextBox ID="txtKQ6" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ7" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ8" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSX1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtQC1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtGhiChu1" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
                 <asp:TableCell><asp:TextBox ID="txtKQ9" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
@@ -207,16 +207,16 @@
                 <asp:TableCell><asp:TextBox ID="txtKQ12" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ13" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ14" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSX2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtQC2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtGhiChu2" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
        
                 <asp:TableCell><asp:TextBox ID="txtKQ15" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ16" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ17" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ18" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX3" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC3" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSX3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtQC3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtGhiChu3" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
             </asp:TableRow>
             </asp:Table>

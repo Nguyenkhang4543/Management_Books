@@ -37,7 +37,7 @@
         </div>
         <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
-                <tr style="text-align:center">
+                <tr style="text-align:center; ">
                     <td class="TieuDe">
                         <asp:Label runat ="server">Lot Nguyên Liệu</asp:Label>
                     </td>
@@ -66,33 +66,33 @@
                         <asp:Label runat ="server">Leader Xác Nhận</asp:Label>
                     </td>
                 </tr>
-                <tr style="width:100%;text-align:center">
+                <tr style="width:100%; text-align:center">
                     <td>
-                        <asp:Textbox ID="txtLotNL" style="width:90%;" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotNL" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtDoan" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtNgayCat" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNgayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtLotCat" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtSanPham" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSanPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtKichThuocCat" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKichThuocCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtSoDon" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDon" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtSoDoan" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtLeaderXacNhan" style="width:90%" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeaderXacNhan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                 </tr>
             </table>
@@ -102,15 +102,15 @@
             <asp:Label Font-Size="20px" runat="server">TÌM KIẾM</asp:Label>
         </div>
         <div style="width:100%;text-align:center">
-            <asp:Label Font-Size="20px" runat="server">From Date: </asp:Label>
-            <asp:TextBox runat="server" type="Date" ID="txtFromDate"></asp:TextBox>
+            <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
+            <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
-            <asp:TextBox runat="server" type="Date" ID="txtToDate"></asp:TextBox>
-            <asp:TextBox runat="server" ID="txtLotNL_Search"></asp:TextBox>
-            <asp:Button Cssclass="button2" runat="server" OnClick="btnSearch_Click" Text="Search"/>
+            <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtToDate"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtLotNL_Search" style="height: 25px"></asp:TextBox>
+            <asp:Button Cssclass="button2" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
-            <asp:GridView runat="server" style="width:100%" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#feffa9">
+            <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#99ffcc" >
                 <Columns>
                     <asp:TemplateField HeaderText="LOT NL">
                         <ItemTemplate>
