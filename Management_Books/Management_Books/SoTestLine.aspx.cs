@@ -17,5 +17,14 @@ namespace Management_Books
         {
             Response.Redirect("Home.aspx");
         }
+        protected void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            Session["MaNV"] = null;
+            Session["Quyen"] = null;
+            Session["Ten"] = null;
+            Session["BoPhan"] = null;
+            Session["Factory"] = null;
+            Response.Redirect("Login.aspx");
+        }
     }
 }

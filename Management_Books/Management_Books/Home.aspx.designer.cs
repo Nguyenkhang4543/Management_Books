@@ -33,6 +33,15 @@ namespace Management_Books
         protected global::System.Web.UI.HtmlControls.HtmlTable Table3;
 
         /// <summary>
+        /// btnAdminLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdminLogin;
+
+        /// <summary>
         /// lblTenDanhNhap control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace Management_Books
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor btnDangXuat;
+
+        /// <summary>
+        /// lblSoKashime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSoKashime;
 
         /// <summary>
         /// CheckAdmin control.
@@ -78,6 +96,177 @@ namespace Management_Books
         protected global::System.Web.UI.WebControls.Button btnSoTestLine;
 
         /// <summary>
+        /// btnSoThaoTac1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac1;
+
+        /// <summary>
+        /// btnSoThaoTac2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac2;
+
+        /// <summary>
+        /// btnSoThaoTac3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac3;
+
+        /// <summary>
+        /// btnSoThaoTac4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac4;
+
+        /// <summary>
+        /// btnSoThaoTac5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac5;
+
+        /// <summary>
+        /// btnSoThaoTac6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac6;
+
+        /// <summary>
+        /// btnSoThaoTac7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac7;
+
+        /// <summary>
+        /// btnSoThaoTac8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac8;
+
+        /// <summary>
+        /// btnSoThaoTac9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac9;
+
+        /// <summary>
+        /// btnSoThaoTac10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac10;
+
+        /// <summary>
+        /// btnSoThaoTac11 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac11;
+
+        /// <summary>
+        /// btnSoThaoTac12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac12;
+
+        /// <summary>
+        /// btnSoThaoTac13 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac13;
+
+        /// <summary>
+        /// btnSoThaoTac14 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac14;
+
+        /// <summary>
+        /// btnSoThaoTac15 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac15;
+
+        /// <summary>
+        /// btnSoThaoTac16 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac16;
+
+        /// <summary>
+        /// btnSoThaoTac17 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac17;
+
+        /// <summary>
+        /// btnSoThaoTac18 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac18;
+
+        /// <summary>
+        /// lblSoLineCut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSoLineCut;
+
+        /// <summary>
         /// btnSoCatCable control.
         /// </summary>
         /// <remarks>
@@ -85,5 +274,77 @@ namespace Management_Books
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSoCatCable;
+
+        /// <summary>
+        /// btnSoThaoTac19 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac19;
+
+        /// <summary>
+        /// btnSoThaoTac20 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac20;
+
+        /// <summary>
+        /// btnSoThaoTac21 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac21;
+
+        /// <summary>
+        /// btnSoThaoTac22 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac22;
+
+        /// <summary>
+        /// btnSoThaoTac23 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac23;
+
+        /// <summary>
+        /// btnSoThaoTac24 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac24;
+
+        /// <summary>
+        /// btnSoThaoTac25 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac25;
+
+        /// <summary>
+        /// btnSoThaoTac26 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSoThaoTac26;
     }
 }

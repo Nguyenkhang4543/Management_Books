@@ -25,7 +25,7 @@
                 <td style="border-spacing: unset; border-style: none; background-color: #006699; text-align: right; width: 12%">
                     <div >
                         <asp:Label runat="server" ID="lblTenDanhNhap" ForeColor="White" Style=" display:inline-table; margin-right:10px" Font-Bold="True"></asp:Label>
-                        <a class="button_logout" id="btnDangXuat" runat="server" >
+                        <a class="button_logout" id="btnDangXuat" runat="server" onserverclick="btnDangXuat_Click" >
                             <div class="logout">Log Out </div>
                         </a>
                     </div>

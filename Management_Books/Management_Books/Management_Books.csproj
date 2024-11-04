@@ -127,6 +127,7 @@
     <Content Include="Home.aspx" />
     <Content Include="Images\NISSEI.png" />
     <Content Include="Login.aspx" />
+    <Content Include="Management_Employees.aspx" />
     <Content Include="Nissei.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -184,6 +185,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management_Employees.aspx.cs">
+      <DependentUpon>Management_Employees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management_Employees.aspx.designer.cs">
+      <DependentUpon>Management_Employees.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

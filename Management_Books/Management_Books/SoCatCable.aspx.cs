@@ -45,6 +45,15 @@ namespace Management_Books
         {
             Response.Redirect("Home.aspx");
         }
+        protected void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            Session["MaNV"] = null;
+            Session["Quyen"] = null;
+            Session["Ten"] = null;
+            Session["BoPhan"] = null;
+            Session["Factory"] = null;
+            Response.Redirect("Login.aspx");
+        }
         private void MsgBox(string sMessage)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "myalert", "alert(\"" + sMessage.Replace("\r\n", "") + "\");", true);
@@ -93,7 +102,11 @@ namespace Management_Books
                         
                          )
                     {
-                        GridView1.Rows[i].BackColor = Color.FromArgb(1, 255, 255, 153);
+                        GridView1.Rows[i].BackColor = Color.FromArgb(1, 255, 255, 0);
+                    }
+                    else
+                    {
+                        GridView1.Rows[i].BackColor = Color.FromArgb(1, 100, 207, 74);
                     }
                 }
             }

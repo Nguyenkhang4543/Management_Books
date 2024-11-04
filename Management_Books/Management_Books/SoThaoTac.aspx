@@ -29,7 +29,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width:100%">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
+            <ContentTemplate>
+                 <div style="width:100%">
         <%-------------------------------Thanh Tiêu Đề-------------------------------%>
         <table id="Table3" runat="server" enableviewstate="true" style="border-spacing: unset; width: 100%;">
             <tr>
@@ -43,7 +47,7 @@
                 <td style="border-spacing: unset; border-style: none; background-color: #006699; text-align: right; width: 12%">
                     <div >
                         <asp:Label runat="server" ID="lblTenDanhNhap" ForeColor="White" Style=" display:inline-table; margin-right:10px" Font-Bold="True"></asp:Label>
-                        <a class="button_logout" id="btnDangXuat" runat="server" >
+                        <a class="button_logout" id="btnDangXuat" runat="server" onserverclick="btnDangXuat_Click">
                             <div class="logout">Log Out </div>
                         </a>
                     </div>
@@ -143,38 +147,6 @@
                     </td>
                 </tr>
             </table>
-        <%-------------------------------Bảng Số 3-------------------------------%>
-        <%--<table class="tblForm" style="margin-bottom:5px">
-                <tr class="font">
-                    <td class="font" colspan="1" rowspan="3"  width="120px"; >Lot No。<br /> ロットNo.</td>
-                    <td rowspan="3"  width="50px"; >Số lượng <br />数量</td>
-                     <td colspan="6">Người thao tác 作業者</td>
-                    <td rowspan="3"  width="110px";>Leader <br />đóng gói <br /> 梱包リーダー</td>
-                    <td colspan="8" rowspan="1">Công đoạn<br />工程</td>
-                </tr>
-                <tr class="font">
-                    <td colspan="1" rowspan="2"  width="100px"; >Set cable Dập máy <br />ケーブルセット カシメ </td>
-                    <td rowspan="2"  width="100px";>Dập sleeve <br />スリーブカシメ</td>
-                     <td rowspan="2"  width="75px"; >Số lượng đóng gói <br />梱包数量</td>
-                    <td rowspan="2"  width="80px";>Số lượng bù <br />補充数量</td>
-                    <td rowspan="2" width="95px";>MSNV đóng gói <br />梱包者の社員</td>
-                     <td rowspan="2" width="100px";>MSNV người đóng thùng <br />箱梱包者の社員</td>
-                    <td rowspan="1"  width="100px";>Cable<br />ケーブル"</td>
-                    <td width="100px";>Sleeve<br />スリーブ"</td>
-                    <td width="100px";>Nhúng chì <br />予備半田</td>
-                    <td colspan="5">Giao QC <br /> 品管移転</td>
-                </tr>
-                <tr>
-                    <td  colspan="1" rowspan="3"></td>
-                    <td></td>
-                     <td></td>
-                    <td  class="font" colspan="1" rowspan="3" width="100px";>6-9h</td>
-                    <td class="font"  width="100px"; >10-12h</td>
-                     <td class="font" width="100px";>13-15h</td>
-                    <td class="font" width="100px";>16-18h</td>
-                    <td class="font" width="100px"; >OK Đơn<br />ロット</td>
-                </tr>
-                </table>--%>
         <%-------------------------------Grid View-------------------------------%>
         <div>
             <asp:GridView ID="GridView1" runat="server" style="width:100%; text-align:center" AutoGenerateColumns="False" HeaderStyle-BackColor="#feffa9">
@@ -297,14 +269,22 @@
                         </asp:TemplateField>
                     </Columns>
             </asp:GridView>
+           <%-- <asp:Button class="button" ID="btnAddNewRow" runat="server" Text="+" OnClick="btnAddNewRow_Click" Height="30px" Width="36px" />
+            <asp:Button class="button" ID="btnDeleteRow" runat="server" Text="-" Onclick="btnDeleteRow_Click" Height="30px" Width="36px" />--%>
             <asp:Button class="button" ID="btnAddNewRow" runat="server" Text="+" OnClick="btnAddNewRow_Click" Height="30px" Width="36px" />
-            <asp:Button class="button" ID="btnDeleteRow" runat="server" Text="-" Onclick="btnDeleteRow_Click" Height="30px" Width="36px" />
+            <asp:Button class="button" ID="btnDeleteRow" runat="server" Text="-" OnClick="btnDeleteRow_Click" Height="30px" Width="36px" />
         </div>
         <%-------------------------------Footer-------------------------------%>
         <br />
         <br />
         <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
         </div>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnAddNewRow" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnDeleteRow" EventName="Click" />
+            </Triggers>
+        </asp:UpdatePanel>
     </form>
 </body>
 </html>

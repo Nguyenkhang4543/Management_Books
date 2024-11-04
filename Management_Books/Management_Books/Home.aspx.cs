@@ -34,11 +34,37 @@ namespace Management_Books
                     CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field <bool>("ALL_Books");
                     if(CheckAdmin.Checked == true)
                     {
+                        btnAdminLogin.Visible = true;
                         ////////////////////////////////// So Kashime //////////////////////////////////
+                        lblSoKashime.Visible = true;
                         btnSoThaoTac.Visible = true;
                         btnSoTestLine.Visible = true;
                         ////////////////////////////////// So Line Cut //////////////////////////////////
+                        lblSoLineCut.Visible = true;
                         btnSoCatCable.Visible = true;
+
+                        ////////////////////////////////// So Test //////////////////////////////////
+                        btnSoThaoTac1.Visible = true;
+                        btnSoThaoTac2.Visible = true;
+                        btnSoThaoTac3.Visible = true;
+                        btnSoThaoTac4.Visible = true;
+                        btnSoThaoTac5.Visible = true;
+                        btnSoThaoTac6.Visible = true;
+                        btnSoThaoTac7.Visible = true;
+                        btnSoThaoTac8.Visible = true;
+                        btnSoThaoTac9.Visible = true;
+                        btnSoThaoTac10.Visible = true;
+                        btnSoThaoTac11.Visible = true;
+                        btnSoThaoTac12.Visible = true;
+                        btnSoThaoTac13.Visible = true;
+                        btnSoThaoTac14.Visible = true;
+                        btnSoThaoTac15.Visible = true;
+                        btnSoThaoTac16.Visible = true;
+                        btnSoThaoTac17.Visible = true;
+                        btnSoThaoTac18.Visible = true;
+                        btnSoThaoTac19.Visible = true;
+                        btnSoThaoTac20.Visible = true;
+
                     }
                     else
                     {
@@ -57,14 +83,17 @@ namespace Management_Books
                             if (maSo == 1)
                             {
                                 btnSoThaoTac.Visible = true;
+                                lblSoKashime.Visible = true;
                             }
                             if (maSo == 2)
                             {
                                 btnSoTestLine.Visible = true;
+                                lblSoKashime.Visible = true;
                             }
                             if (maSo == 3)
                             {
                                 btnSoCatCable.Visible = true;
+                                lblSoLineCut.Visible = true;
                             }
                         }
                     }
@@ -78,8 +107,21 @@ namespace Management_Books
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
+        protected void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            Session["MaNV"] = null;
+            Session["Quyen"] = null;
+            Session["Ten"] = null;
+            Session["BoPhan"] = null;
+            Session["Factory"] = null;
+            Response.Redirect("Login.aspx");
+        }
 
-
+        ///////////////////////////// Quản Lý Danh Sách Sổ/////////////////////////////////////////
+        protected void btnManagement_Employees_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Management_Employees.aspx");
+        }
 
         ///////////////////////////// Sổ Quản Lý Kashime /////////////////////////////////////////
         protected void btnSoThaoTac_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace Management_Books
 {
 
 
-    public partial class SoThaoTac
+    public partial class Management_Employees
     {
 
         /// <summary>
@@ -78,6 +78,87 @@ namespace Management_Books
         protected global::System.Web.UI.HtmlControls.HtmlAnchor btnDangXuat;
 
         /// <summary>
+        /// ddlBoPhan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBoPhan;
+
+        /// <summary>
+        /// ddlLoaiSo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLoaiSo;
+
+        /// <summary>
+        /// lblMa_So control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMa_So;
+
+        /// <summary>
+        /// lblID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblID;
+
+        /// <summary>
+        /// txtMaNhanVien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaNhanVien;
+
+        /// <summary>
+        /// txtTenNhanVien control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTenNhanVien;
+
+        /// <summary>
+        /// CheckAllQuyen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckAllQuyen;
+
+        /// <summary>
+        /// btnLuu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLuu;
+
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -85,23 +166,5 @@ namespace Management_Books
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
-        /// btnAddNewRow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddNewRow;
-
-        /// <summary>
-        /// btnDeleteRow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteRow;
     }
 }

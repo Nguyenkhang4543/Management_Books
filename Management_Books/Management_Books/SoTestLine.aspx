@@ -24,7 +24,7 @@
                 <td style="border-spacing: unset; border-style: none; background-color: #006699; text-align: right; width: 12%">
                     <div >
                         <asp:Label runat="server" ID="lblTenDanhNhap" ForeColor="White" Style=" display:inline-table; margin-right:10px" Font-Bold="True"></asp:Label>
-                        <a class="button_logout" id="btnDangXuat" runat="server" >
+                        <a class="button_logout" id="btnDangXuat" runat="server" onserverclick="btnDangXuat_Click" >
                             <div class="logout">Log Out </div>
                         </a>
                     </div>
@@ -189,7 +189,7 @@
                 <asp:TableCell><asp:TextBox ID="txtBoxSanPhamDangSanXuat" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="textBoxSanPhamMoi" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
      
-                    <asp:TableCell><asp:TextBox ID="txtKQ1" style="width: 25px; height:25px" runat="server" ></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKQ1" style="width: 25px; height:25px" runat="server" ></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ3" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKQ4" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
