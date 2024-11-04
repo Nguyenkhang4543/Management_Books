@@ -23,6 +23,11 @@ namespace Management_Books
             else
             {
                 lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+
+                if(Session["Quyen"].ToString() == "1")
+                {
+                    btnAdmin.Visible = true;
+                }
                 DataTable dtPhanQuyenXem = new DataTable();
                 dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
                 {
@@ -34,7 +39,6 @@ namespace Management_Books
                     CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field <bool>("ALL_Books");
                     if(CheckAdmin.Checked == true)
                     {
-                        btnAdminLogin.Visible = true;
                         ////////////////////////////////// So Kashime //////////////////////////////////
                         lblSoKashime.Visible = true;
                         btnSoThaoTac.Visible = true;

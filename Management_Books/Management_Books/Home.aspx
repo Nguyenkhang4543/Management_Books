@@ -14,7 +14,7 @@
     <table id="Table3" runat="server" enableviewstate="true" style="border-spacing: unset; width: 100%;">
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
-                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Admin" Visible="false" ID="btnAdminLogin" OnClick="btnManagement_Employees_Click"  />
+                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Admin" Visible="false" ID="btnAdmin" OnClick="btnManagement_Employees_Click"  />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -60,7 +60,7 @@
         <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." ID="btnSoThaoTac17" Visible="false" />
         <asp:Button CssClass="button3" type="submit" runat="server" Text="Sổ ..." ID="btnSoThaoTac18" Visible="false"/>
     </div>
-     <div style="margin-top:10px;width:100%;border-top:2px solid black">
+     <div style="margin-top:10px;width:100%;">
         <asp:label runat="server" ID="lblSoLineCut" Visible="false" style="margin-left:15px;font-size:25px; font-weight:bold;color:#ff9999">Line Cut :</asp:label>
     </div>
     <div style ="padding: 0 10px 10px 10px; text-align: center;">
