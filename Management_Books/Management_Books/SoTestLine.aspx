@@ -233,7 +233,7 @@
             <asp:Button Cssclass="button2" runat="server" Text="Search"/>
         </div>
             <div>
-                <asp:GridView runat ="server" ID="GridView" AutoGenerateColumns="true">
+                <asp:GridView runat ="server" ID="GridView" AutoGenerateColumns="false">
                     <Columns>
                         <asp:TemplateField HeaderText="Line">
                             <ItemTemplate>
