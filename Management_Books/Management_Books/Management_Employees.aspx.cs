@@ -35,7 +35,6 @@ namespace Management_Books
                     ddlLoaiSo.Items.Insert(0, new ListItem("-----Select-----", ""));
                 }
             }
-
         }
         public static string convertToUnSign3(string s)
         {
@@ -109,21 +108,27 @@ namespace Management_Books
         }
         protected void btnLuu_Click(object sender, EventArgs e)
         {
-            int insert = 0;
-            if (CheckData() == true)
+            if (CheckData() == true && Check_NhanVien()==true)
             {
-                insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
+               int insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
            {
-                new SqlParameter("@id",lblID.Text),
                 new SqlParameter("@Ma_So",lblMa_So.Text),
                 new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
                 new SqlParameter("@MSNV",txtMaNhanVien.Text),
                 new SqlParameter("@Ten_So",ddlLoaiSo.Text)
            });
-                MsgBox("Lưu Thành Công!");
-                ResetData();
-                Load_GridView();
-                return;
+                if(insert > 0)
+                {
+                    MsgBox("Lưu Thành Công!");
+                    ResetData();
+                    Load_GridView();
+                    return;
+                }
+                else
+                {
+                    MsgBox("Lưu Không Thành Công!");
+                }
+               
             }
             else
             {
@@ -136,6 +141,7 @@ namespace Management_Books
             txtMaNhanVien.Text = "";
             CheckAllQuyen.Checked = false;
             ddlLoaiSo.Text = "";
+            txtTenNhanVien.Text = "";
         }
         private bool CheckData()
         {
@@ -147,14 +153,32 @@ namespace Management_Books
             }
             return true;
         }
+        private bool Check_NhanVien()
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Check_PhanQuyen_NhanVien", new SqlParameter[]
+            {
+                new SqlParameter("@Ma_So",lblMa_So.Text),
+                new SqlParameter("@MSNV",txtMaNhanVien.Text)
+            });
+            if(dt.Rows.Count < 0)
+            {
+                return true;
+            }
+            else
+            {
+                MsgBox("Nhân Viên Đã Có Thông Tin Với :" + ddlLoaiSo.SelectedValue);
+                return false;
+            }
+        }
+       
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = Convert.ToInt32(GridView1.DataKeys[rowIndex].Value);
-            DataTable dt = new DataTable();
-            dt = SQLhelper.GetDataToTable("Books_Get_ThongTinNhanVien_ByID", new SqlParameter[] {
-                new SqlParameter("@id", id)
-            });
+            DataTable dt = SQLhelper.GetDataToTable("Books_Get_ThongTinNhanVien_ByID", new SqlParameter[] {
+                         new SqlParameter("@ID", id)
+             });
             if (dt.Rows.Count > 0)
             {
                 lblID.Text = dt.Rows[0].Field<int>("ID").ToString();
@@ -164,17 +188,61 @@ namespace Management_Books
                 CheckAllQuyen.Checked = dt.Rows[0].Field<bool>("ALL_Books");
             }
             btnDelete.Visible = true;
+            btnUpdate.Visible = true;
         }
-
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            {
+                int update = 0;
+                update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
+                            new SqlParameter("@ID", id),
+                            new SqlParameter("@Ma_So",lblMa_So.Text),
+                            new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
+                            new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                            new SqlParameter("@Ten_So",ddlLoaiSo.Text)
+              });
+                if (update > 0)
+                {
+                    MsgBox("Update Thành Công");
+                    ResetData();
+                    Load_GridView();
+                    btnDelete.Visible = false;
+                    btnUpdate.Visible = false;
+                }
+                else
+                {
+                    MsgBox("Update Không Thành Công");
+                    return;
+                }
+            }
+        }
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt = SQLhelper.GetDataToTable("Books_Delete_ThongTinNhanVien", new SqlParameter[] {
-                new SqlParameter("@MSNV",txtMaNhanVien.Text)
-            });
-            MsgBox("Xóa Thành Công !");
-            Load_GridView();
-            btnDelete.Visible = false;
+            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            {
+                SqlParameter[] prameter = new SqlParameter[]
+                {
+                    new SqlParameter("@ID", id)
+                };
+                int delete = SQLhelper.ExecuteNonQuery("Books_Delete_ThongTinNhanVien", prameter);
+                if (delete > 0)
+                {
+                    MsgBox("Xóa Thành Công!");
+                    ResetData();
+                    Load_GridView();
+                    btnDelete.Visible = false;
+                    btnUpdate.Visible = false;
+                }
+                else
+                {
+                    MsgBox("Xóa Không Thành Công!");
+                }
+            }
+            else
+            {
+                MsgBox("ID không hợp lệ!");
+            }
         }
     }
 }

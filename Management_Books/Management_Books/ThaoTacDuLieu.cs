@@ -9,16 +9,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.IO;
 
-//using System;
-//using System.Collections.Generic;
-//using System.Data;
-//using System.Data.SqlClient;
-//using System.Linq;
-//using System.Security.Cryptography;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.IO;
-
 namespace Management_Books
 {
     public class ThaoTacDuLieu
@@ -211,7 +201,6 @@ namespace Management_Books
                 if (cmd != null) cmd.Dispose();
             }
         }
-
         public string ExecuteNonQueryTest(string procedureName, params SqlParameter[] parameters)
         {
             string temp;
