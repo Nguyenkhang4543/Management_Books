@@ -262,32 +262,32 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Dập nguyên liệu còn lại về line nguyên liệu">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTConLai_1")%>'></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTConLai_2")%>'></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTConLai_1")%>'></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTConLai_2")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Gom tất cả dây quăng trong máy">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_1")%>'></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_2")%>'></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("ThuGomConLai_1")%>'></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("ThuGomConLai_2")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thành phẩm đã giao hết qua QC">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("GiaoTP_QC_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("GiaoTP_QC_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn phế phẩm của sản phẩm A">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTPhePham_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTPhePham_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTPhePham_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTPhePham_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("ACB_XacNhan_SX_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("ACB_XacNhan_QC_1")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ">
@@ -297,26 +297,26 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn CDC hoặc đặc tính">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTCDC_A_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTCDC_A_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTCDC_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTCDC_A_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra đặc tính">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTCD_DTA_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTCD_DTA_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra ngoại dạng">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTND_A1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTND_A2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTND_A1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTND_A2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_2")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("ACB_XacNhan_SX_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("ACB_XacNhan_QC_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ">
@@ -326,20 +326,20 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Khay, khuôn bẻ Taibar, trên line không còn sản phẩm A">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTTaibar_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTTaibar_A_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tất cả sản phẩm A đã được đóng gói và đóng thùng">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_1")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("KTDongGoi_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("KTDongGoi_A_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_3")%>' ></asp:Label>
-                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_3")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left" Text='<%# Eval("ACB_XacNhan_SX_3")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right" Text='<%# Eval("ACB_XacNhan_QC_3")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ">
