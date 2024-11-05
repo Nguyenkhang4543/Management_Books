@@ -49,6 +49,7 @@
                                 <asp:ListItem>*********************************</asp:ListItem>
                                 <asp:ListItem>Kashime</asp:ListItem>
                                 <asp:ListItem>LineCut</asp:ListItem>
+                                <asp:ListItem>All Sổ</asp:ListItem>
                                 </asp:Dropdownlist>
                         <asp:Dropdownlist ID="ddlLoaiSo" style="width:50%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMa_So" ></asp:Dropdownlist>
                         <asp:Label ID="lblMa_So" style="display:none" AutoPostBack="true" runat="server"></asp:Label>

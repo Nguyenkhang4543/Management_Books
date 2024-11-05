@@ -192,29 +192,55 @@ namespace Management_Books
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            if(Check_Update() == true)
             {
-                int update = 0;
-                update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
+                if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                {
+                    int update = 0;
+                    update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
                             new SqlParameter("@ID", id),
                             new SqlParameter("@Ma_So",lblMa_So.Text),
                             new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
                             new SqlParameter("@MSNV",txtMaNhanVien.Text),
                             new SqlParameter("@Ten_So",ddlLoaiSo.Text)
               });
-                if (update > 0)
-                {
-                    MsgBox("Update Thành Công");
-                    ResetData();
-                    Load_GridView();
-                    btnDelete.Visible = false;
-                    btnUpdate.Visible = false;
+                    if (update > 0)
+                    {
+                        MsgBox("Update Thành Công");
+                        ResetData();
+                        Load_GridView();
+                        btnDelete.Visible = false;
+                        btnUpdate.Visible = false;
+                    }
+                    else
+                    {
+                        MsgBox("Update Không Thành Công");
+                        return;
+                    }
                 }
-                else
-                {
-                    MsgBox("Update Không Thành Công");
-                    return;
-                }
+            }
+            else
+            {
+                MsgBox("Xảy Ra Lỗi Trong Quá Trình Update!");
+                return;
+            }
+            
+        }
+        private bool Check_Update()
+        {
+            int update = SQLhelper.ExecuteNonQuery("Check_PhanQuyen_NhanVien", new SqlParameter[]
+            {
+                new SqlParameter("@Ma_So",lblMa_So.Text),
+                new SqlParameter("@MSNV",txtMaNhanVien.Text)
+            });
+            if (update < 0)
+            {
+                return true;
+            }
+            else
+            {
+                MsgBox("Nhân Viên Đã Có Thông Tin Với :" + ddlLoaiSo.SelectedValue);
+                return false;
             }
         }
         protected void btnDelete_Click(object sender, EventArgs e)
