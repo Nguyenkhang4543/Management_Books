@@ -39,7 +39,7 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click"  />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -81,69 +81,68 @@
                     <td class="font">SLEEVE スリーブ</td>
                 </tr>
                 <tr>
-                    <td class="font1">Bản vẽ 図面:
-                    <asp:TextBox runat="server"></asp:TextBox>
+                    <td class="font1">Lineライン:
+                    <asp:TextBox runat="server" ID="txtLine"></asp:TextBox>
                     </td>
                     <td >
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2" ID="txtCable1" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtSlevee1" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font1">Bản vẽ 図面:
+                    <asp:TextBox runat="server" ID="txtBanVe"></asp:TextBox>
+                    </td>
+                    <td >
+                        <asp:TextBox class="textbox2" ID="txtCable2" runat="server"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:TextBox class="textbox2"  ID="txtSlevee2" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="font1">Mã sp 品目:
-                        <asp:TextBox runat="server"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtMaSanPham"></asp:TextBox>
                     </td>
                     <td >
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtCable3" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2" ID="txtSlevee3" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="font1">Tên sp 品名:
-                        <asp:TextBox runat="server"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtTenSanPham"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtCable4" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtSlevee4" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="font1">Ngày thao tác 作業日:
-                        <asp:TextBox runat="server"></asp:TextBox>
+                        <asp:TextBox type="date" runat="server" ID="txtNgayThaoTac"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtCable5" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox class="textbox2"  ID="txtSlevee5" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="font1">Đảm nhiệm 担当:
-                        <asp:TextBox runat="server"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtNguoiDamNhiem"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="font1">Hơi máy dập 圧力( 0.4 ~  0.5 ):
-                        <asp:TextBox runat="server"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
-                    </td>
-                    <td>
-                        <asp:TextBox class="textbox2" runat="server"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtHoiMayDap"></asp:TextBox>
                     </td>
                 </tr>
             </table>

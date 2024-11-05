@@ -130,7 +130,7 @@ namespace Management_Books
         ///////////////////////////// Sổ Quản Lý Kashime /////////////////////////////////////////
         protected void btnSoThaoTac_Click(object sender, EventArgs e)
         {
-            Response.Redirect("SoThaoTac.aspx");
+            Response.Redirect("SoThaoTac_Main.aspx");
         }
         protected void btnSoTestLine_Click(object sender, EventArgs e)
         {

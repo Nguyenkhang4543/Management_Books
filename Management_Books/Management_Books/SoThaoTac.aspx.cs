@@ -19,6 +19,7 @@ namespace Management_Books
 {
     public partial class SoThaoTac : System.Web.UI.Page
     {
+        ThaoTacDuLieu SQLhelper = new ThaoTacDuLieu();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,7 +30,7 @@ namespace Management_Books
         }
             protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Home.aspx");
+            Response.Redirect("SoThaoTac_Main.aspx");
         }
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -39,6 +40,16 @@ namespace Management_Books
             Session["BoPhan"] = null;
             Session["Factory"] = null;
             Response.Redirect("Login.aspx");
+        }
+        public static string convertToUnSign3(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        }
+        private void MsgBox(string sMessage)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "myalert", "alert(\"" + sMessage.Replace("\r\n", "") + "\");", true);
         }
         private void SetInitialRow()
         {
@@ -631,5 +642,116 @@ namespace Management_Books
                 txtOkDon.Enabled = true;
             }
         }
+        private string PhatSinhSoPhieu()
+        {
+            string Auto_IDPhieu = string.Format("{0:yyMM}", DateTime.Now.Date);
+            SqlParameter[] paramet = new SqlParameter[]
+                                  {
+                                    SQLhelper.CreateParameter("@IDPhieu", Auto_IDPhieu),
+                                  };
+            object chuoi = SQLhelper.ExecuteScala("Books_Kashime_Auto_IDPhieu_SoThaoTac", paramet);
+            if (chuoi == null)
+            {
+                Auto_IDPhieu += "001";
+            }
+            else
+            {
+                string strChuoi = chuoi.ToString();
+                //count = chuoi + 1;
+                if (!string.IsNullOrEmpty(strChuoi))
+                {
+                    int count = int.Parse(strChuoi.Substring(4)) + 1;
+                    if (count < 10)
+                        Auto_IDPhieu += "00" + count.ToString();
+                    else if (count < 100)
+                        Auto_IDPhieu += "0" + count.ToString();
+                    else if (count < 1000)
+                        Auto_IDPhieu += "" + count.ToString();
+                    else
+                        Auto_IDPhieu += count.ToString();
+                }
+                else Auto_IDPhieu += "001";
+            }
+            return Auto_IDPhieu;
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (Check_Data_Save() == true)
+            {
+                int insert = 0;
+                string ID_Phieu = PhatSinhSoPhieu();
+                insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoThaoTac_Data", new SqlParameter[] { 
+                        new SqlParameter("ID_Phieu",ID_Phieu),
+                        new SqlParameter("Line",txtLine.Text),
+                        new SqlParameter("BanVe",txtBanVe.Text),
+                        new SqlParameter("MaSanPham",txtMaSanPham.Text),
+                        new SqlParameter("TenSanPham",txtTenSanPham.Text),
+                        new SqlParameter("NgayThaoTac",txtNgayThaoTac.Text),
+                        new SqlParameter("NguoiDamNhiem",txtNguoiDamNhiem.Text),
+                        new SqlParameter("HoiMayDay",txtHoiMayDap.Text),
+                        new SqlParameter("MayCable1",txtCable1.Text),
+                        new SqlParameter("MayCable2",txtCable2.Text),
+                        new SqlParameter("MayCable3",txtCable3.Text),
+                        new SqlParameter("MayCable4",txtCable4.Text),
+                        new SqlParameter("MayCable5",txtCable5.Text),
+                        new SqlParameter("Sleeve1",txtSlevee1.Text),
+                        new SqlParameter("Sleeve2",txtSlevee2.Text),
+                        new SqlParameter("Sleeve3",txtSlevee3.Text),
+                        new SqlParameter("Sleeve4",txtSlevee4.Text),
+                        new SqlParameter("Sleeve5",txtSlevee5.Text),
+                });
+                if(insert > 0)
+                {
+                    MsgBox("Lưu Thành Công");
+                }
+                else
+                {
+                    MsgBox("Lưu Không Thành Công");
+                }
+            }
+        }
+        private bool Check_Data_Save()
+        {
+            if (string.IsNullOrEmpty(txtLine.Text))
+            {
+                MsgBox("Chưa Nhập Số Line");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtBanVe.Text))
+            {
+                MsgBox("Chưa Nhập Bản Vẽ");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtMaSanPham.Text))
+            {
+                MsgBox("Chưa Nhập Mã Sản Phẩm");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtTenSanPham.Text))
+            {
+                MsgBox("Chưa Nhập Tên Sản Phẩm");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtNgayThaoTac.Text))
+            {
+                MsgBox("Chưa Nhập Ngày Thao Tác");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtNguoiDamNhiem.Text))
+            {
+                MsgBox("Chưa Nhập Người Đảm Nhiệm");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtHoiMayDap.Text))
+            {
+                MsgBox("Chưa Nhập Hơi Máy Dậy");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
     }
 }
