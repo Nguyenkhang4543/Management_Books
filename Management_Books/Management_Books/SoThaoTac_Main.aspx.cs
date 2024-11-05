@@ -21,13 +21,37 @@ namespace Management_Books
     public partial class SoThaoTac_Main : System.Web.UI.Page
     {
         ThaoTacDuLieu SQLhelper = new ThaoTacDuLieu();
+        int currPage = 1;
+        int Total = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                lblCurrPage.Text = "1";
                 Load_Gridview();
+                DataTable dt = new DataTable();
+                SqlParameter[] prams = new SqlParameter[] {
+                                    new SqlParameter("@NoiDung","")};
+                dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewList", prams);
+                if (dt.Rows.Count > 0)
+                {
+                    double a = dt.Rows.Count;
+                    double tong = (a / 20);
+                    lblTotal.Text = ((int)Math.Ceiling(tong)).ToString();
+                    if (tong > 1)
+                    {
+                        btnLast.Enabled = true;
+                        btnNext.Enabled = true;
+                    }
+                    else
+                    {
+                        btnLast.Enabled = false;
+                        btnNext.Enabled = false;
+                    }
+                    btnPrevious.Enabled = false;
+                    btnFirst.Enabled = false;
+                }
             }
-
         }
         protected void btnBack_Click(object sender, EventArgs e)
         {
@@ -60,15 +84,185 @@ namespace Management_Books
         private void Load_Gridview()
         {
             DataTable dt = new DataTable();
-            dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac");
+            dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewPage",new SqlParameter[] {
+                 new SqlParameter("@PageNumber",currPage),
+                 new SqlParameter("@NoiDung",txtNoiDung.Text.ToString().Trim())
+        });
             if (dt.Rows.Count > 0)
             {
+                int rowIndex = 0;
                 GridView.DataSource = dt;
                 GridView.DataBind();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Label Row = (Label)GridView.Rows[rowIndex].Cells[0].FindControl("lblSTT");
+                    LinkButton ID = (LinkButton)GridView.Rows[rowIndex].Cells[1].FindControl("txtID");
+                    Label Line = (Label)GridView.Rows[rowIndex].Cells[2].FindControl("lblLine");
+                    Label MaSanPham = (Label)GridView.Rows[rowIndex].Cells[3].FindControl("lblMaSanPham");
+                    Label TenSanPham = (Label)GridView.Rows[rowIndex].Cells[4].FindControl("lblTenSanPham");
+                    Label BanVe = (Label)GridView.Rows[rowIndex].Cells[5].FindControl("lblBanVe");
+                    Label NgayThaoTac = (Label)GridView.Rows[rowIndex].Cells[6].FindControl("lblNgayThaoTac");
+                    Label NguoiDamNhiem = (Label)GridView.Rows[rowIndex].Cells[7].FindControl("lblNguoiDamNhiem");
+                    Row.Text = dt.Rows[i][0].ToString();
+                    ID.Text = dt.Rows[i][1].ToString();
+                    Line.Text = dt.Rows[i][2].ToString();
+                    MaSanPham.Text = dt.Rows[i][3].ToString();
+                    TenSanPham.Text = dt.Rows[i][4].ToString();
+                    BanVe.Text = dt.Rows[i][5].ToString();
+                    NgayThaoTac.Text = (Convert.ToDateTime(dt.Rows[i][6].ToString())).ToString("yyyy-MM-dd HH:mm:ss");
+                    NguoiDamNhiem.Text = dt.Rows[i][7].ToString();
+                    rowIndex++;
+                }
+                SetPreviousData();
+            }
+        }
+        protected void btnFirst_Click(object sender, EventArgs e)
+        {
+            currPage = 1;
+            Load_Gridview();
+            lblCurrPage.Text = "1";
+            btnPrevious.Enabled = false;
+            btnNext.Enabled = true;
+            btnFirst.Enabled = false;
+            btnLast.Enabled = true;
+        }
+
+        protected void btnLast_Click(object sender, EventArgs e)
+        {
+
+            currPage = int.Parse(lblTotal.Text.ToString());
+            Load_Gridview();
+            lblCurrPage.Text = currPage.ToString();
+            btnPrevious.Enabled = true;
+            btnNext.Enabled = false;
+            btnFirst.Enabled = true;
+            btnLast.Enabled = false;
+        }
+
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (int.Parse(lblCurrPage.Text.ToString()) > 1)
+            {
+                currPage = int.Parse(lblCurrPage.Text.ToString()) - 1;
             }
             else
             {
-                MsgBox("Không Có Dữ Liệu");   
+                currPage = 1;
+            }
+            lblCurrPage.Text = currPage.ToString();
+            if (int.Parse(lblCurrPage.Text.ToString()) > 1)
+            {
+                btnPrevious.Enabled = true;
+                btnNext.Enabled = true;
+                btnFirst.Enabled = true;
+                btnLast.Enabled = true;
+            }
+            else
+            {
+                btnPrevious.Enabled = false;
+                btnNext.Enabled = true;
+                btnFirst.Enabled = false;
+                btnLast.Enabled = true;
+            }
+            Load_Gridview();
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            if (int.Parse(lblCurrPage.Text.ToString()) < int.Parse(lblTotal.Text.ToString()))
+            {
+                currPage = int.Parse(lblCurrPage.Text.ToString()) + 1;
+            }
+            else
+            {
+                currPage = Total;
+            }
+            lblCurrPage.Text = currPage.ToString();
+            if (int.Parse(lblCurrPage.Text.ToString()) < int.Parse(lblTotal.Text.ToString()))
+            {
+                btnPrevious.Enabled = true;
+                btnNext.Enabled = true;
+                btnFirst.Enabled = true;
+                btnLast.Enabled = true;
+            }
+            else
+            {
+                btnPrevious.Enabled = true;
+                btnNext.Enabled = false;
+                btnFirst.Enabled = true;
+                btnLast.Enabled = false;
+            }
+            Load_Gridview();
+        }
+        private void SetPreviousData()
+        {
+            int rowIndex = 0;
+            if (ViewState["CurrentTable"] != null)
+            {
+                DataTable dt = (DataTable)ViewState["CurrentTable"];
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Label Row = (Label)GridView.Rows[rowIndex].Cells[0].FindControl("lblSTT");
+                        LinkButton ID = (LinkButton)GridView.Rows[rowIndex].Cells[1].FindControl("txtID");
+                        Label Line = (Label)GridView.Rows[rowIndex].Cells[2].FindControl("lblLine");
+                        Label MaSanPham = (Label)GridView.Rows[rowIndex].Cells[3].FindControl("lblMaSanPham");
+                        Label TenSanPham = (Label)GridView.Rows[rowIndex].Cells[4].FindControl("lblTenSanPham");
+                        Label BanVe = (Label)GridView.Rows[rowIndex].Cells[5].FindControl("lblBanVe");
+                        Label NgayThaoTac = (Label)GridView.Rows[rowIndex].Cells[6].FindControl("lblNgayThaoTac");
+                        Label NguoiDamNhiem = (Label)GridView.Rows[rowIndex].Cells[7].FindControl("lblNguoiDamNhiem");
+                        Row.Text = dt.Rows[i]["lblSTT"].ToString();
+                        ID.Text = dt.Rows[i]["txtID"].ToString();
+                        Line.Text = dt.Rows[i]["lblLine"].ToString();
+                        MaSanPham.Text = dt.Rows[i]["lblMaSanPham"].ToString();
+                        TenSanPham.Text = dt.Rows[i]["lblTenSanPham"].ToString();
+                        BanVe.Text = dt.Rows[i]["lblBanVe"].ToString();
+                        NgayThaoTac.Text = dt.Rows[i]["lblNgayThaoTac"].ToString();
+                        NguoiDamNhiem.Text = dt.Rows[i]["lblNguoiDamNhiem"].ToString();
+                        rowIndex++;
+                    }
+                }
+            }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            Load_Gridview();
+            lblCurrPage.Text = "1";
+            DataTable dt = new DataTable();
+            string IDPhieu = Request.QueryString["IDPhieu"];
+            SqlParameter[] prams = new SqlParameter[] {
+                                new SqlParameter("@NoiDung",txtNoiDung.Text.ToString().Trim())};
+            dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewList", prams);
+            if (dt.Rows.Count > 0)
+            {
+                double a = dt.Rows.Count;
+                double tong = (a / 20);
+                lblTotal.Text = ((int)Math.Ceiling(tong)).ToString();
+                btnPrevious.Enabled = false;
+                btnFirst.Enabled = false;
+                if (tong > 1)
+                {
+                    btnLast.Enabled = true;
+                    btnNext.Enabled = true;
+                }
+                else
+                {
+                    btnLast.Enabled = false;
+                    btnNext.Enabled = false;
+                }
+            }
+        }
+        protected void GridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "View")
+            {
+                int rowindex = Convert.ToInt32(e.CommandArgument);
+                GridViewRow gvr = GridView.Rows[rowindex];
+                string IDPhieu = (gvr.FindControl("txtID") as LinkButton).Text;
+                Response.Redirect("SoThaoTac.aspx?IDPhieu=" + IDPhieu.ToString());
             }
         }
     }

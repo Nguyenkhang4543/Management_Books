@@ -435,7 +435,6 @@ D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bi
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bin\Antlr3.Runtime.pdb
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bin\Microsoft.AspNet.FriendlyUrls.xml
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.AssemblyReference.cache
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.CoreCompileInputs.cache
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.CopyComplete
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.dll
