@@ -84,17 +84,17 @@ namespace Management_Books
 
                         foreach (int maSo in maSoArray)
                         {
-                            if (maSo == 1)
+                            if (maSo == 2)
                             {
                                 btnSoThaoTac.Visible = true;
                                 lblSoKashime.Visible = true;
                             }
-                            if (maSo == 2)
+                            if (maSo == 3)
                             {
                                 btnSoTestLine.Visible = true;
                                 lblSoKashime.Visible = true;
                             }
-                            if (maSo == 3)
+                            if (maSo == 4)
                             {
                                 btnSoCatCable.Visible = true;
                                 lblSoLineCut.Visible = true;

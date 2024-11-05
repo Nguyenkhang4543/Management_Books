@@ -16,7 +16,6 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -221,6 +220,135 @@
             </asp:TableRow>
             </asp:Table>
 
+            </div>
+            <div style="width:100%;text-align:center; margin-top:10px">
+                 <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" />
+            </div>
+            <div style="width:100%;text-align:center">
+            <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
+            <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
+            <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
+            <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtToDate"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtLotNL_Search" style="height: 25px"></asp:TextBox>
+            <asp:Button Cssclass="button2" runat="server" Text="Search"/>
+        </div>
+            <div>
+                <asp:GridView runat ="server" ID="GridView" AutoGenerateColumns="true">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Line">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("So_Line")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Ngày Sản Xuất">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("Ngay_SX")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Thời Gian Đổi Sản Phẩm">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("ThoiGianDoi_SP")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Sản Phẩm Đang Sản Xuất">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("SP_DangThaoTac")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Sản Phẩm Mới">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("SP_TienHanhDoi")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Dập nguyên liệu còn lại về line nguyên liệu">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTConLai_1")%>'></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTConLai_2")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Gom tất cả dây quăng trong máy">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_1")%>'></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_2")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Thành phẩm đã giao hết qua QC">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Không còn phế phẩm của sản phẩm A">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTPhePham_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTPhePham_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="ACB Xác nhận">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_1")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="GHI CHÚ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("DapCable_GhiChu")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn CDC hoặc đặc tính">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTCDC_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTCDC_A_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra đặc tính">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra ngoại dạng">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTND_A1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTND_A2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="ACB Xác nhận">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_2")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="GHI CHÚ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("QC_GhiChu")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Khay, khuôn bẻ Taibar, trên line không còn sản phẩm A">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Tất cả sản phẩm A đã được đóng gói và đóng thùng">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_1")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_2")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="ACB Xác nhận">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_SX_3")%>' ></asp:Label>
+                                <asp:Label runat="server" Text='<%# Eval("ACB_XacNhan_QC_3")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="GHI CHÚ">
+                            <ItemTemplate>
+                                <asp:Label runat="server" Text='<%# Eval("DongGoi_GhiChu")%>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
         <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
         </div>
