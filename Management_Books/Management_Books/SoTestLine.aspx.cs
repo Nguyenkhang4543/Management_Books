@@ -18,7 +18,43 @@ namespace Management_Books
         {
             if (!IsPostBack)
             {
-                Load_Gridview();
+                string MaNV = Session["MaNV"].ToString();
+                DataTable dt = new DataTable();
+                dt = SQLhelper.GetDataToTable("Check_PhanQuyen_TheoSo", new SqlParameter[] {
+                    new SqlParameter("@MaNV", MaNV)
+                });
+
+                if (dt.Rows.Count > 0)
+                {
+                    string maSo = dt.Rows[0]["Ma_So"].ToString();
+                    bool allbooks = Convert.ToBoolean(dt.Rows[0]["ALL_Books"]);
+
+                    if (allbooks)
+                    {
+                        // Cho Phép Đăng Nhập Với Quyền Admin
+                    }
+                    else if (maSo == "3")
+                    {
+                        // Cho Phép Đăng Nhập Với Quyền Thao Tác Sổ
+                    }
+                    else
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                if (Session["MaNV"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    Load_Gridview();
+                }
             }
         }
         protected void btnBack_Click(object sender, EventArgs e)

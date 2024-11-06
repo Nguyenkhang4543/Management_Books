@@ -24,8 +24,14 @@ namespace Management_Books
                 }
                 else
                 {
+                    if (Session["Quyen"].ToString() != "1")
+                    {
+                        Response.Redirect("Login.aspx");
+                    }
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
                     Load_GridView();
+                    Load_GridView_DanhSachSo();
+
                     DataTable dt = new DataTable();
                     dt = SQLhelper.GetDataToTable("Books_Get_AllSo");
                     ddlLoaiSo.DataSource = dt;
@@ -59,6 +65,18 @@ namespace Management_Books
             {
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
+            }
+        }
+
+        private void Load_GridView_DanhSachSo()
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_Get_DanhSachSo");
+
+            if(dt.Rows.Count > 0)
+            {
+                GridViewDanhSach.DataSource = dt;
+                GridViewDanhSach.DataBind();
             }
         }
         protected void ddlLoaiSo_IndexChanged(object sender, EventArgs e)

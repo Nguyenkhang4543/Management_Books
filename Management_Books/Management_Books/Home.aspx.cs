@@ -33,7 +33,6 @@ namespace Management_Books
                 {
                      new SqlParameter("@MSNV", Session["MaNV"].ToString())
                 });
-
                 if (dtPhanQuyenXem.Rows.Count > 0)
                 {
                     CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field <bool>("ALL_Books");
@@ -101,7 +100,6 @@ namespace Management_Books
                             }
                         }
                     }
-
                 }
             }
         }
@@ -146,7 +144,6 @@ namespace Management_Books
             Response.Redirect("SoCatCable.aspx");
         }
 
-       
         ///////////////////////////// Sổ Quản Lý Kashime /////////////////////////////////////////
 
     }

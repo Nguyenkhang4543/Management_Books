@@ -50,7 +50,7 @@
     <br />
     <%-- ---------------------------------------------------------------Bảng Dữ Liệu Các Phiếu---------------------------------------------------------------------------------------- --%>
     <div style="width:100%">
-        <asp:GridView style="width:100%" runat="server" ID="GridView" AutoGenerateColumns="false" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" ForeColor="Black" OnRowCommand="GridView_RowCommand" >
+        <asp:GridView runat="server" ID="GridView" AutoGenerateColumns="false" Width="100%" HeaderStyle-BackColor="Green" BackColor="Wheat" Font-Size="20px" HeaderStyle-ForeColor="White" OnRowCommand="GridView_RowCommand" >
             <Columns>
                 <asp:TemplateField HeaderText="STT">
                     <ItemTemplate>
@@ -67,12 +67,12 @@
                         <asp:Label runat="server" ID="lblLine" ></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Mã">
+                <asp:TemplateField HeaderText="Mã Sản Phẩm">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="lblMaSanPham" ></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Tên">
+                <asp:TemplateField HeaderText="Tên Sản Phẩm">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="lblTenSanPham"></asp:Label>
                     </ItemTemplate>

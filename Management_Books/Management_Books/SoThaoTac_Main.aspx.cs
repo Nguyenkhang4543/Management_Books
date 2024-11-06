@@ -27,29 +27,38 @@ namespace Management_Books
         {
             if (!IsPostBack)
             {
-                lblCurrPage.Text = "1";
-                Load_Gridview();
-                DataTable dt = new DataTable();
-                SqlParameter[] prams = new SqlParameter[] {
-                                    new SqlParameter("@NoiDung","")};
-                dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewList", prams);
-                if (dt.Rows.Count > 0)
+                if (Session["MaNV"] == null)
                 {
-                    double a = dt.Rows.Count;
-                    double tong = (a / 20);
-                    lblTotal.Text = ((int)Math.Ceiling(tong)).ToString();
-                    if (tong > 1)
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    lblCurrPage.Text = "1";
+                    Load_Gridview();
+                    DataTable dt = new DataTable();
+                    SqlParameter[] prams = new SqlParameter[] {
+                                    new SqlParameter("@NoiDung","")};
+                    dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewList", prams);
+                    if (dt.Rows.Count > 0)
                     {
-                        btnLast.Enabled = true;
-                        btnNext.Enabled = true;
+                        double a = dt.Rows.Count;
+                        double tong = (a / 20);
+                        lblTotal.Text = ((int)Math.Ceiling(tong)).ToString();
+                        if (tong > 1)
+                        {
+                            btnLast.Enabled = true;
+                            btnNext.Enabled = true;
+                        }
+                        else
+                        {
+                            btnLast.Enabled = false;
+                            btnNext.Enabled = false;
+                        }
+                        btnPrevious.Enabled = false;
+                        btnFirst.Enabled = false;
                     }
-                    else
-                    {
-                        btnLast.Enabled = false;
-                        btnNext.Enabled = false;
-                    }
-                    btnPrevious.Enabled = false;
-                    btnFirst.Enabled = false;
                 }
             }
         }
@@ -262,7 +271,8 @@ namespace Management_Books
                 int rowindex = Convert.ToInt32(e.CommandArgument);
                 GridViewRow gvr = GridView.Rows[rowindex];
                 string IDPhieu = (gvr.FindControl("txtID") as LinkButton).Text;
-                Response.Redirect("SoThaoTac.aspx?IDPhieu=" + IDPhieu.ToString());
+                string ID_Phieu_Encrypt = ThaoTacDuLieu.Encrypt_V1(IDPhieu, "NisseiTL1LGMyTho");
+                Response.Redirect("SoThaoTac.aspx?IDPhieu=" + ID_Phieu_Encrypt.ToString());
             }
         }
     }

@@ -24,8 +24,15 @@ namespace Management_Books
         {
             if (!IsPostBack)
             {
-                SetInitialRow();
-
+                if (Session["MaNV"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else
+                {
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    SetInitialRow();
+                }
             }
         }
             protected void btnBack_Click(object sender, EventArgs e)

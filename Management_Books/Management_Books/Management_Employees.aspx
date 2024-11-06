@@ -39,6 +39,7 @@
                 <div style="width:100%;text-align:center;margin-top:15px">
                     <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Quản Lý Sử Dụng Sổ</label>
                 </div>
+                <div style="width:100%;display:flex">
                 <div style="width:600px;border: 2px solid black;margin-left:40px;margin-top:10px;background-color:burlywood">
                     <div style="width:100%;border-bottom:2px dashed black;">
                         <div style="width:95%; margin-left:10px;margin-top:10px;">
@@ -76,6 +77,28 @@
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
                     </div>
+                </div>
+                <div  style="width:600px;border: 2px solid black;margin-left:150px;margin-top:10px;background-color:#e6f1f9;font-size:20px;text-align:center">
+                    <asp:Gridview runat="server" ID="GridViewDanhSach" AutoGenerateColumns="false" Width="100%" overflow="auto" HeaderStyle-BackColor="OrangeRed" HeaderStyle-ForeColor="White">
+                        <Columns>
+                             <asp:TemplateField HeaderText="Tên Sổ">
+                                <ItemTemplate>
+                                    <asp:Label runat ="server" Text='<%# Eval("Ma_So")%>' ></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Mã Sổ">
+                                <ItemTemplate>
+                                    <asp:Label runat ="server" Text='<%# Eval("Ten_So")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Bộ Phận">
+                                <ItemTemplate>
+                                    <asp:Label runat ="server" Text='<%# Eval("BoPhan")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:Gridview>
+                </div>
                 </div>
                 <br />
                 <div style="width:100%;text-align:center">
