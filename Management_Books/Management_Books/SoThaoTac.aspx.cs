@@ -31,7 +31,18 @@ namespace Management_Books
                 else
                 {
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
-                    SetInitialRow();
+                
+                    lblID_Phieu.Text = Request.QueryString["IDPhieu"];
+                    if (!string.IsNullOrEmpty(lblID_Phieu.Text))
+                    {
+                        string Decrpyt = ThaoTacDuLieu.Decrypt_V1(lblID_Phieu.Text, "NisseiTL1LGMyTho");
+                        Load_Data_ID_Phieu(Decrpyt);
+                    }
+                    else
+                    {
+                        SetInitialRow();
+                    }
+                   
                 }
             }
         }
@@ -62,9 +73,6 @@ namespace Management_Books
         {
             DataTable dt = new DataTable();
             DataRow dr = null;
-            // Thêm các cột tương ứng với các TemplateField trong GridView
-            //dt.Columns.Add(new DataColumn("OK", typeof(bool)));
-            //dt.Columns.Add(new DataColumn("No", typeof(int)));
             dt.Columns.Add(new DataColumn("txtSoDon", typeof(string)));
             dt.Columns.Add(new DataColumn("txtSoLot", typeof(string)));
             dt.Columns.Add(new DataColumn("txtNgaySanXuat", typeof(string)));
@@ -106,9 +114,6 @@ namespace Management_Books
 
             dr = dt.NewRow();
 
-            // Khởi tạo các giá trị ban đầu cho các cột
-            //dr["OK"] = false;
-            //dr["No"] = 1;
             dr["txtSoDon"] = string.Empty;
             dr["txtSoLot"] = string.Empty;
             dr["txtNgaySanXuat"] = string.Empty;
@@ -683,37 +688,191 @@ namespace Management_Books
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (Check_Data_Save() == true)
+            if (string.IsNullOrEmpty(lblID_Phieu.Text))
             {
-                int insert = 0;
-                string ID_Phieu = PhatSinhSoPhieu();
-                insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoThaoTac_Data", new SqlParameter[] { 
-                        new SqlParameter("ID_Phieu",ID_Phieu),
-                        new SqlParameter("Line",txtLine.Text),
-                        new SqlParameter("BanVe",txtBanVe.Text),
-                        new SqlParameter("MaSanPham",txtMaSanPham.Text),
-                        new SqlParameter("TenSanPham",txtTenSanPham.Text),
-                        new SqlParameter("NgayThaoTac",txtNgayThaoTac.Text),
-                        new SqlParameter("NguoiDamNhiem",txtNguoiDamNhiem.Text),
-                        new SqlParameter("HoiMayDay",txtHoiMayDap.Text),
-                        new SqlParameter("MayCable1",txtCable1.Text),
-                        new SqlParameter("MayCable2",txtCable2.Text),
-                        new SqlParameter("MayCable3",txtCable3.Text),
-                        new SqlParameter("MayCable4",txtCable4.Text),
-                        new SqlParameter("MayCable5",txtCable5.Text),
-                        new SqlParameter("Sleeve1",txtSlevee1.Text),
-                        new SqlParameter("Sleeve2",txtSlevee2.Text),
-                        new SqlParameter("Sleeve3",txtSlevee3.Text),
-                        new SqlParameter("Sleeve4",txtSlevee4.Text),
-                        new SqlParameter("Sleeve5",txtSlevee5.Text),
+                if (Check_Data_Save() == true && Check_Data_Save_Detail() == true)
+                {
+                    string ID_Phieu = PhatSinhSoPhieu();
+                    int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoThaoTac_Data", new SqlParameter[] {
+                        new SqlParameter("@ID_Phieu",ID_Phieu),
+                        new SqlParameter("@Line",txtLine.Text),
+                        new SqlParameter("@BanVe",txtBanVe.Text),
+                        new SqlParameter("@MaSanPham",txtMaSanPham.Text),
+                        new SqlParameter("@TenSanPham",txtTenSanPham.Text),
+                        new SqlParameter("@NgayThaoTac",txtNgayThaoTac.Text),
+                        new SqlParameter("@NguoiDamNhiem",txtNguoiDamNhiem.Text),
+                        new SqlParameter("@HoiMayDay",txtHoiMayDap.Text),
+                        new SqlParameter("@MayCable1",txtCable1.Text),
+                        new SqlParameter("@MayCable2",txtCable2.Text),
+                        new SqlParameter("@MayCable3",txtCable3.Text),
+                        new SqlParameter("@MayCable4",txtCable4.Text),
+                        new SqlParameter("@MayCable5",txtCable5.Text),
+                        new SqlParameter("@Sleeve1",txtSlevee1.Text),
+                        new SqlParameter("@Sleeve2",txtSlevee2.Text),
+                        new SqlParameter("@Sleeve3",txtSlevee3.Text),
+                        new SqlParameter("@Sleeve4",txtSlevee4.Text),
+                        new SqlParameter("@Sleeve5",txtSlevee5.Text),
                 });
-                if(insert > 0)
-                {
-                    MsgBox("Lưu Thành Công");
-                }
-                else
-                {
-                    MsgBox("Lưu Không Thành Công");
+                 foreach (GridViewRow row in GridView1.Rows)
+                    {
+                        TextBox NO_Don = (TextBox)row.FindControl("txtSoDon");
+                        string txtNO_Don = NO_Don.Text;
+
+                        TextBox So_Lot = (TextBox)row.FindControl("txtSoLot");
+                        string txtSo_Lot = So_Lot.Text;
+
+                        TextBox NgaySX = (TextBox)row.FindControl("txtNgaySanXuat");
+                        string txtNgaySanXuat = NgaySX.Text;
+
+                        TextBox SoLuong = (TextBox)row.FindControl("txtSoLuong");
+                        string txtSoLuong = SoLuong.Text;
+
+                        TextBox SetCable = (TextBox)row.FindControl("txtSetCable");
+                        string txtSetCable = SetCable.Text;
+
+                        TextBox Dap_Sleeve = (TextBox)row.FindControl("txtDapSleeve");
+                        string txtDapSleeve = Dap_Sleeve.Text;
+
+                        TextBox SLDongGoi = (TextBox)row.FindControl("txtSoLuongDongGoi");
+                        string txtSoLuongDongGoi = SLDongGoi.Text;
+
+                        TextBox SLBoSung = (TextBox)row.FindControl("txtSoLuongBu");
+                        string txtSoLuongBu = SLBoSung.Text;
+
+                        TextBox NguoiDongGoi1 = (TextBox)row.FindControl("txtMSNV_DongGoi_1");
+                        string txtMSNV_DongGoi_1 = NguoiDongGoi1.Text;
+
+                        TextBox NguoiDongGoi2 = (TextBox)row.FindControl("txtMSNV_DongGoi_2");
+                        string txtMSNV_DongGoi_2 = NguoiDongGoi2.Text;
+
+                        TextBox NguoiDongGoi3 = (TextBox)row.FindControl("txtMSNV_DongGoi_3");
+                        string txtMSNV_DongGoi_3 = NguoiDongGoi3.Text;
+
+                        TextBox NguoiDongGoi4 = (TextBox)row.FindControl("txtMSNV_DongGoi_4");
+                        string txtMSNV_DongGoi_4 = NguoiDongGoi4.Text;
+
+                        TextBox NguoiDongThung1 = (TextBox)row.FindControl("txtMSNV_DongThung_1");
+                        string txtMSNV_DongThung_1 = NguoiDongThung1.Text;
+
+                        TextBox NguoiDongThung2 = (TextBox)row.FindControl("txtMSNV_DongThung_2");
+                        string txtMSNV_DongThung_2 = NguoiDongThung2.Text;
+
+                        TextBox NguoiDongThung3 = (TextBox)row.FindControl("txtMSNV_DongThung_3");
+                        string txtMSNV_DongThung_3 = NguoiDongThung3.Text;
+
+                        TextBox NguoiDongThung4 = (TextBox)row.FindControl("txtMSNV_DongThung_4");
+                        string txtMSNV_DongThung_4 = NguoiDongThung4.Text;
+
+                        TextBox LeaderDongGoi = (TextBox)row.FindControl("txtLeader_DongGoi");
+                        string txtLeader_DongGoi = LeaderDongGoi.Text;
+
+                        TextBox Cable = (TextBox)row.FindControl("txtCable");
+                        string txtCable = Cable.Text;
+
+                        TextBox QC_Confirm = (TextBox)row.FindControl("txtQC_Confirm");
+                        string txtQC_Confirm = QC_Confirm.Text;
+
+                        TextBox Sleeve = (TextBox)row.FindControl("txtSleeve");
+                        string txtSleeve = Sleeve.Text;
+
+                        TextBox NhungChi = (TextBox)row.FindControl("txtNhungChi");
+                        string txtNhungChi = NhungChi.Text;
+
+                        TextBox GiaoNhan_1 = (TextBox)row.FindControl("txtGiaoNhan_1");
+                        string txtGiaoNhan_1 = GiaoNhan_1.Text;
+
+                        TextBox GiaoNhan_2 = (TextBox)row.FindControl("txtGiaoNhan_2");
+                        string txtGiaoNhan_2 = GiaoNhan_2.Text;
+
+                        TextBox GiaoNhan_3 = (TextBox)row.FindControl("txtGiaoNhan_3");
+                        string txtGiaoNhan_3 = GiaoNhan_3.Text;
+
+                        TextBox GiaoNhan_4 = (TextBox)row.FindControl("txtGiaoNhan_4");
+                        string txtGiaoNhan_4 = GiaoNhan_4.Text;
+
+                        TextBox GiaoNhan_5 = (TextBox)row.FindControl("txtGiaoNhan_5");
+                        string txtGiaoNhan_5 = GiaoNhan_5.Text;
+
+                        TextBox GiaoNhan_6 = (TextBox)row.FindControl("txtGiaoNhan_6");
+                        string txtGiaoNhan_6 = GiaoNhan_6.Text;
+
+                        TextBox GiaoNhan_7 = (TextBox)row.FindControl("txtGiaoNhan_7");
+                        string txtGiaoNhan_7 = GiaoNhan_7.Text;
+
+                        TextBox GiaoNhan_8 = (TextBox)row.FindControl("txtGiaoNhan_8");
+                        string txtGiaoNhan_8 = GiaoNhan_8.Text;
+
+                        TextBox GiaoNhan_9 = (TextBox)row.FindControl("txtGiaoNhan_9");
+                        string txtGiaoNhan_9 = GiaoNhan_9.Text;
+
+                        TextBox GiaoNhan_10 = (TextBox)row.FindControl("txtGiaoNhan_10");
+                        string txtGiaoNhan_10 = GiaoNhan_10.Text;
+
+                        TextBox GiaoNhan_11 = (TextBox)row.FindControl("txtGiaoNhan_11");
+                        string txtGiaoNhan_11 = GiaoNhan_11.Text;
+
+                        TextBox GiaoNhan_12 = (TextBox)row.FindControl("txtGiaoNhan_12");
+                        string txtGiaoNhan_12 = GiaoNhan_12.Text;
+
+                        TextBox GiaoNhan_13 = (TextBox)row.FindControl("txtGiaoNhan_13");
+                        string txtGiaoNhan_13 = GiaoNhan_13.Text;
+
+                        TextBox GiaoNhan_14 = (TextBox)row.FindControl("txtGiaoNhan_14");
+                        string txtGiaoNhan_14 = GiaoNhan_14.Text;
+
+                        TextBox GiaoNhan_15 = (TextBox)row.FindControl("txtGiaoNhan_15");
+                        string txtGiaoNhan_15 = GiaoNhan_15.Text;
+
+                        TextBox GiaoNhan_16 = (TextBox)row.FindControl("txtGiaoNhan_16");
+                        string txtGiaoNhan_16 = GiaoNhan_16.Text;
+
+                        TextBox OkeDon = (TextBox)row.FindControl("txtOkDon");
+                        string txtOkDon = OkeDon.Text;
+
+
+                        int insert_datadetail = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoThaoTac_Data_Detail", new SqlParameter[] {
+                         new SqlParameter("@ID_Phieu",ID_Phieu),
+                         new SqlParameter("@NO_Don",txtNO_Don),
+                         new SqlParameter("@So_Lot",txtSo_Lot),
+                         new SqlParameter("@NgaySX",txtNgaySanXuat),
+                         new SqlParameter("@SoLuong",txtSoLuong),
+                         new SqlParameter("@SetCable",txtSetCable),
+                         new SqlParameter("@Dap_Sleeve",txtDapSleeve),
+                         new SqlParameter("@SLDongGoi",txtSoLuongDongGoi),
+                         new SqlParameter("@SLBoSung",txtSoLuongBu),
+                         new SqlParameter("@NguoiDongGoi1",txtMSNV_DongGoi_1),
+                         new SqlParameter("@NguoiDongGoi2",txtMSNV_DongGoi_2),
+                         new SqlParameter("@NguoiDongGoi3",txtMSNV_DongGoi_3),
+                         new SqlParameter("@NguoiDongGoi4",txtMSNV_DongGoi_4),
+                         new SqlParameter("@NguoiDongThung1",txtMSNV_DongThung_1),
+                         new SqlParameter("@NguoiDongThung2",txtMSNV_DongThung_2),
+                         new SqlParameter("@NguoiDongThung3",txtMSNV_DongThung_3),
+                         new SqlParameter("@NguoiDongThung4",txtMSNV_DongThung_4),
+                         new SqlParameter("@LeaderDongGoi",txtLeader_DongGoi),
+                         new SqlParameter("@Cable",txtCable),
+                         new SqlParameter("@QC_Confirm",txtQC_Confirm),
+                         new SqlParameter("@Sleeve",txtSleeve),
+                         new SqlParameter("@NhungChi",txtNhungChi),
+                         new SqlParameter("@GiaoNhan_1",txtGiaoNhan_1),
+                         new SqlParameter("@GiaoNhan_2",txtGiaoNhan_2),
+                         new SqlParameter("@GiaoNhan_3",txtGiaoNhan_3),
+                         new SqlParameter("@GiaoNhan_4",txtGiaoNhan_4),
+                         new SqlParameter("@GiaoNhan_5",txtGiaoNhan_5),
+                         new SqlParameter("@GiaoNhan_6",txtGiaoNhan_6),
+                         new SqlParameter("@GiaoNhan_7",txtGiaoNhan_7),
+                         new SqlParameter("@GiaoNhan_8",txtGiaoNhan_8),
+                         new SqlParameter("@GiaoNhan_9",txtGiaoNhan_9),
+                         new SqlParameter("@GiaoNhan_10",txtGiaoNhan_10),
+                         new SqlParameter("@GiaoNhan_11",txtGiaoNhan_11),
+                         new SqlParameter("@GiaoNhan_12",txtGiaoNhan_12),
+                         new SqlParameter("@GiaoNhan_13",txtGiaoNhan_13),
+                         new SqlParameter("@GiaoNhan_14",txtGiaoNhan_14),
+                         new SqlParameter("@GiaoNhan_15",txtGiaoNhan_15),
+                         new SqlParameter("@GiaoNhan_16",txtGiaoNhan_16),
+                         new SqlParameter("@XacNhanDon",txtOkDon),
+                    });
+                    }
+                    MsgBox("lưu Thành Công!");
                 }
             }
         }
@@ -760,5 +919,222 @@ namespace Management_Books
             }
         }
 
+        private bool Check_Data_Save_Detail()
+        {
+            bool KQ = true;
+            string ThongBao = "";
+            for(int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                TextBox txtSoDon = (TextBox)GridView1.Rows[i].FindControl("txtSoDon");
+                TextBox txtSoLot = (TextBox)GridView1.Rows[i].FindControl("txtSoLot");
+                TextBox txtNgaySanXuat = (TextBox)GridView1.Rows[i].FindControl("txtNgaySanXuat");
+                TextBox txtSoLuong = (TextBox)GridView1.Rows[i].FindControl("txtSoLuong");
+                TextBox txtSetCable = (TextBox)GridView1.Rows[i].FindControl("txtSetCable");
+                int Dong = i + 1;
+                if (string.IsNullOrEmpty(txtSoDon.Text))
+                {
+                    ThongBao += "\\n + Chưa Nhập Item Tại Dòng Thứ: " + Dong;
+                }
+                if (string.IsNullOrEmpty(txtSoLot.Text))
+                {
+                    ThongBao += "\\n + Chưa Nhập Item Tại Dòng Thứ: " + Dong;
+                }
+                if (string.IsNullOrEmpty(txtNgaySanXuat.Text))
+                {
+                    ThongBao += "\\n + Chưa Nhập Item Tại Dòng Thứ: " + Dong;
+                }
+                if (string.IsNullOrEmpty(txtSoLuong.Text))
+                {
+                    ThongBao += "\\n + Chưa Nhập Item Tại Dòng Thứ: " + Dong;
+                }
+                if (string.IsNullOrEmpty(txtSetCable.Text))
+                {
+                    ThongBao += "\\n + Chưa Nhập Item Tại Dòng Thứ: " + Dong;
+                }
+                if (!string.IsNullOrEmpty(ThongBao.Trim()))
+                {
+                    MsgBox(ThongBao);
+                    KQ = false;
+                }
+            }
+            return KQ;
+        }
+
+        private void Load_Data_ID_Phieu(string ID_Phieu_Decrypt)
+        {
+            DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac_By_ID_Phieu", new SqlParameter[] {
+                    SQLhelper.CreateParameter("@ID_Phieu",ID_Phieu_Decrypt),
+                });
+            if (dt.Rows.Count > 0)
+            {
+                txtLine.Text = dt.Rows[0].Field<string>("Line").ToString() ?? string.Empty;
+                txtBanVe.Text = dt.Rows[0].Field<string>("BanVe").ToString() ?? string.Empty;
+                txtMaSanPham.Text = dt.Rows[0].Field<string>("MaSanPham").ToString() ?? string.Empty;
+                txtTenSanPham.Text = dt.Rows[0].Field<string>("TenSanPham").ToString() ?? string.Empty;
+                if (!string.IsNullOrEmpty(Convert.ToString(dt.Rows[0].Field<DateTime?>("NgayThaoTac"))))
+                {
+                    txtNgayThaoTac.Text = dt.Rows[0].Field<DateTime>("NgayThaoTac").ToString("yyyy-MM-dd") ?? string.Empty;
+                }
+                if (dt.Rows[0]["NguoiDamNhiem"] != DBNull.Value)
+                {
+                    txtNguoiDamNhiem.Text = dt.Rows[0].Field<string>("NguoiDamNhiem") ?? string.Empty;
+                }
+                txtHoiMayDap.Text = dt.Rows[0].Field<string>("HoiMayDay");
+                if (dt.Rows[0]["HoiMayDay"] != DBNull.Value)
+                {
+                    txtHoiMayDap.Text = dt.Rows[0].Field<string>("HoiMayDay") ?? string.Empty;
+                }
+                if (dt.Rows[0]["MayCable1"] != DBNull.Value)
+                {
+                    txtCable1.Text = dt.Rows[0].Field<string>("MayCable1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["MayCable2"] != DBNull.Value)
+                {
+                    txtCable2.Text = dt.Rows[0].Field<string>("MayCable2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["MayCable3"] != DBNull.Value)
+                {
+                    txtCable3.Text = dt.Rows[0].Field<string>("MayCable3") ?? string.Empty;
+                }
+                if (dt.Rows[0]["MayCable4"] != DBNull.Value)
+                {
+                    txtCable4.Text = dt.Rows[0].Field<string>("MayCable4") ?? string.Empty;
+                }
+                if (dt.Rows[0]["MayCable5"] != DBNull.Value)
+                {
+                    txtCable5.Text = dt.Rows[0].Field<string>("MayCable5") ?? string.Empty;
+                }
+                if (dt.Rows[0]["Sleeve1"] != DBNull.Value)
+                {
+                    txtSlevee1.Text = dt.Rows[0].Field<string>("Sleeve1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["Sleeve2"] != DBNull.Value)
+                {
+                    txtSlevee2.Text = dt.Rows[0].Field<string>("Sleeve2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["Sleeve3"] != DBNull.Value)
+                {
+                    txtSlevee3.Text = dt.Rows[0].Field<string>("Sleeve3") ?? string.Empty;
+                }
+                if (dt.Rows[0]["Sleeve4"] != DBNull.Value)
+                {
+                    txtSlevee4.Text = dt.Rows[0].Field<string>("Sleeve4") ?? string.Empty;
+                }
+                if (dt.Rows[0]["Sleeve5"] != DBNull.Value)
+                {
+                    txtSlevee5.Text = dt.Rows[0].Field<string>("Sleeve5") ?? string.Empty;
+                }
+            }
+
+            DataTable dtCurrentTable = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac_Detail_By_ID_Phieu", new SqlParameter[] {
+                SQLhelper.CreateParameter("@ID_Phieu", ID_Phieu_Decrypt),
+            });
+
+            int rowIndex = 0;
+            GridView1.DataSource = dtCurrentTable;
+            GridView1.DataBind();
+            for (int i = 0; i < dtCurrentTable.Rows.Count; i++)
+            {
+                TextBox box1 = (TextBox)GridView1.Rows[rowIndex].Cells[2].FindControl("txtSoDon");
+                TextBox box2 = (TextBox)GridView1.Rows[rowIndex].Cells[2].FindControl("txtSoLot");
+                TextBox box3 = (TextBox)GridView1.Rows[rowIndex].Cells[2].FindControl("txtNgaySanXuat");
+
+                TextBox box4 = (TextBox)GridView1.Rows[rowIndex].Cells[3].FindControl("txtSoLuong");
+
+                TextBox box5 = (TextBox)GridView1.Rows[rowIndex].Cells[4].FindControl("txtSetCable");
+
+                TextBox box6 = (TextBox)GridView1.Rows[rowIndex].Cells[5].FindControl("txtDapSleeve");
+
+                TextBox box7 = (TextBox)GridView1.Rows[rowIndex].Cells[6].FindControl("txtSoLuongDongGoi");
+
+                TextBox box8 = (TextBox)GridView1.Rows[rowIndex].Cells[7].FindControl("txtSoLuongBu");
+
+                TextBox box9 = (TextBox)GridView1.Rows[rowIndex].Cells[8].FindControl("txtMSNV_DongGoi_1");
+                TextBox box10 = (TextBox)GridView1.Rows[rowIndex].Cells[8].FindControl("txtMSNV_DongGoi_2");
+                TextBox box11 = (TextBox)GridView1.Rows[rowIndex].Cells[8].FindControl("txtMSNV_DongGoi_3");
+                TextBox box12 = (TextBox)GridView1.Rows[rowIndex].Cells[8].FindControl("txtMSNV_DongGoi_4");
+
+                TextBox box13 = (TextBox)GridView1.Rows[rowIndex].Cells[9].FindControl("txtMSNV_DongThung_1");
+                TextBox box14 = (TextBox)GridView1.Rows[rowIndex].Cells[9].FindControl("txtMSNV_DongThung_2");
+                TextBox box15 = (TextBox)GridView1.Rows[rowIndex].Cells[9].FindControl("txtMSNV_DongThung_3");
+                TextBox box16 = (TextBox)GridView1.Rows[rowIndex].Cells[9].FindControl("txtMSNV_DongThung_4");
+
+                TextBox box17 = (TextBox)GridView1.Rows[rowIndex].Cells[10].FindControl("txtLeader_DongGoi");
+
+                TextBox box18 = (TextBox)GridView1.Rows[rowIndex].Cells[11].FindControl("txtCable");
+                TextBox box19 = (TextBox)GridView1.Rows[rowIndex].Cells[11].FindControl("txtQC_Confirm");
+
+                TextBox box20 = (TextBox)GridView1.Rows[rowIndex].Cells[12].FindControl("txtSleeve");
+
+                TextBox box21 = (TextBox)GridView1.Rows[rowIndex].Cells[13].FindControl("txtNhungChi");
+
+                TextBox box22 = (TextBox)GridView1.Rows[rowIndex].Cells[14].FindControl("txtGiaoNhan_1");
+                TextBox box23 = (TextBox)GridView1.Rows[rowIndex].Cells[14].FindControl("txtGiaoNhan_2");
+                TextBox box24 = (TextBox)GridView1.Rows[rowIndex].Cells[14].FindControl("txtGiaoNhan_3");
+                TextBox box25 = (TextBox)GridView1.Rows[rowIndex].Cells[14].FindControl("txtGiaoNhan_4");
+
+                TextBox box26 = (TextBox)GridView1.Rows[rowIndex].Cells[15].FindControl("txtGiaoNhan_5");
+                TextBox box27 = (TextBox)GridView1.Rows[rowIndex].Cells[15].FindControl("txtGiaoNhan_6");
+                TextBox box28 = (TextBox)GridView1.Rows[rowIndex].Cells[15].FindControl("txtGiaoNhan_7");
+                TextBox box29 = (TextBox)GridView1.Rows[rowIndex].Cells[15].FindControl("txtGiaoNhan_8");
+
+                TextBox box30 = (TextBox)GridView1.Rows[rowIndex].Cells[16].FindControl("txtGiaoNhan_9");
+                TextBox box31 = (TextBox)GridView1.Rows[rowIndex].Cells[16].FindControl("txtGiaoNhan_10");
+                TextBox box32 = (TextBox)GridView1.Rows[rowIndex].Cells[16].FindControl("txtGiaoNhan_11");
+                TextBox box33 = (TextBox)GridView1.Rows[rowIndex].Cells[16].FindControl("txtGiaoNhan_12");
+
+                TextBox box34 = (TextBox)GridView1.Rows[rowIndex].Cells[17].FindControl("txtGiaoNhan_13");
+                TextBox box35 = (TextBox)GridView1.Rows[rowIndex].Cells[17].FindControl("txtGiaoNhan_14");
+                TextBox box36 = (TextBox)GridView1.Rows[rowIndex].Cells[17].FindControl("txtGiaoNhan_15");
+                TextBox box37 = (TextBox)GridView1.Rows[rowIndex].Cells[17].FindControl("txtGiaoNhan_16");
+
+                TextBox box38 = (TextBox)GridView1.Rows[rowIndex].Cells[18].FindControl("txtOkDon");
+
+                box1.Text = dtCurrentTable.Rows[i][1].ToString();
+                box2.Text = dtCurrentTable.Rows[i][2].ToString();
+                box3.Text = dtCurrentTable.Rows[i][3].ToString();
+                box4.Text = dtCurrentTable.Rows[i][4].ToString();
+                box5.Text = dtCurrentTable.Rows[i][5].ToString();
+                box6.Text = dtCurrentTable.Rows[i][6].ToString();
+                box7.Text = dtCurrentTable.Rows[i][7].ToString();
+                box8.Text = dtCurrentTable.Rows[i][8].ToString();
+                box9.Text = dtCurrentTable.Rows[i][9].ToString();
+                box10.Text = dtCurrentTable.Rows[i][10].ToString();
+
+                box11.Text = dtCurrentTable.Rows[i][11].ToString();
+                box12.Text = dtCurrentTable.Rows[i][12].ToString();
+                box13.Text = dtCurrentTable.Rows[i][13].ToString();
+                box14.Text = dtCurrentTable.Rows[i][14].ToString();
+                box15.Text = dtCurrentTable.Rows[i][15].ToString();
+                box16.Text = dtCurrentTable.Rows[i][16].ToString();
+                box17.Text = dtCurrentTable.Rows[i][17].ToString();
+                box18.Text = dtCurrentTable.Rows[i][18].ToString();
+                box19.Text = dtCurrentTable.Rows[i][19].ToString();
+                box20.Text = dtCurrentTable.Rows[i][20].ToString();
+
+                box21.Text = dtCurrentTable.Rows[i][21].ToString();
+                box22.Text = dtCurrentTable.Rows[i][22].ToString();
+                box23.Text = dtCurrentTable.Rows[i][23].ToString();
+                box24.Text = dtCurrentTable.Rows[i][24].ToString();
+                box25.Text = dtCurrentTable.Rows[i][25].ToString();
+                box26.Text = dtCurrentTable.Rows[i][26].ToString();
+                box27.Text = dtCurrentTable.Rows[i][27].ToString();
+                box28.Text = dtCurrentTable.Rows[i][28].ToString();
+                box29.Text = dtCurrentTable.Rows[i][29].ToString();
+                box30.Text = dtCurrentTable.Rows[i][30].ToString();
+
+                box31.Text = dtCurrentTable.Rows[i][31].ToString();
+                box32.Text = dtCurrentTable.Rows[i][32].ToString();
+                box33.Text = dtCurrentTable.Rows[i][33].ToString();
+                box34.Text = dtCurrentTable.Rows[i][34].ToString();
+                box35.Text = dtCurrentTable.Rows[i][35].ToString();
+                box36.Text = dtCurrentTable.Rows[i][36].ToString();
+                box37.Text = dtCurrentTable.Rows[i][37].ToString();
+                box38.Text = dtCurrentTable.Rows[i][38].ToString();
+
+                rowIndex++;
+            }
+            SetPreviousData();
+        }
     }
 }

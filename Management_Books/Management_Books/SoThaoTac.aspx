@@ -73,6 +73,7 @@
                     <td style="width: 20%; text-align: left; border: 1px solid #143c54;"><span>1/1</span></td>
                 </tr>
          </table>
+        <asp:Label runat="server" ID="lblID_Phieu" style="display:none"></asp:Label>
         <%-------------------------------Bảng Số 2-------------------------------%>
         <table class ="tblForm" style=" margin-bottom:5px">            
                 <tr style="text-align: center">
