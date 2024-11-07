@@ -199,11 +199,19 @@ namespace Management_Books
                         new SqlParameter("@NgayGhiNhan", DateTime.Now.ToString()),
                         new SqlParameter("@NguoiGhiNhan", Session["Ten"].ToString()),
                 });
-                MsgBox("Lưu dữ liệu thành công");
-                ResetData();
-                Enable_field();
-                btnSearch_Click(null, null);
-                lblID.Text = null;
+                if(insert > 0)
+                {
+                    MsgBox("Lưu Dữ Liệu Thành Công");
+                    ResetData();
+                    Enable_field();
+                    btnSearch_Click(null, null);
+                    lblID.Text = null;
+                }
+                else
+                {
+                    MsgBox("Lưu Dữ Liệu Không Thành Công!");
+                }
+               
               
             }
         }

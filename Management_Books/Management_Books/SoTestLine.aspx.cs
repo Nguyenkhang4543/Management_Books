@@ -165,9 +165,10 @@ namespace Management_Books
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
+            string ID = string.IsNullOrEmpty(hdfID.Value) ? null : hdfID.Value;
             int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoTestLine", new SqlParameter[]
             {
+                new SqlParameter("@ID",ID),
                 new SqlParameter("@So_Line",txtSo_Line.Text),
                 new SqlParameter("@Ngay_SX",txtNgay_SX.Text),
                 new SqlParameter("@ThoiGianDoi_SP",txtThoiGianDoi_SP.Text),

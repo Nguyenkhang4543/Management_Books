@@ -439,3 +439,4 @@ D:\777. Project_Production\Management_Books\Management_Books\Management_Books\ob
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.CopyComplete
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.dll
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.pdb
+D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.AssemblyReference.cache

@@ -235,8 +235,8 @@
             </div>
             <div style="width:100%;text-align:center; margin-top:10px">
                 <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save"  OnClick="btnSave_Click" />
-                <asp:Label runat="server" ID="lblID"></asp:Label>
             </div>
+             <asp:HiddenField runat="server" ID="hdfID" />
             <div style="width:100%;text-align:center">
             <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
