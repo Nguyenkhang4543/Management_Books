@@ -39,7 +39,7 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click"  />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" ID="btnSave" OnClick="btnSave_Click"  />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -73,8 +73,8 @@
                     <td style="width: 20%; text-align: left; border: 1px solid #143c54;"><span>1/1</span></td>
                 </tr>
          </table>
-        <asp:Label runat="server" ID="lblID_Phieu"></asp:Label>
-        <asp:Label runat="server" ID="lblTrangThai"></asp:Label>
+        <asp:Label runat="server" ID="lblID_Phieu" style="display:none"></asp:Label>
+        <asp:Label runat="server" ID="lblTrangThai" style="display:none"></asp:Label>
         <%-------------------------------Bảng Số 2-------------------------------%>
         <table class ="tblForm" style=" margin-bottom:5px">            
                 <tr style="text-align: center">

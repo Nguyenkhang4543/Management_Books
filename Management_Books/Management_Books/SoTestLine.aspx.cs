@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace Management_Books
 {
@@ -53,7 +54,10 @@ namespace Management_Books
                 else
                 {
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
-                    Load_Gridview();
+                    txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    btnSearch_Click(null, null);
+                    //Load_Gridview();
                 }
             }
         }
@@ -84,7 +88,7 @@ namespace Management_Books
         {
             DataTable dt = new DataTable();
             dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoTestLine");
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 GridView.DataSource = dt;
                 GridView.DataBind();
@@ -93,6 +97,333 @@ namespace Management_Books
             {
                 MsgBox("Không Có Dữ Liệu");
             }
+        }
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtFromDate.Text.ToString()) && !string.IsNullOrEmpty(txtToDate.Text.ToString()))
+            {
+                DateTime Tu = DateTime.Parse(txtFromDate.Text.ToString()) + new TimeSpan(0, 0, 0);
+                DateTime Den = DateTime.Parse(txtToDate.Text.ToString()) + new TimeSpan(23, 59, 0);
+                string SoLine = "";
+                SoLine = txtSoLine_Search.Text.ToString().Trim();
+                SqlParameter[] para = new SqlParameter[]
+                                  {
+                                    new SqlParameter("@Tu", Tu),
+                                    new SqlParameter("@Den", Den),
+                                    new SqlParameter("@So_Line", SoLine),
+                                    new SqlParameter("@MaBP",Session["BoPhan"].ToString()),
+                                    new SqlParameter("@Factory",Session["Factory"].ToString()),
+                                    new SqlParameter("@Quyen",Session["Quyen"].ToString() )
+                                  };
+                DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_ALL_SoTestLine", para);
+                GridView.DataSource = dt;
+                GridView.DataBind();
+                for (int i = 0; i < GridView.Rows.Count; i++)
+                {
+                    if (string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblSo_Line")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblNgay_SX")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblThoiGianDoi_SP")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblSP_DangThaoTac")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblSP_TienHanhDoi")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTConLai_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTConLai_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblThuGomConLai_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblThuGomConLai_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblGiaoTP_QC_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblGiaoTP_QC_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTPhePham_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTPhePham_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_SX_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_QC_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTCDC_A_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTCDC_A_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTCD_DTA_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTCD_DTA_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTND_A1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTND_A2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_SX_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_QC_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTTaibar_A_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTTaibar_A_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTDongGoi_A_1")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblKTDongGoi_A_2")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_SX_3")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView.Rows[i].FindControl("lblACB_XacNhan_QC_3")).Text)
+                        
+                         )
+                    {
+                        GridView.Rows[i].BackColor = Color.FromArgb(248, 255, 66);
+                    }
+                    else
+                    {
+                        GridView.Rows[i].BackColor = Color.FromArgb(224, 255, 250);
+                    }
+                }
+
+
+            }
+        }
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+            int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoTestLine", new SqlParameter[]
+            {
+                new SqlParameter("@So_Line",txtSo_Line.Text),
+                new SqlParameter("@Ngay_SX",txtNgay_SX.Text),
+                new SqlParameter("@ThoiGianDoi_SP",txtThoiGianDoi_SP.Text),
+                new SqlParameter("@SP_DangThaoTac",txtSP_DangThaoTac.Text),
+                new SqlParameter("@SP_TienHanhDoi",txtSP_TienHanhDoi.Text),
+                new SqlParameter("@KTConLai_1",txtKTConLai_1.Text),
+                new SqlParameter("@KTConLai_2",txtKTConLai_2.Text),
+                new SqlParameter("@ThuGomConLai_1",txtThuGomConLai_1.Text),
+                new SqlParameter("@ThuGomConLai_2",txtThuGomConLai_2.Text),
+                new SqlParameter("@GiaoTP_QC_1",txtGiaoTP_QC_1.Text),
+                new SqlParameter("@GiaoTP_QC_2",txtGiaoTP_QC_2.Text),
+                new SqlParameter("@KTPhePham_1",txtKTPhePham_1.Text),
+                new SqlParameter("@KTPhePham_2",txtKTPhePham_2.Text),
+                new SqlParameter("@ACB_XacNhan_SX_1",txtACB_XacNhan_SX_1.Text),
+                new SqlParameter("@ACB_XacNhan_QC_1",txtACB_XacNhan_QC_1.Text),
+                new SqlParameter("@DapCable_GhiChu",txtDapCable_GhiChu.Text),
+
+                new SqlParameter("@KTCDC_A_1",txtKTCDC_A_1.Text),
+                new SqlParameter("@KTCDC_A_2",txtKTCDC_A_2.Text),
+                new SqlParameter("@KTCD_DTA_1",txtKTCD_DTA_1.Text),
+                new SqlParameter("@KTCD_DTA_2",txtKTCD_DTA_2.Text),
+                new SqlParameter("@KTND_A1",txtKTND_A1.Text),
+                new SqlParameter("@KTND_A2",txtKTND_A2.Text),
+                new SqlParameter("@ACB_XacNhan_SX_2",txtACB_XacNhan_SX_2.Text),
+                new SqlParameter("@ACB_XacNhan_QC_2",txtACB_XacNhan_QC_2.Text),
+                new SqlParameter("@QC_GhiChu",txtQC_GhiChu.Text),
+
+                new SqlParameter("@KTTaibar_A_1",txtKTTaibar_A_1.Text),
+                new SqlParameter("@KTTaibar_A_2",txtKTTaibar_A_2.Text),
+                new SqlParameter("@KTDongGoi_A_1",txtKTDongGoi_A_1.Text),
+                new SqlParameter("@KTDongGoi_A_2",txtKTDongGoi_A_2.Text),
+                new SqlParameter("@ACB_XacNhan_SX_3",txtACB_XacNhan_SX_3.Text),
+                new SqlParameter("@ACB_XacNhan_QC_3",txtACB_XacNhan_QC_3.Text),
+                new SqlParameter("@DongGoi_GhiChu",txtDongGoi_GhiChu.Text),
+                new SqlParameter("@MaBP",Session["BoPhan"].ToString()),
+                new SqlParameter("@Factory",Session["Factory"].ToString())
+            });
+            if (insert > 0)
+            {
+                MsgBox("Lưu Dữ Liệu Thành Công");
+                btnSearch_Click(null, null);
+
+
+            }
+            else
+            {
+                MsgBox("Lưu Dữ Liệu Không Thành Công!");
+            }
+        }
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
+            int id = int.Parse(GridView.DataKeys[rowIndex].Values[0].ToString());
+            DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoTestLine_By_ID", new SqlParameter("@ID", id));
+            if (dt.Rows.Count > 0)
+            {
+                txtSo_Line.Text = dt.Rows[0].Field<string>("So_Line").ToString();
+                if (!string.IsNullOrEmpty(Convert.ToString(dt.Rows[0].Field<DateTime?>("Ngay_SX"))))
+                {
+                    txtNgay_SX.Text = dt.Rows[0].Field<DateTime>("Ngay_SX").ToString("yyyy-MM-dd") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ThoiGianDoi_SP"] != DBNull.Value)
+                {
+                    txtThoiGianDoi_SP.Text = dt.Rows[0].Field<string>("ThoiGianDoi_SP") ?? string.Empty;
+                }
+                if (dt.Rows[0]["SP_DangThaoTac"] != DBNull.Value)
+                {
+                    txtSP_DangThaoTac.Text = dt.Rows[0].Field<string>("SP_DangThaoTac") ?? string.Empty;
+                }
+                if (dt.Rows[0]["SP_TienHanhDoi"] != DBNull.Value)
+                {
+                    txtSP_TienHanhDoi.Text = dt.Rows[0].Field<string>("SP_TienHanhDoi") ?? string.Empty;
+                }
+                 if (dt.Rows[0]["KTConLai_1"] != DBNull.Value)
+                {
+                    txtKTConLai_1.Text = dt.Rows[0].Field<string>("KTConLai_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTConLai_2"] != DBNull.Value)
+                {
+                    txtKTConLai_2.Text = dt.Rows[0].Field<string>("KTConLai_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ThuGomConLai_1"] != DBNull.Value)
+                {
+                    txtThuGomConLai_1.Text = dt.Rows[0].Field<string>("ThuGomConLai_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ThuGomConLai_2"] != DBNull.Value)
+                {
+                    txtThuGomConLai_2.Text = dt.Rows[0].Field<string>("ThuGomConLai_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["GiaoTP_QC_1"] != DBNull.Value)
+                {
+                    txtGiaoTP_QC_1.Text = dt.Rows[0].Field<string>("GiaoTP_QC_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["GiaoTP_QC_2"] != DBNull.Value)
+                {
+                    txtGiaoTP_QC_2.Text = dt.Rows[0].Field<string>("GiaoTP_QC_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTPhePham_1"] != DBNull.Value)
+                {
+                    txtKTPhePham_1.Text = dt.Rows[0].Field<string>("KTPhePham_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTPhePham_2"] != DBNull.Value)
+                {
+                    txtKTPhePham_2.Text = dt.Rows[0].Field<string>("KTPhePham_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ACB_XacNhan_SX_1"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_SX_1.Text = dt.Rows[0].Field<string>("ACB_XacNhan_SX_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ACB_XacNhan_QC_1"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_QC_1.Text = dt.Rows[0].Field<string>("ACB_XacNhan_QC_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["DapCable_GhiChu"] != DBNull.Value)
+                {
+                    txtDapCable_GhiChu.Text = dt.Rows[0].Field<string>("DapCable_GhiChu") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTCDC_A_1"] != DBNull.Value)
+                {
+                    txtKTCDC_A_1.Text = dt.Rows[0].Field<string>("KTCDC_A_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTCDC_A_2"] != DBNull.Value)
+                {
+                    txtKTCDC_A_2.Text = dt.Rows[0].Field<string>("KTCDC_A_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTCD_DTA_1"] != DBNull.Value)
+                {
+                    txtKTCD_DTA_1.Text = dt.Rows[0].Field<string>("KTCD_DTA_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTCD_DTA_2"] != DBNull.Value)
+                {
+                    txtKTCD_DTA_2.Text = dt.Rows[0].Field<string>("KTCD_DTA_2") ?? string.Empty;
+                }
+                 if (dt.Rows[0]["KTND_A1"] != DBNull.Value)
+                {
+                    txtKTND_A1.Text = dt.Rows[0].Field<string>("KTND_A1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTND_A2"] != DBNull.Value)
+                {
+                    txtKTND_A2.Text = dt.Rows[0].Field<string>("KTND_A2") ?? string.Empty;
+                }
+                 if (dt.Rows[0]["ACB_XacNhan_SX_2"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_SX_2.Text = dt.Rows[0].Field<string>("ACB_XacNhan_SX_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ACB_XacNhan_QC_2"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_QC_2.Text = dt.Rows[0].Field<string>("ACB_XacNhan_QC_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["QC_GhiChu"] != DBNull.Value)
+                {
+                    txtQC_GhiChu.Text = dt.Rows[0].Field<string>("QC_GhiChu") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTTaibar_A_1"] != DBNull.Value)
+                {
+                    txtKTTaibar_A_1.Text = dt.Rows[0].Field<string>("KTTaibar_A_1") ?? string.Empty;
+                }
+                if (dt.Rows[0]["KTTaibar_A_2"] != DBNull.Value)
+                {
+                    txtKTTaibar_A_2.Text = dt.Rows[0].Field<string>("KTTaibar_A_2") ?? string.Empty;
+                }
+                 if (dt.Rows[0]["KTDongGoi_A_1"] != DBNull.Value)
+                {
+                    txtKTDongGoi_A_1.Text = dt.Rows[0].Field<string>("KTDongGoi_A_1") ?? string.Empty;
+                }
+                 if (dt.Rows[0]["KTDongGoi_A_2"] != DBNull.Value)
+                {
+                    txtKTDongGoi_A_2.Text = dt.Rows[0].Field<string>("KTDongGoi_A_2") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ACB_XacNhan_SX_3"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_SX_3.Text = dt.Rows[0].Field<string>("ACB_XacNhan_SX_3") ?? string.Empty;
+                }
+                if (dt.Rows[0]["ACB_XacNhan_QC_3"] != DBNull.Value)
+                {
+                    txtACB_XacNhan_QC_3.Text = dt.Rows[0].Field<string>("ACB_XacNhan_QC_3") ?? string.Empty;
+                }
+                if (dt.Rows[0]["DongGoi_GhiChu"] != DBNull.Value)
+                {
+                    txtDongGoi_GhiChu.Text = dt.Rows[0].Field<string>("DongGoi_GhiChu") ?? string.Empty;
+                }
+                if(!string.IsNullOrEmpty(txtSo_Line.Text)
+                    &&!string.IsNullOrEmpty(txtNgay_SX.Text)
+                    && !string.IsNullOrEmpty(txtThoiGianDoi_SP.Text)
+                    && !string.IsNullOrEmpty(txtSP_DangThaoTac.Text)
+                    && !string.IsNullOrEmpty(txtSP_TienHanhDoi.Text)
+                    && !string.IsNullOrEmpty(txtKTConLai_1.Text)
+                    && !string.IsNullOrEmpty(txtKTConLai_2.Text)
+                    && !string.IsNullOrEmpty(txtThuGomConLai_1.Text)
+                    && !string.IsNullOrEmpty(txtThuGomConLai_2.Text)
+                    && !string.IsNullOrEmpty(txtGiaoTP_QC_1.Text)
+                    && !string.IsNullOrEmpty(txtGiaoTP_QC_2.Text)
+                    && !string.IsNullOrEmpty(txtKTPhePham_1.Text)
+                    && !string.IsNullOrEmpty(txtKTPhePham_2.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_1.Text)
+                    && !string.IsNullOrEmpty(txtKTCDC_A_1.Text)
+                    && !string.IsNullOrEmpty(txtKTCDC_A_2.Text)
+                    && !string.IsNullOrEmpty(txtKTCD_DTA_1.Text)
+                    && !string.IsNullOrEmpty(txtKTCD_DTA_2.Text)
+                    && !string.IsNullOrEmpty(txtKTND_A1.Text)
+                    && !string.IsNullOrEmpty(txtKTND_A2.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text)
+                    && !string.IsNullOrEmpty(txtKTTaibar_A_1.Text)
+                    && !string.IsNullOrEmpty(txtKTTaibar_A_2.Text)
+                    && !string.IsNullOrEmpty(txtKTDongGoi_A_1.Text)
+                    && !string.IsNullOrEmpty(txtKTDongGoi_A_2.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text)
+                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text)
+                    )
+                {
+                    Enable_Field(false);
+                }
+                else
+                {
+                    Enable_Field();
+                }
+            }
+        }
+        private void Enable_Field(bool flag = true)
+        {
+            txtSo_Line.Enabled = flag;
+            txtNgay_SX.Enabled = flag;
+            txtThoiGianDoi_SP.Enabled = flag;
+            txtSP_DangThaoTac.Enabled = flag;
+            txtSP_TienHanhDoi.Enabled = flag;
+            txtKTConLai_1.Enabled = flag;
+            txtKTConLai_2.Enabled = flag;
+            txtThuGomConLai_1.Enabled = flag;
+            txtThuGomConLai_2.Enabled = flag;
+            txtGiaoTP_QC_1.Enabled = flag;
+            txtGiaoTP_QC_2.Enabled = flag;
+            txtKTPhePham_1.Enabled = flag;
+            txtKTPhePham_2.Enabled = flag;
+            txtACB_XacNhan_SX_1.Enabled = flag;
+            txtACB_XacNhan_QC_1.Enabled = flag;
+            txtDapCable_GhiChu.Enabled = flag;
+
+            txtKTCDC_A_1.Enabled = flag;
+            txtKTCDC_A_2.Enabled = flag;
+            txtKTCD_DTA_1.Enabled = flag;
+            txtKTCD_DTA_2.Enabled = flag;
+            txtKTND_A1.Enabled = flag;
+            txtKTND_A2.Enabled = flag;
+            txtACB_XacNhan_SX_2.Enabled = flag;
+            txtACB_XacNhan_QC_2.Enabled = flag;
+            txtQC_GhiChu.Enabled = flag;
+
+            txtKTTaibar_A_1.Enabled = flag;
+            txtKTTaibar_A_2.Enabled = flag;
+            txtKTDongGoi_A_1.Enabled = flag;
+            txtKTDongGoi_A_2.Enabled = flag;
+            txtACB_XacNhan_SX_3.Enabled = flag;
+            txtACB_XacNhan_QC_3.Enabled = flag;
+            txtDongGoi_GhiChu.Enabled = flag;
         }
     }
 }

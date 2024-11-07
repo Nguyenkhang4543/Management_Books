@@ -15,7 +15,7 @@
             <table id="Table3" runat="server" enableviewstate="true" style="border-spacing: unset; width: 100%;">
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click" />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>
@@ -182,198 +182,216 @@
             <%-- ------------------TextBox------------------%>
             <asp:TableRow style ="height:40px; text-align:center">
      
-                <asp:TableCell><asp:TextBox ID="txtLine" style="width: 50px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtNgaySanXuat" style="width: 50px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtThoiGianDoiSanPham" style="width: 50px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtBoxSanPhamDangSanXuat" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="textBoxSanPhamMoi" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSo_Line" style="width: 50px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtNgay_SX" type="date" style="width: 100px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtThoiGianDoi_SP" style="width: 50px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSP_DangThaoTac" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtSP_TienHanhDoi" style="width: 80px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
      
-                <asp:TableCell><asp:TextBox ID="txtKQ1" style="width: 25px; height:25px" runat="server" ></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ3" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ4" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ5" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ6" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ7" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ8" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtGhiChu1" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTConLai_1" style="width: 25px; height:25px" runat="server" ></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTConLai_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
-                <asp:TableCell><asp:TextBox ID="txtKQ9" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ10" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ11" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ12" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ13" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ14" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtGhiChu2" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtThuGomConLai_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtThuGomConLai_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtGiaoTP_QC_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtGiaoTP_QC_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtKTPhePham_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTPhePham_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_1" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtDapCable_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtKTCDC_A_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTCDC_A_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtKTCD_DTA_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTCD_DTA_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtKTND_A1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTND_A2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_2" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtQC_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
        
-                <asp:TableCell><asp:TextBox ID="txtKQ15" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ16" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ17" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtKQ18" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtSX3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtQC3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtGhiChu3" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTTaibar_A_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTTaibar_A_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtKTDongGoi_A_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtKTDongGoi_A_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_3" style="width: 40px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
+
+                <asp:TableCell><asp:TextBox ID="txtDongGoi_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
             </asp:TableRow>
             </asp:Table>
 
             </div>
             <div style="width:100%;text-align:center; margin-top:10px">
-                 <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" />
+                <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save"  OnClick="btnSave_Click" />
+                <asp:Label runat="server" ID="lblID"></asp:Label>
             </div>
             <div style="width:100%;text-align:center">
             <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtToDate"></asp:TextBox>
-            <asp:TextBox runat="server" ID="txtLotNL_Search" style="height: 25px"></asp:TextBox>
-            <asp:Button Cssclass="button2" runat="server" Text="Search"/>
+            <asp:TextBox runat="server" ID="txtSoLine_Search" style="height: 25px"></asp:TextBox>
+            <asp:Button Cssclass="button2" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
         </div>
            <div style="width:100%">
-                <asp:GridView runat ="server" ID="GridView" AutoGenerateColumns="false" Width="100%">
+                <asp:GridView runat ="server" ID="GridView" AutoGenerateColumns="false" Width="100%"  DataKeyNames="ID" >
                     <Columns>
                         <asp:TemplateField HeaderText="Line" HeaderStyle-BackColor="#fffdb4">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("So_Line")%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblSo_Line" Text='<%# Eval("So_Line")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Ngày Sản Xuất" HeaderStyle-BackColor="#fffdb4">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("Ngay_SX")%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblNgay_SX" Text='<%# Eval("Ngay_SX")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thời Gian Đổi Sản Phẩm" HeaderStyle-BackColor="#fffdb4">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("ThoiGianDoi_SP")%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblThoiGianDoi_SP" Text='<%# Eval("ThoiGianDoi_SP")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Sản Phẩm Đang Sản Xuất" HeaderStyle-BackColor="#fffdb4">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("SP_DangThaoTac")%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblSP_DangThaoTac" Text='<%# Eval("SP_DangThaoTac")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Sản Phẩm Mới" HeaderStyle-BackColor="#fffdb4">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("SP_TienHanhDoi")%>'></asp:Label>
+                                <asp:Label runat="server" ID="lblSP_TienHanhDoi" Text='<%# Eval("SP_TienHanhDoi")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Dập nguyên liệu còn lại về line nguyên liệu" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTConLai_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTConLai_1" Text='<%# Eval("KTConLai_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTConLai_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTConLai_2" Text='<%# Eval("KTConLai_2")%>'></asp:Label>
                                 </div>
                            </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Gom tất cả dây quăng trong máy" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblThuGomConLai_1" Text='<%# Eval("ThuGomConLai_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("ThuGomConLai_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblThuGomConLai_2" Text='<%# Eval("ThuGomConLai_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thành phẩm đã giao hết qua QC" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblGiaoTP_QC_1" Text='<%# Eval("GiaoTP_QC_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("GiaoTP_QC_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblGiaoTP_QC_2" Text='<%# Eval("GiaoTP_QC_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn phế phẩm của sản phẩm A" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTPhePham_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTPhePham_1" Text='<%# Eval("KTPhePham_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTPhePham_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTPhePham_2" Text='<%# Eval("KTPhePham_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận" ItemStyle-Width="115px" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
-                                <asp:Label runat="server" style="border:1px solid black;float:left; width:50px;height:20px;" Text='<%# Eval("ACB_XacNhan_SX_1")%>' ></asp:Label>
-                                <asp:Label runat="server" style="border:1px solid black;float:right; width:50px;height:20px;" Text='<%# Eval("ACB_XacNhan_QC_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left; width:50px;height:20px;" ID="lblACB_XacNhan_SX_1" Text='<%# Eval("ACB_XacNhan_SX_1")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right; width:50px;height:20px;" ID="lblACB_XacNhan_QC_1" Text='<%# Eval("ACB_XacNhan_QC_1")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ" HeaderStyle-BackColor="#cffeb3">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("DapCable_GhiChu")%>' ></asp:Label>
+                                <asp:Label runat="server" ID="lblDapCable_GhiChu" Text='<%# Eval("DapCable_GhiChu")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn CDC hoặc đặc tính" HeaderStyle-BackColor="#ffcda9" >
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTCDC_A_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTCDC_A_1" Text='<%# Eval("KTCDC_A_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTCDC_A_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTCDC_A_2" Text='<%# Eval("KTCDC_A_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra đặc tính" HeaderStyle-BackColor="#ffcda9">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTCD_DTA_1" Text='<%# Eval("KTCD_DTA_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTCD_DTA_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTCD_DTA_2" Text='<%# Eval("KTCD_DTA_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Không còn sản phẩm A ở công đoạn kiểm tra ngoại dạng" HeaderStyle-BackColor="#ffcda9">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTND_A1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTND_A1" Text='<%# Eval("KTND_A1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTND_A2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTND_A2" Text='<%# Eval("KTND_A2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận" ItemStyle-Width="115px" HeaderStyle-BackColor="#ffcda9">
                             <ItemTemplate>
-                                <asp:Label runat="server" style="border:1px solid black;float:left; width: 50px;height: 25px;" Text='<%# Eval("ACB_XacNhan_SX_2")%>' ></asp:Label>
-                                <asp:Label runat="server" style="border:1px solid black;float:right; width: 50px;height:25px;" Text='<%# Eval("ACB_XacNhan_QC_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left; width: 50px;height: 20px;" ID="lblACB_XacNhan_SX_2" Text='<%# Eval("ACB_XacNhan_SX_2")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right; width: 50px;height:20px;" ID="lblACB_XacNhan_QC_2" Text='<%# Eval("ACB_XacNhan_QC_2")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ" HeaderStyle-BackColor="#ffcda9">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("QC_GhiChu")%>' ></asp:Label>
+                                <asp:Label runat="server" ID="lblQC_GhiChu" Text='<%# Eval("QC_GhiChu")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Khay, khuôn bẻ Taibar, trên line không còn sản phẩm A" HeaderStyle-BackColor="#baeaf3">
                             <ItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTTaibar_A_1" Text='<%# Eval("KTTaibar_A_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTTaibar_A_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTTaibar_A_2" Text='<%# Eval("KTTaibar_A_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Tất cả sản phẩm A đã được đóng gói và đóng thùng" HeaderStyle-BackColor="#baeaf3">
                             <ItemTemplate>
                                   <div style="text-align:center">
-                                    <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_1")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTDongGoi_A_1" Text='<%# Eval("KTDongGoi_A_1")%>'></asp:Label>
                                     <asp:Label runat="server" style="color:black;" Text="|"></asp:Label>
-                                    <asp:Label runat="server" Text='<%# Eval("KTDongGoi_A_2")%>'></asp:Label>
+                                    <asp:Label runat="server" ID="lblKTDongGoi_A_2" Text='<%# Eval("KTDongGoi_A_2")%>'></asp:Label>
                                 </div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="ACB Xác nhận" ItemStyle-Width="115px" HeaderStyle-BackColor="#baeaf3">
                             <ItemTemplate>
-                                <asp:Label runat="server" style="border:1px solid black;float:left; width:50px;height:30px;" Text='<%# Eval("ACB_XacNhan_SX_3")%>' ></asp:Label>
-                                <asp:Label runat="server" style="border:1px solid black;float:right; width:50px;height:30px;" Text='<%# Eval("ACB_XacNhan_QC_3")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:left; width:50px;height:20px;" ID="lblACB_XacNhan_SX_3" Text='<%# Eval("ACB_XacNhan_SX_3")%>' ></asp:Label>
+                                <asp:Label runat="server" style="border:1px solid black;float:right; width:50px;height:20px;" ID="lblACB_XacNhan_QC_3" Text='<%# Eval("ACB_XacNhan_QC_3")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="GHI CHÚ" HeaderStyle-BackColor="#baeaf3">
                             <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Eval("DongGoi_GhiChu")%>' ></asp:Label>
+                                <asp:Label runat="server" ID="lblDongGoi_GhiChu" Text='<%# Eval("DongGoi_GhiChu")%>' ></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button CssClass="button2" ID="btnEdit" Text="Edit" runat="server" OnClick="btnEdit_Click" CommandArgument='<%# Eval("ID") %>' />
+                                </ItemTemplate>
+                    </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </div>

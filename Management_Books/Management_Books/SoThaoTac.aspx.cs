@@ -32,8 +32,6 @@ namespace Management_Books
                 else
                 {
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
-                    lblTrangThai.Text = "Drawing";
-                
                     lblID_Phieu.Text = Request.QueryString["IDPhieu"];
                     if (!string.IsNullOrEmpty(lblID_Phieu.Text))
                     {
@@ -43,8 +41,8 @@ namespace Management_Books
                     else
                     {
                         SetInitialRow();
+
                     }
-                   
                 }
             }
         }
@@ -694,7 +692,7 @@ namespace Management_Books
             {
                 if (Check_Data_Save() == true && Check_Data_Save_Detail() == true)
                 {
-                    string TrangThai = lblTrangThai.Text;
+                    string TrangThai = "Drawing";
                     string ID_Phieu = PhatSinhSoPhieu();
                     int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoThaoTac_Data", new SqlParameter[] {
                         new SqlParameter("@ID_Phieu",ID_Phieu),
@@ -879,14 +877,14 @@ namespace Management_Books
                         NO_Phieu++;
                     }
                     MsgBox("lưu Thành Công!");
+                    Load_Data_ID_Phieu(ID_Phieu);
                 }
             }
-
             else
             {
                 if (Check_Data_Save() == true && Check_Data_Save_Detail() == true)
                 {
-                    string TrangThai = lblTrangThai.Text;
+                    string TrangThai = "Drawing";
                     string ID_Phieu_Update = ThaoTacDuLieu.Decrypt_V1(lblID_Phieu.Text, "NisseiTL1LGMyTho");
                     int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Update_SoThaoTac_Data", new SqlParameter[] {
                         new SqlParameter("@ID_Phieu",ID_Phieu_Update),
@@ -1072,9 +1070,10 @@ namespace Management_Books
                     }
                     NO_Phieu = 1;
                     MsgBox("Cập Nhật Thành Công!");
+                    Load_Data_ID_Phieu(ID_Phieu_Update);
                 }
             }
-
+            Check_Finished();
         }
         private bool Check_Data_Save()
         {
@@ -1160,6 +1159,47 @@ namespace Management_Books
             return KQ;
         }
 
+        private void Check_Finished()
+        {
+            string Decrpyt_Check = ThaoTacDuLieu.Decrypt_V1(lblID_Phieu.Text, "NisseiTL1LGMyTho");
+            DataTable dtcheck_Finished = new DataTable();
+            dtcheck_Finished = SQLhelper.ExecuteDataTable("Book_Kashime_Check_Fisnished_SoThaoTac", new SqlParameter[]
+            {
+                     new SqlParameter("@ID_Phieu", Decrpyt_Check)
+            });
+
+            if (dtcheck_Finished.Rows.Count > 0)
+            {
+                List<string> maSoList = new List<string>();
+
+                foreach (DataRow row in dtcheck_Finished.Rows)
+                {
+                    string maSo = row["XacNhanDon"].ToString();
+                    maSoList.Add(maSo);
+                }
+
+                string[] maSoArray = maSoList.ToArray();
+
+                // Kiểm tra nếu mảng không có phần tử nào là null hoặc rỗng
+                if (maSoArray.All(maSo => !string.IsNullOrEmpty(maSo)))
+                {
+                    lblTrangThai.Text = "Finished";
+                    DataTable dt = new DataTable();
+                    dt = SQLhelper.ExecuteDataTable("Book_Kashime_Update_Fisnished_SoThaoTac",new SqlParameter[]
+                   {
+                            new SqlParameter("@ID_Phieu", Decrpyt_Check),
+                    });
+                }
+                else
+                {
+                    lblTrangThai.Text = "Drawing";
+                }
+            }
+            else
+            {
+                lblTrangThai.Text = "Drawing";
+            }
+        }
         private void Load_Data_ID_Phieu(string ID_Phieu_Decrypt)
         {
             DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac_By_ID_Phieu", new SqlParameter[] {
@@ -1179,7 +1219,6 @@ namespace Management_Books
                 {
                     txtNguoiDamNhiem.Text = dt.Rows[0].Field<string>("NguoiDamNhiem") ?? string.Empty;
                 }
-                txtHoiMayDap.Text = dt.Rows[0].Field<string>("HoiMayDay");
                 if (dt.Rows[0]["HoiMayDay"] != DBNull.Value)
                 {
                     txtHoiMayDap.Text = dt.Rows[0].Field<string>("HoiMayDay") ?? string.Empty;
@@ -1229,7 +1268,6 @@ namespace Management_Books
             DataTable dtCurrentTable = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac_Detail_By_ID_Phieu", new SqlParameter[] {
                 SQLhelper.CreateParameter("@ID_Phieu", ID_Phieu_Decrypt),
             });
-
             int rowIndex = 0;
             GridView1.DataSource = dtCurrentTable;
             GridView1.DataBind();
@@ -1373,7 +1411,7 @@ namespace Management_Books
                     box36.Enabled = false;
                     box37.Enabled = false;
                     box38.Enabled = false;
-                    lblTrangThai.Text = "Finished";
+                    btnSave.Visible = false;
                 }
             }
             SetPreviousData();
