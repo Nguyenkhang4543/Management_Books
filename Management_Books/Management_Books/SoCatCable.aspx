@@ -110,7 +110,7 @@
             <asp:Button Cssclass="button2" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
-            <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#99ffcc" >
+            <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#006699" HeaderStyle-ForeColor="White" >
                 <Columns>
                     <asp:TemplateField HeaderText="LOT NL">
                         <ItemTemplate>

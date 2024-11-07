@@ -113,14 +113,18 @@ namespace Management_Books
                     Label BanVe = (Label)GridView.Rows[rowIndex].Cells[5].FindControl("lblBanVe");
                     Label NgayThaoTac = (Label)GridView.Rows[rowIndex].Cells[6].FindControl("lblNgayThaoTac");
                     Label NguoiDamNhiem = (Label)GridView.Rows[rowIndex].Cells[7].FindControl("lblNguoiDamNhiem");
+                    Label TrangThai = (Label)GridView.Rows[rowIndex].Cells[8].FindControl("lblTrangThai");
+                    Label NguoiNhap = (Label)GridView.Rows[rowIndex].Cells[9].FindControl("lblNguoiNhap");
                     Row.Text = dt.Rows[i][0].ToString();
                     ID.Text = dt.Rows[i][1].ToString();
                     Line.Text = dt.Rows[i][2].ToString();
                     MaSanPham.Text = dt.Rows[i][3].ToString();
                     TenSanPham.Text = dt.Rows[i][4].ToString();
                     BanVe.Text = dt.Rows[i][5].ToString();
-                    NgayThaoTac.Text = (Convert.ToDateTime(dt.Rows[i][6].ToString())).ToString("yyyy-MM-dd HH:mm:ss");
+                    NgayThaoTac.Text = (Convert.ToDateTime(dt.Rows[i][6].ToString())).ToString("yyyy-MM-dd");
                     NguoiDamNhiem.Text = dt.Rows[i][7].ToString();
+                    TrangThai.Text = dt.Rows[i][8].ToString();
+                    NguoiNhap.Text = dt.Rows[i][9].ToString();
                     rowIndex++;
                 }
                 SetPreviousData();
@@ -222,6 +226,8 @@ namespace Management_Books
                         Label BanVe = (Label)GridView.Rows[rowIndex].Cells[5].FindControl("lblBanVe");
                         Label NgayThaoTac = (Label)GridView.Rows[rowIndex].Cells[6].FindControl("lblNgayThaoTac");
                         Label NguoiDamNhiem = (Label)GridView.Rows[rowIndex].Cells[7].FindControl("lblNguoiDamNhiem");
+                        Label TrangThai = (Label)GridView.Rows[rowIndex].Cells[8].FindControl("lblTrangThai");
+                        Label NguoiNhap = (Label)GridView.Rows[rowIndex].Cells[9].FindControl("lblNguoiNhap");
                         Row.Text = dt.Rows[i]["lblSTT"].ToString();
                         ID.Text = dt.Rows[i]["txtID"].ToString();
                         Line.Text = dt.Rows[i]["lblLine"].ToString();
@@ -230,6 +236,8 @@ namespace Management_Books
                         BanVe.Text = dt.Rows[i]["lblBanVe"].ToString();
                         NgayThaoTac.Text = dt.Rows[i]["lblNgayThaoTac"].ToString();
                         NguoiDamNhiem.Text = dt.Rows[i]["lblNguoiDamNhiem"].ToString();
+                        TrangThai.Text = dt.Rows[i]["lblTrangThai"].ToString();
+                        NguoiNhap.Text = dt.Rows[i]["lblNguoiNhap"].ToString();
                         rowIndex++;
                     }
                 }

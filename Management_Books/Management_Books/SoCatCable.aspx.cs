@@ -102,11 +102,11 @@ namespace Management_Books
                         
                          )
                     {
-                        GridView1.Rows[i].BackColor = Color.FromArgb(1, 255, 255, 0);
+                        GridView1.Rows[i].BackColor = Color.FromArgb(248, 255, 66);
                     }
                     else
                     {
-                        GridView1.Rows[i].BackColor = Color.FromArgb(1, 100, 207, 74);
+                        GridView1.Rows[i].BackColor = Color.FromArgb(224, 255, 250);
                     }
                 }
             }

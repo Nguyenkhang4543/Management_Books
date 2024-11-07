@@ -33,13 +33,13 @@
     </table>
     <%-- ---------------------------------------------------------------Thanh Tìm Kiếm------------------------------------------------------------------------------------------------ --%>
     <div style="width:100%;text-align:left; margin-top:15px;margin-left:15px">
-            <asp:Button Cssclass="button2" ID="btnFirst" runat="server" Text="|&lt;" Font-Names="Times New Roman" Font-Size="Large" Font-Bold="True"/>
-            <asp:Button Cssclass="button2" ID="btnPrevious" runat="server" Text="&lt;" Font-Names="Times New Roman" Font-Size="Large" Font-Bold="True"/>
+            <asp:Button Cssclass="button2" ID="btnFirst" runat="server" Text="|&lt;" Font-Names="Times New Roman" Font-Size="Large" OnClick="btnFirst_Click" Font-Bold="True"/>
+            <asp:Button Cssclass="button2" ID="btnPrevious" runat="server" Text="&lt;" Font-Names="Times New Roman" Font-Size="Large" OnClick="btnPrevious_Click" Font-Bold="True"/>
             <asp:Label ID="lblCurrPage" runat="server" Text="Label"></asp:Label>
             <asp:Label ID="lbl" runat="server" Text="/"></asp:Label>
             <asp:Label ID="lblTotal" runat="server" Text="Label"></asp:Label>
-            <asp:Button Cssclass="button2" ID="btnNext" runat="server" Text="&gt;" Font-Names="Times New Roman" Font-Size="Large"  Font-Bold="True"/>
-            <asp:Button Cssclass="button2" ID="btnLast" runat="server" Text="&gt;|" Font-Names="Times New Roman" Font-Size="Large" Font-Bold="True"/>   
+            <asp:Button Cssclass="button2" ID="btnNext" runat="server" Text="&gt;" Font-Names="Times New Roman" Font-Size="Large"  OnClick="btnNext_Click"  Font-Bold="True"/>
+            <asp:Button Cssclass="button2" ID="btnLast" runat="server" Text="&gt;|" Font-Names="Times New Roman" Font-Size="Large"  OnClick="btnLast_Click" Font-Bold="True"/>   
             <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
@@ -50,7 +50,7 @@
     <br />
     <%-- ---------------------------------------------------------------Bảng Dữ Liệu Các Phiếu---------------------------------------------------------------------------------------- --%>
     <div style="width:100%">
-        <asp:GridView runat="server" ID="GridView" AutoGenerateColumns="false" Width="100%" HeaderStyle-BackColor="Green" BackColor="Wheat" Font-Size="20px" HeaderStyle-ForeColor="White" OnRowCommand="GridView_RowCommand" >
+        <asp:GridView runat="server" ID="GridView" style="text-align:center" AutoGenerateColumns="false" Width="100%" HeaderStyle-BackColor="Green" BackColor="Wheat" Font-Size="16px" HeaderStyle-ForeColor="White" OnRowCommand="GridView_RowCommand" >
             <Columns>
                 <asp:TemplateField HeaderText="STT">
                     <ItemTemplate>
@@ -90,6 +90,16 @@
                 <asp:TemplateField HeaderText="Người Đảm Nhiệm">
                     <ItemTemplate>
                         <asp:Label runat="server" ID="lblNguoiDamNhiem"></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Trạng Thái">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblTrangThai"></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Người Nhập">
+                    <ItemTemplate>
+                        <asp:Label runat="server" ID="lblNguoiNhap"></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

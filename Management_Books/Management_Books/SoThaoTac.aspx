@@ -73,12 +73,13 @@
                     <td style="width: 20%; text-align: left; border: 1px solid #143c54;"><span>1/1</span></td>
                 </tr>
          </table>
-        <asp:Label runat="server" ID="lblID_Phieu" style="display:none"></asp:Label>
+        <asp:Label runat="server" ID="lblID_Phieu"></asp:Label>
+        <asp:Label runat="server" ID="lblTrangThai"></asp:Label>
         <%-------------------------------Bảng Số 2-------------------------------%>
         <table class ="tblForm" style=" margin-bottom:5px">            
                 <tr style="text-align: center">
                     <td class="font">LINE ライン: </td>
-                    <td class="font" >CABLE ケーブル</td>
+                    <td class="font">CABLE ケーブル</td>
                     <td class="font">SLEEVE スリーブ</td>
                 </tr>
                 <tr>
