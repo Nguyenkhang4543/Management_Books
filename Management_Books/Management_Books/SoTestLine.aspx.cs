@@ -57,9 +57,10 @@ namespace Management_Books
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
                     txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                     txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    Check_ACB_Admin_XacNhan();
+                    Check_ACB_XacNhan();
                     btnSearch_Click(null, null);
                     Load_GridView_PhanQuyen();
-                    //Load_Gridview();
                 }
             }
         }
@@ -77,7 +78,55 @@ namespace Management_Books
             btnMain.Visible = true;
             btnAdmin.Visible = false;
         }
+        private void Check_ACB_Admin_XacNhan()
+        {
 
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+                {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString())
+                });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
+                if (CheckAdmin.Checked == true)
+                {
+                    txtACB_XacNhan_SX_1.Enabled = true;
+                    txtACB_XacNhan_SX_2.Enabled = true;
+                    txtACB_XacNhan_SX_3.Enabled = true;
+                    txtACB_XacNhan_QC_1.Enabled = true;
+                    txtACB_XacNhan_QC_2.Enabled = true;
+                    txtACB_XacNhan_QC_3.Enabled = true;
+                }
+            }
+        }
+        private void Check_ACB_XacNhan()
+        {
+            DataTable checkSX = new DataTable();
+            checkSX = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+            {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "SX")
+            });
+            if (checkSX.Rows.Count > 0)
+            {
+                txtACB_XacNhan_SX_1.Enabled = true;
+                txtACB_XacNhan_SX_2.Enabled = true;
+                txtACB_XacNhan_SX_3.Enabled = true;
+            }
+            DataTable checkQC = new DataTable();
+            checkQC = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+            {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "QC")
+            });
+            if (checkQC.Rows.Count > 0)
+            {
+                txtACB_XacNhan_QC_1.Enabled = true;
+                txtACB_XacNhan_QC_2.Enabled = true;
+                txtACB_XacNhan_QC_3.Enabled = true;
+            }
+        }
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {
             Session["MaNV"] = null;
@@ -178,9 +227,11 @@ namespace Management_Books
         }
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            string ID = string.IsNullOrEmpty(hdfID.Value) ? null : hdfID.Value;
-            int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoTestLine", new SqlParameter[]
+            if (Check_Data_Save() == true)
             {
+                string ID = string.IsNullOrEmpty(hdfID.Value) ? null : hdfID.Value;
+                int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_SoTestLine", new SqlParameter[]
+                {
                 new SqlParameter("@ID",ID),
                 new SqlParameter("@So_Line",txtSo_Line.Text),
                 new SqlParameter("@Ngay_SX",txtNgay_SX.Text),
@@ -218,17 +269,52 @@ namespace Management_Books
                 new SqlParameter("@DongGoi_GhiChu",txtDongGoi_GhiChu.Text),
                 new SqlParameter("@MaBP",Session["BoPhan"].ToString()),
                 new SqlParameter("@Factory",Session["Factory"].ToString())
-            });
-            if (insert > 0)
+                });
+                if (insert > 0)
+                {
+                    MsgBox("Lưu Dữ Liệu Thành Công");
+                    Enable_Field();
+                    btnSearch_Click(null, null);
+                    Reset_Data();
+                }
+                else
+                {
+                    MsgBox("Lưu Dữ Liệu Không Thành Công!");
+                }
+            }
+           
+        }
+
+        private bool Check_Data_Save()
+        {
+            if (string.IsNullOrEmpty(txtSo_Line.Text))
             {
-                MsgBox("Lưu Dữ Liệu Thành Công");
-                Enable_Field();
-                btnSearch_Click(null, null);
-                Reset_Data();
+                MsgBox("Chưa Nhập Số Line");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtNgay_SX.Text))
+            {
+                MsgBox("Chưa Nhập Ngày Sản Xuất");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtThoiGianDoi_SP.Text))
+            {
+                MsgBox("Chưa Nhập Thời Gian Đổi Sản Phẩm");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtSP_DangThaoTac.Text))
+            {
+                MsgBox("Chưa Nhập Sản Phẩm Đang Thao Tác");
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtSP_TienHanhDoi.Text))
+            {
+                MsgBox("Chưa Nhập Sản Phẩm Tiến Hành Đổi");
+                return false;
             }
             else
             {
-                MsgBox("Lưu Dữ Liệu Không Thành Công!");
+                return true;
             }
         }
         private void Reset_Data()
@@ -488,20 +574,15 @@ namespace Management_Books
                 CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
                 if (!CheckAdmin.Checked)
                 {
-                    //ValidateAndExecute(txtACB_XacNhan_SX_1, "SX");
-                    //ValidateAndExecute(txtACB_XacNhan_QC_1, "QC");
-                    //ValidateAndExecute(txtACB_XacNhan_SX_2, "SX");
-                    //ValidateAndExecute(txtACB_XacNhan_QC_2, "QC");
-                    //ValidateAndExecute(txtACB_XacNhan_SX_3, "SX");
-                    //ValidateAndExecute(txtACB_XacNhan_QC_3, "SX");
                     if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text))
                     {
-                        int checkSX1 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        DataTable checkSX1 = new DataTable();
+                        checkSX1 = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
                         {
                         new SqlParameter("@MSNV", Session["MaNV"].ToString()),
                         new SqlParameter("@BoPhan", "SX")
                         });
-                        if(checkSX1 < 0)
+                        if (checkSX1.Rows.Count > 0)
                         {
                             MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
                             txtACB_XacNhan_SX_1.Text = "";
@@ -510,103 +591,23 @@ namespace Management_Books
                     }
                     if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_1.Text))
                     {
-                        int checkQC1 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        DataTable checkQC1 = new DataTable();
+                        checkQC1 = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
                         {
                         new SqlParameter("@MSNV", Session["MaNV"].ToString()),
                         new SqlParameter("@BoPhan", "QC")
                         });
-                        if (checkQC1 < 0)
+                        if (checkQC1.Rows.Count <= 0)
                         {
                             MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
                             txtACB_XacNhan_QC_1.Text = "";
                             return;
                         }
                     }
-
-
-                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text))
-                    {
-                        int checkSX2 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
-                        {
-                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
-                        new SqlParameter("@BoPhan", "SX")
-                        });
-                        if (checkSX2 < 0)
-                        {
-                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                            txtACB_XacNhan_SX_2.Text = "";
-                            return;
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text))
-                    {
-                        int checkQC2 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
-                        {
-                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
-                        new SqlParameter("@BoPhan", "QC")
-                        });
-                        if (checkQC2 < 0)
-                        {
-                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                            txtACB_XacNhan_QC_2.Text = "";
-                            return;
-                        }
-                    }
-
-
-                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text))
-                    {
-                        int checkSX3 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
-                        {
-                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
-                        new SqlParameter("@BoPhan", "SX")
-                        });
-                        if (checkSX3 < 0)
-                        {
-                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                            txtACB_XacNhan_SX_3.Text = "";
-                            return;
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text))
-                    {
-                        int checkQC3 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
-                        {
-                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
-                        new SqlParameter("@BoPhan", "QC")
-                        });
-                        if (checkQC3 < 0)
-                        {
-                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                            txtACB_XacNhan_QC_3.Text = "";
-                            return;
-                        }
-                    }
-                }
+                } 
             }
         }
-        private void ValidateAndExecute(TextBox textBox, string boPhan)
-        {
-            if (!string.IsNullOrEmpty(textBox.Text))
-            {
-                DataTable dt = new DataTable();
-                dt = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
-                {
-                new SqlParameter("@MSNV", Session["MaNV"].ToString()),
-                new SqlParameter("@BoPhan", boPhan)
-                });
-                if(dt.Rows.Count > 0)
-                {
-
-                }
-                else
-                {
-                    MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                    textBox.Text = "";
-                }
-            }
-           
-        }
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

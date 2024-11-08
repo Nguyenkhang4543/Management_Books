@@ -131,8 +131,8 @@
                 <asp:TableCell><asp:TextBox ID="txtKTPhePham_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKTPhePham_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_1" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_1" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true"  runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_1" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_1" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
 
                 <asp:TableCell><asp:TextBox ID="txtDapCable_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
@@ -145,8 +145,8 @@
                 <asp:TableCell><asp:TextBox ID="txtKTND_A1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKTND_A2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_2" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_2" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_2" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_2" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
 
                 <asp:TableCell><asp:TextBox ID="txtQC_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
        
@@ -156,8 +156,8 @@
                 <asp:TableCell><asp:TextBox ID="txtKTDongGoi_A_1" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
                 <asp:TableCell><asp:TextBox ID="txtKTDongGoi_A_2" style="width: 25px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
 
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_3" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true" runat="server"></asp:TextBox></asp:TableCell>
-                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_3" style="width: 40px; height:25px" OnTextChanged="ACB_XacNhan" AutoPostBack="true" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_SX_3" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
+                <asp:TableCell><asp:TextBox ID="txtACB_XacNhan_QC_3" style="width: 40px; height:25px" Enabled="false" runat="server"></asp:TextBox></asp:TableCell>
 
                 <asp:TableCell><asp:TextBox ID="txtDongGoi_GhiChu" style="width: 70px; height:25px" runat="server"></asp:TextBox></asp:TableCell>
             </asp:TableRow>

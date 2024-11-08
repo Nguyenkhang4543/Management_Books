@@ -56,7 +56,6 @@ namespace Management_Books
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "myalert", "alert(\"" + sMessage.Replace("\r\n", "") + "\");", true);
         }
-
         private void Load_GridView()
         {
             DataTable dt = new DataTable();
@@ -67,7 +66,6 @@ namespace Management_Books
                 GridView1.DataBind();
             }
         }
-
         private void Load_GridView_DanhSachSo()
         {
             DataTable dt = new DataTable();
@@ -91,7 +89,6 @@ namespace Management_Books
             ddlLoaiSo.DataBind();
             ddlLoaiSo.Items.Insert(0, new ListItem("-----Select-----", ""));
         }
-
         protected void ddlMa_So(object sender, EventArgs e)
         {
             DataTable dt = SQLhelper.GetDataToTable("Books_Get_So_Ma_So", new SqlParameter[] {
@@ -107,7 +104,6 @@ namespace Management_Books
             }
 
         }
-
         protected void txtMaNhanVien_TextChanged(object sender, EventArgs e)
         {
             DataTable dt = SQLhelper.GetDataToTable("Books_Get_ThongTin_NhanVien", new SqlParameter[]
@@ -126,16 +122,16 @@ namespace Management_Books
         }
         protected void btnLuu_Click(object sender, EventArgs e)
         {
-            if (CheckData() == true && Check_NhanVien()==true)
+            if(CheckAllQuyen.Checked == true && Check_NhanVien() == true)
             {
-               int insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
-           {
-                new SqlParameter("@Ma_So",lblMa_So.Text),
-                new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
-                new SqlParameter("@MSNV",txtMaNhanVien.Text),
-                new SqlParameter("@Ten_So",ddlLoaiSo.Text)
-           });
-                if(insert > 0)
+                int insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
+                   {
+                        new SqlParameter("@Ma_So","1"),
+                        new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
+                        new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                        new SqlParameter("@Ten_So","All Sổ")
+                   });
+                if (insert > 0)
                 {
                     MsgBox("Lưu Thành Công!");
                     ResetData();
@@ -146,13 +142,37 @@ namespace Management_Books
                 {
                     MsgBox("Lưu Không Thành Công!");
                 }
-               
             }
             else
             {
-                MsgBox("Không Thành Công, Kiểm Tra Lại Dữ Liệu");
-            }
 
+         
+                if (CheckData() == true && Check_NhanVien()==true)
+                {
+                   int insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
+                   {
+                        new SqlParameter("@Ma_So",lblMa_So.Text),
+                        new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
+                        new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                        new SqlParameter("@Ten_So",ddlLoaiSo.Text)
+                   });
+                    if(insert > 0)
+                    {
+                        MsgBox("Lưu Thành Công!");
+                        ResetData();
+                        Load_GridView();
+                        return;
+                    }
+                    else
+                    {
+                        MsgBox("Lưu Không Thành Công!");
+                    }
+                }
+                else
+                {
+                    MsgBox("Không Thành Công, Kiểm Tra Lại Dữ Liệu");
+                }
+            }
         }
         private void ResetData()
         {
@@ -166,7 +186,12 @@ namespace Management_Books
 
             if (string.IsNullOrEmpty(txtMaNhanVien.Text))
             {
-                MsgBox("Chưa Chọn Nhân Viên !");
+                MsgBox("Chưa Nhập Nhân Viên !");
+                return false;
+            }
+            if (string.IsNullOrEmpty(ddlLoaiSo.Text))
+            {
+                MsgBox("Chưa Chọn Loại Sổ !");
                 return false;
             }
             return true;
@@ -189,7 +214,6 @@ namespace Management_Books
                 return false;
             }
         }
-       
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
@@ -212,37 +236,67 @@ namespace Management_Books
         {
             if(Check_Update() == true)
             {
-                if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                if(CheckAllQuyen.Checked == true)
                 {
-                    int update = 0;
-                    update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
+                    if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                    {
+                        int update = 0;
+                        update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
+                            new SqlParameter("@ID", id),
+                            new SqlParameter("@Ma_So","1"),
+                            new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
+                            new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                            new SqlParameter("@Ten_So","All Sổ")
+                        });
+                        if (update > 0)
+                        {
+                            MsgBox("Update Thành Công");
+                            ResetData();
+                            Load_GridView();
+                            btnDelete.Visible = false;
+                            btnUpdate.Visible = false;
+                        }
+                        else
+                        {
+                            MsgBox("Update Không Thành Công");
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                    {
+                        int update = 0;
+                        update = SQLhelper.ExecuteNonQuery("Books_Update_PhanQuyen", new SqlParameter[] {
                             new SqlParameter("@ID", id),
                             new SqlParameter("@Ma_So",lblMa_So.Text),
                             new SqlParameter("@ALL_Books",CheckAllQuyen.Checked),
                             new SqlParameter("@MSNV",txtMaNhanVien.Text),
                             new SqlParameter("@Ten_So",ddlLoaiSo.Text)
-              });
-                    if (update > 0)
-                    {
-                        MsgBox("Update Thành Công");
-                        ResetData();
-                        Load_GridView();
-                        btnDelete.Visible = false;
-                        btnUpdate.Visible = false;
-                    }
-                    else
-                    {
-                        MsgBox("Update Không Thành Công");
-                        return;
+                        });
+                        if (update > 0)
+                        {
+                            MsgBox("Update Thành Công");
+                            ResetData();
+                            Load_GridView();
+                            btnDelete.Visible = false;
+                            btnUpdate.Visible = false;
+                        }
+                        else
+                        {
+                            MsgBox("Update Không Thành Công");
+                            return;
+                        }
                     }
                 }
+               
             }
             else
             {
                 MsgBox("Xảy Ra Lỗi Trong Quá Trình Update!");
                 return;
             }
-            
         }
         private bool Check_Update()
         {
