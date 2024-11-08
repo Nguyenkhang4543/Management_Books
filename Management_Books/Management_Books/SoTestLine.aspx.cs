@@ -566,6 +566,7 @@ namespace Management_Books
                 {
                     MsgBox("Lưu Thành Công!");
                     ResetData();
+                    Load_GridView_PhanQuyen();
                     return;
                 }
                 else
@@ -603,20 +604,20 @@ namespace Management_Books
         }
         private bool Check_NhanVien()
         {
-            DataTable dt = new DataTable();
-            dt = SQLhelper.GetDataToTable("Check_PhanQuyen_SoTestLine", new SqlParameter[]
+            int check = 0;
+            check = SQLhelper.ExecuteNonQuery("Check_PhanQuyen_ACB_XacNhan_SoTestLine", new SqlParameter[]
             {
                 new SqlParameter("@MSNV",txtMaNhanVien.Text),
                 new SqlParameter("@BoPhan",ddlBoPhan.SelectedValue)
             });
-            if (dt.Rows.Count < 0)
-            {
-                return true;
-            }
-            else
+            if(check > 0)
             {
                 MsgBox("Nhân Viên Đã Có Thông Tin Với :" + ddlBoPhan.SelectedValue);
                 return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -702,6 +703,7 @@ namespace Management_Books
                 {
                     MsgBox("Xóa Thành Công!");
                     ResetData();
+                    Load_GridView_PhanQuyen();
                     btnDelete.Visible = false;
                     btnUpdate.Visible = false;
                 }

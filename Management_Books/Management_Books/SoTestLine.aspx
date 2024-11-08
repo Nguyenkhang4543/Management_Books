@@ -388,7 +388,7 @@
                 </div>
                 <br />
                 <div style="width:100%;text-align:center">
-                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" DataKeyNames="ID" Pagesize="10" HeaderStyle-BackColor="Orange" >
+                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" AutoPostBack="true" DataKeyNames="ID" Pagesize="10" HeaderStyle-BackColor="Orange" >
                         <Columns>
                             <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
