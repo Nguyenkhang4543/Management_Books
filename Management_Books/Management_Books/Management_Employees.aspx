@@ -46,14 +46,9 @@
                             <label>Loại Sổ:</label>
                         </div>
                         <div style="width:580px;display:flex; margin-left:10px;margin-top:10px; margin-bottom:10px">
-                            <asp:Dropdownlist runat="server" style="width:50%;margin-right:15px" AutoPostBack="true" ID="ddlBoPhan" OnSelectedIndexChanged="ddlLoaiSo_IndexChanged">
-                                <asp:ListItem>*********************************</asp:ListItem>
-                                <asp:ListItem>Kashime</asp:ListItem>
-                                <asp:ListItem>LineCut</asp:ListItem>
-                                <asp:ListItem>All Sổ</asp:ListItem>
-                                </asp:Dropdownlist>
+                        <asp:Dropdownlist runat="server" style="width:50%;margin-right:15px" AutoPostBack="true" ID="ddlBoPhan" OnSelectedIndexChanged="ddlLoaiSo_IndexChanged"></asp:Dropdownlist>
                         <asp:Dropdownlist ID="ddlLoaiSo" style="width:50%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMa_So" ></asp:Dropdownlist>
-                        <asp:Label ID="lblMa_So" style="display:none" AutoPostBack="true" runat="server"></asp:Label>
+                        <asp:Label ID="lblMa_So" AutoPostBack="true" runat="server"></asp:Label>
                         <asp:Label ID="lblID" runat="server" style="display:none"></asp:Label>
                         </div>
                     </div>
@@ -69,11 +64,12 @@
                     <div style="width:100%;border-bottom:2px dashed black">
                         <div style="width:200px; margin-left:10px;margin-top:10px; margin-bottom:10px">
                             <label>Admin:</label>
-                            <asp:Checkbox ID="CheckAllQuyen" style="cursor:pointer" runat="server"></asp:Checkbox>
+                            <asp:Checkbox ID="CheckAllQuyen" style="cursor:pointer" runat="server" AutoPostBack="true" OnCheckedChanged="CheckALLQuyen_Click"></asp:Checkbox>
                         </div>
                     </div>
                     <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Visible="false" Text="Thêm Mới" OnClick="btnThemMoi_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
                     </div>
@@ -101,8 +97,15 @@
                 </div>
                 </div>
                 <br />
+                <div>
+                    <asp:TextBox runat="server" ID="txtNoiDung"  style="width:200px;height:40px" PlaceHolder="Search MaNV"></asp:TextBox>
+                    <asp:Button runat="server" Text="Search" style="width:60px;height:40px;border-radius:4px;background-color:aquamarine" ID="btnSearch" OnClick="btnSearch_Click"/>
+                </div>
+                <br />
                 <div style="width:100%;text-align:center">
-                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" DataKeyNames="ID" Pagesize="10" HeaderStyle-BackColor="YellowGreen" >
+                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" DataKeyNames="ID" AllowPaging="True" PageSize="10" HeaderStyle-BackColor="YellowGreen" 
+                        OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+                        >
                         <Columns>
                             <asp:TemplateField HeaderText="ID">
                                 <ItemTemplate>

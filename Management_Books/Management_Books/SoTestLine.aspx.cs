@@ -70,6 +70,7 @@ namespace Management_Books
         }
         protected void btnAdminMain_Click(object sender, EventArgs e)
         {
+            lblTenDanhNhapAdmin.Text = convertToUnSign3(Session["Ten"].ToString());
             btnMain.Visible = false;
             btnAdmin.Visible = true;
         }
@@ -355,6 +356,7 @@ namespace Management_Books
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            btnLuu.Visible = false;
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = int.Parse(GridView.DataKeys[rowIndex].Values[0].ToString());
             DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoTestLine_By_ID", new SqlParameter("@ID", id));
@@ -805,6 +807,25 @@ namespace Management_Books
             {
                 MsgBox("ID không hợp lệ!");
             }
+        }
+        int stt = 1;
+        public string get_stt()
+        {
+            return Convert.ToString(stt++);
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;   //trang hien tai
+            int trang_thu = e.NewPageIndex;      //the hien trang thu may
+            int so_dong = GridView1.PageSize;       //moi trang co bao nhieu dong
+            stt = trang_thu * so_dong + 1;
+            Load_GridView_PhanQuyen();
+        }
+
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

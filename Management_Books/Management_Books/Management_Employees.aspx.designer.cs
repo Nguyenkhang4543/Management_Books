@@ -150,6 +150,15 @@ namespace Management_Books
         protected global::System.Web.UI.WebControls.Button btnLuu;
 
         /// <summary>
+        /// btnThemMoi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnThemMoi;
+
+        /// <summary>
         /// btnUpdate control.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,24 @@ namespace Management_Books
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewDanhSach;
+
+        /// <summary>
+        /// txtNoiDung control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNoiDung;
+
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
         /// GridView1 control.

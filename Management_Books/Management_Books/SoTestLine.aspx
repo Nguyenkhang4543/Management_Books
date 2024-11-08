@@ -344,8 +344,8 @@
                 </td>
                 <td style="border-spacing: unset; border-style: none; background-color: #006699; text-align: right; width: 12%">
                     <div >
-                        <asp:Label runat="server" ID="Label1" ForeColor="White" Style=" display:inline-table; margin-right:10px" Font-Bold="True"></asp:Label>
-                        <a class="button_logout" id="A1" runat="server" onserverclick="btnDangXuat_Click" >
+                        <asp:Label runat="server" ID="lblTenDanhNhapAdmin" ForeColor="White" Style=" display:inline-table; margin-right:10px" Font-Bold="True"></asp:Label>
+                        <a class="button_logout" runat="server" onserverclick="btnDangXuat_Click" >
                             <div class="logout">Log Out </div>
                         </a>
                     </div>
@@ -388,7 +388,9 @@
                 </div>
                 <br />
                 <div style="width:100%;text-align:center">
-                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" AutoPostBack="true" DataKeyNames="ID" Pagesize="10" HeaderStyle-BackColor="Orange" >
+                    <asp:Gridview style="width:100%" runat="server" ID="GridView1" AutoGenerateColumns="false" AutoPostBack="true" DataKeyNames="ID" AllowPaging="True" PageSize="10"
+                        OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+                        HeaderStyle-BackColor="Orange" >
                         <Columns>
                             <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>

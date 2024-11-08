@@ -39,6 +39,14 @@ namespace Management_Books
                     ddlLoaiSo.DataValueField = "Ten_So";
                     ddlLoaiSo.DataBind();
                     ddlLoaiSo.Items.Insert(0, new ListItem("-----Select-----", ""));
+
+                    DataTable dtBP = new DataTable();
+                    dtBP = SQLhelper.GetDataToTable("Books_Get_All_BoPhan");
+                    ddlBoPhan.DataSource = dtBP;
+                    ddlBoPhan.DataTextField = "BoPhan";
+                    ddlBoPhan.DataValueField = "BoPhan";
+                    ddlBoPhan.DataBind();
+                    ddlBoPhan.Items.Insert(0, new ListItem("-----Select-----", ""));
                 }
             }
         }
@@ -94,7 +102,7 @@ namespace Management_Books
             DataTable dt = SQLhelper.GetDataToTable("Books_Get_So_Ma_So", new SqlParameter[] {
                                                 SQLhelper.CreateParameter("@TenSo", ddlLoaiSo.SelectedValue.Trim())
                                                 });
-            if (dt.Rows.Count > 0 && ddlLoaiSo.Text != "-----Select-----")
+            if (dt.Rows.Count > 0)
             {
                 lblMa_So.Text = dt.Rows[0].Field<string>("Ma_So");
             }
@@ -121,7 +129,7 @@ namespace Management_Books
             }
         }
         protected void btnLuu_Click(object sender, EventArgs e)
-        {
+            {
             if(CheckAllQuyen.Checked == true && Check_NhanVien() == true)
             {
                 int insert = SQLhelper.ExecuteNonQuery("Books_Insert_PhanQuyen", new SqlParameter[]
@@ -174,10 +182,24 @@ namespace Management_Books
                 }
             }
         }
+        protected void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            btnLuu.Visible = true;
+            btnThemMoi.Visible = false;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            ddlLoaiSo.Text = "";
+            txtMaNhanVien.Text = "";
+            ddlBoPhan.Text="";
+            lblMa_So.Text = "";
+            txtTenNhanVien.Text = "";
+            CheckAllQuyen.Checked = false;
+        }
         private void ResetData()
         {
             txtMaNhanVien.Text = "";
             CheckAllQuyen.Checked = false;
+            ddlBoPhan.Text = "";
             ddlLoaiSo.Text = "";
             txtTenNhanVien.Text = "";
         }
@@ -204,7 +226,7 @@ namespace Management_Books
                 new SqlParameter("@Ma_So",lblMa_So.Text),
                 new SqlParameter("@MSNV",txtMaNhanVien.Text)
             });
-            if(dt.Rows.Count < 0)
+            if(dt.Rows.Count <= 0)
             {
                 return true;
             }
@@ -216,6 +238,9 @@ namespace Management_Books
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            btnLuu.Visible = false;
+            btnThemMoi.Visible = true;
+
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = Convert.ToInt32(GridView1.DataKeys[rowIndex].Value);
             DataTable dt = SQLhelper.GetDataToTable("Books_Get_ThongTinNhanVien_ByID", new SqlParameter[] {
@@ -225,6 +250,8 @@ namespace Management_Books
             {
                 lblID.Text = dt.Rows[0].Field<int>("ID").ToString();
                 ddlLoaiSo.Text = dt.Rows[0].Field<string>("Ten_So");
+                ddlBoPhan.Text = dt.Rows[0].Field<string>("BoPhan");
+                lblMa_So.Text = dt.Rows[0].Field<string>("Ma_So");
                 txtMaNhanVien.Text = dt.Rows[0].Field<string>("MSNV");
                 txtTenNhanVien.Text = dt.Rows[0].Field<string>("HoTen");
                 CheckAllQuyen.Checked = dt.Rows[0].Field<bool>("ALL_Books");
@@ -340,6 +367,55 @@ namespace Management_Books
             else
             {
                 MsgBox("ID không hợp lệ!");
+            }
+        }
+        protected void CheckALLQuyen_Click(object sender, EventArgs e)
+        {
+            if(CheckAllQuyen.Checked == false)
+            {
+                ddlLoaiSo.Text = "";
+                ddlBoPhan.Text= "" ;
+                lblMa_So.Text = "";
+            }
+            else
+            {
+                ddlLoaiSo.Text = "All Sổ";
+                ddlBoPhan.Text = "All Sổ";
+                lblMa_So.Text = "1";
+            }
+        }
+        int stt = 1;
+        public string get_stt()
+        {
+            return Convert.ToString(stt++);
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;   //trang hien tai
+            int trang_thu = e.NewPageIndex;      //the hien trang thu may
+            int so_dong = GridView1.PageSize;       //moi trang co bao nhieu dong
+            stt = trang_thu * so_dong + 1;
+            Load_GridView();
+        }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnSearch_Click(object sender,EventArgs e)
+        {
+            string NoiDung = txtNoiDung.Text.Trim();
+            DataTable dtSearch = new DataTable();
+            dtSearch = SQLhelper.GetDataToTable("Books_Get_Search_ThongTinNhanVien", new SqlParameter[] { 
+                new SqlParameter("@NoiDung",NoiDung)
+            });
+            if(dtSearch.Rows.Count > 0)
+            {
+                GridView1.DataSource = dtSearch;
+                GridView1.DataBind();
+            }
+            else
+            {
+                MsgBox("Nội Dung Tìm Kiếm Không Tồn Tại");
             }
         }
     }
