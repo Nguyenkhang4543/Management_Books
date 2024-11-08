@@ -32,7 +32,8 @@ namespace Management_Books
 
                     if (allbooks)
                     {
-                        // Cho Phép Đăng Nhập Với Quyền Admin
+                        btnAdminMain.Visible = true;
+                        btnMainBack.Visible = true;
                     }
                     else if (maSo == "3")
                     {
@@ -57,6 +58,7 @@ namespace Management_Books
                     txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                     txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                     btnSearch_Click(null, null);
+                    Load_GridView_PhanQuyen();
                     //Load_Gridview();
                 }
             }
@@ -65,6 +67,17 @@ namespace Management_Books
         {
             Response.Redirect("Home.aspx");
         }
+        protected void btnAdminMain_Click(object sender, EventArgs e)
+        {
+            btnMain.Visible = false;
+            btnAdmin.Visible = true;
+        }
+        protected void btnMainBack_Click(object sender, EventArgs e)
+        {
+            btnMain.Visible = true;
+            btnAdmin.Visible = false;
+        }
+
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {
             Session["MaNV"] = null;
@@ -212,7 +225,6 @@ namespace Management_Books
                 Enable_Field();
                 btnSearch_Click(null, null);
                 Reset_Data();
-
             }
             else
             {
@@ -253,6 +265,7 @@ namespace Management_Books
             txtACB_XacNhan_SX_3.Text = "";
             txtACB_XacNhan_QC_3.Text = "";
             txtDongGoi_GhiChu.Text = "";
+            hdfID.Value = "";
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
@@ -488,18 +501,223 @@ namespace Management_Books
         {
             if (!string.IsNullOrEmpty(textBox.Text))
             {
-                SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                DataTable dt = new DataTable();
+                dt = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
                 {
-            new SqlParameter("@MSNV", Session["MSNV"].ToString()),
-            new SqlParameter("@BoPhan", boPhan)
+                new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                new SqlParameter("@BoPhan", boPhan)
                 });
+                if(dt.Rows.Count > 0)
+                {
+
+                }
+                else
+                {
+                    MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                    textBox.Text = "";
+                }
+            }
+           
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        private void Load_GridView_PhanQuyen()
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_Kashime_Get_PhanQuyen_SoTestLine");
+
+            if (dt.Rows.Count > 0)
+            {
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+        }
+        protected void txtMaNhanVien_TextChanged(object sender, EventArgs e)
+        {
+            DataTable dt = SQLhelper.GetDataToTable("Books_Get_ThongTin_NhanVien", new SqlParameter[]
+            {
+                new SqlParameter("@MaNV", txtMaNhanVien.Text)
+            });
+            if (dt.Rows.Count > 0)
+            {
+                txtTenNhanVien.Text = dt.Rows[0].Field<string>("HoTen");
             }
             else
             {
-                MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
-                textBox.Text = "";
+                MsgBox("Mã Nhân Viên Không Tồn Tại !");
+                return;
+            }
+        }
+        protected void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (CheckData() == true && Check_NhanVien() == true)
+            {
+                int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Insert_PhanQuyen_SoTestLine", new SqlParameter[]
+            {
+                new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                new SqlParameter("@HoTen",txtTenNhanVien.Text),
+                new SqlParameter("@BoPhan",ddlBoPhan.SelectedValue)
+               
+            });
+                if (insert > 0)
+                {
+                    MsgBox("Lưu Thành Công!");
+                    ResetData();
+                    return;
+                }
+                else
+                {
+                    MsgBox("Lưu Không Thành Công!");
+                }
+
+            }
+            else
+            {
+                MsgBox("Không Thành Công, Kiểm Tra Lại Dữ Liệu");
+            }
+
+        }
+        private void ResetData()
+        {
+            txtMaNhanVien.Text = "";
+            txtTenNhanVien.Text = "";
+            ddlBoPhan.Text = "";
+        }
+        private bool CheckData()
+        {
+
+            if (string.IsNullOrEmpty(txtMaNhanVien.Text))
+            {
+                MsgBox("Chưa Chọn Nhân Viên !");
+                return false;
+            }
+            if (string.IsNullOrEmpty(ddlBoPhan.Text))
+            {
+                MsgBox("Chưa Chọn Bộ Phận !");
+                return false;
+            }
+            return true;
+        }
+        private bool Check_NhanVien()
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Check_PhanQuyen_SoTestLine", new SqlParameter[]
+            {
+                new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                new SqlParameter("@BoPhan",ddlBoPhan.SelectedValue)
+            });
+            if (dt.Rows.Count < 0)
+            {
+                return true;
+            }
+            else
+            {
+                MsgBox("Nhân Viên Đã Có Thông Tin Với :" + ddlBoPhan.SelectedValue);
+                return false;
             }
         }
 
+        protected void btnEditQuyen_Click(object sender, EventArgs e)
+        {
+            int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
+            int id = Convert.ToInt32(GridView1.DataKeys[rowIndex].Value);
+            DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_PhanQuyen_SoTestLine_By_ID", new SqlParameter[] {
+                         new SqlParameter("@ID", id)
+             });
+            if (dt.Rows.Count > 0)
+            {
+                lblID.Text = dt.Rows[0].Field<int>("ID").ToString();
+                txtMaNhanVien.Text = dt.Rows[0].Field<string>("MSNV");
+                txtTenNhanVien.Text = dt.Rows[0].Field<string>("HoTen");
+                ddlBoPhan.Text = dt.Rows[0].Field<string>("BoPhan");
+            }
+            btnDelete.Visible = true;
+            btnUpdate.Visible = true;
+        }
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (Check_Update() == true)
+            {
+                if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                {
+                    int update = 0;
+                    update = SQLhelper.ExecuteNonQuery("Books_Kashime_Update_PhanQuyen_SoTestLine_By_ID", new SqlParameter[] {
+                            new SqlParameter("@ID", id),
+                            new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                            new SqlParameter("@HoTen",txtTenNhanVien.Text),
+                            new SqlParameter("@BoPhan",ddlBoPhan.SelectedValue)
+
+              });
+                    if (update > 0)
+                    {
+                        MsgBox("Update Thành Công");
+                        ResetData();
+                        Load_GridView_PhanQuyen();
+                        btnDelete.Visible = false;
+                        btnUpdate.Visible = false;
+                    }
+                    else
+                    {
+                        MsgBox("Update Không Thành Công");
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                MsgBox("Xảy Ra Lỗi Trong Quá Trình Update!");
+                return;
+            }
+        }
+        private bool Check_Update()
+        {
+            int update = SQLhelper.ExecuteNonQuery("Check_PhanQuyen_ACB_XacNhan_SoTestLine", new SqlParameter[]
+            {
+                new SqlParameter("@MSNV",txtMaNhanVien.Text),
+                new SqlParameter("@BoPhan",ddlBoPhan.SelectedValue),
+            });
+            if (update < 0)
+            {
+                return true;
+            }
+            else
+            {
+                MsgBox("Nhân Viên Đã Có Thông Tin Với :" + ddlBoPhan.SelectedValue);
+                return false;
+            }
+        }
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            {
+                SqlParameter[] prameter = new SqlParameter[]
+                {
+                    new SqlParameter("@ID", id)
+                };
+                int delete = SQLhelper.ExecuteNonQuery("Books_Kashime_DELETE_PhanQuyen_SoTestLine_By_ID", prameter);
+                if (delete > 0)
+                {
+                    MsgBox("Xóa Thành Công!");
+                    ResetData();
+                    btnDelete.Visible = false;
+                    btnUpdate.Visible = false;
+                }
+                else
+                {
+                    MsgBox("Xóa Không Thành Công!");
+                }
+            }
+            else
+            {
+                MsgBox("ID không hợp lệ!");
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }
