@@ -487,7 +487,8 @@ namespace Management_Books
                 {
                     txtDongGoi_GhiChu.Text = dt.Rows[0].Field<string>("DongGoi_GhiChu") ?? string.Empty;
                 }
-                if(!string.IsNullOrEmpty(txtSo_Line.Text)
+                hdfID.Value = id.ToString();
+                if (!string.IsNullOrEmpty(txtSo_Line.Text)
                     &&!string.IsNullOrEmpty(txtNgay_SX.Text)
                     && !string.IsNullOrEmpty(txtThoiGianDoi_SP.Text)
                     && !string.IsNullOrEmpty(txtSP_DangThaoTac.Text)
@@ -496,8 +497,8 @@ namespace Management_Books
                     && !string.IsNullOrEmpty(txtKTConLai_2.Text)
                     && !string.IsNullOrEmpty(txtThuGomConLai_1.Text)
                     && !string.IsNullOrEmpty(txtThuGomConLai_2.Text)
-                    && !string.IsNullOrEmpty(txtGiaoTP_QC_1.Text)
-                    && !string.IsNullOrEmpty(txtGiaoTP_QC_2.Text)
+                    //&& !string.IsNullOrEmpty(txtGiaoTP_QC_1.Text)
+                    //&& !string.IsNullOrEmpty(txtGiaoTP_QC_2.Text)
                     && !string.IsNullOrEmpty(txtKTPhePham_1.Text)
                     && !string.IsNullOrEmpty(txtKTPhePham_2.Text)
                     && !string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text)
@@ -508,14 +509,14 @@ namespace Management_Books
                     && !string.IsNullOrEmpty(txtKTCD_DTA_2.Text)
                     && !string.IsNullOrEmpty(txtKTND_A1.Text)
                     && !string.IsNullOrEmpty(txtKTND_A2.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text)
+                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text)
+                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text)
                     && !string.IsNullOrEmpty(txtKTTaibar_A_1.Text)
                     && !string.IsNullOrEmpty(txtKTTaibar_A_2.Text)
                     && !string.IsNullOrEmpty(txtKTDongGoi_A_1.Text)
                     && !string.IsNullOrEmpty(txtKTDongGoi_A_2.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text)
+                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text)
+                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text)
                     )
                 {
                     Enable_Field(false);
@@ -523,6 +524,8 @@ namespace Management_Books
                 else
                 {
                     Enable_Field();
+                    Check_ACB_Admin_XacNhan();
+                    Check_ACB_XacNhan();
                 }
             }
         }
@@ -541,8 +544,8 @@ namespace Management_Books
             txtGiaoTP_QC_2.Enabled = flag;
             txtKTPhePham_1.Enabled = flag;
             txtKTPhePham_2.Enabled = flag;
-            txtACB_XacNhan_SX_1.Enabled = flag;
-            txtACB_XacNhan_QC_1.Enabled = flag;
+            //txtACB_XacNhan_SX_1.Enabled = flag;
+            //txtACB_XacNhan_QC_1.Enabled = flag;
             txtDapCable_GhiChu.Enabled = flag;
 
             txtKTCDC_A_1.Enabled = flag;
@@ -551,17 +554,19 @@ namespace Management_Books
             txtKTCD_DTA_2.Enabled = flag;
             txtKTND_A1.Enabled = flag;
             txtKTND_A2.Enabled = flag;
-            txtACB_XacNhan_SX_2.Enabled = flag;
-            txtACB_XacNhan_QC_2.Enabled = flag;
+            //txtACB_XacNhan_SX_2.Enabled = flag;
+            //txtACB_XacNhan_QC_2.Enabled = flag;
             txtQC_GhiChu.Enabled = flag;
 
             txtKTTaibar_A_1.Enabled = flag;
             txtKTTaibar_A_2.Enabled = flag;
             txtKTDongGoi_A_1.Enabled = flag;
             txtKTDongGoi_A_2.Enabled = flag;
-            txtACB_XacNhan_SX_3.Enabled = flag;
-            txtACB_XacNhan_QC_3.Enabled = flag;
+            //txtACB_XacNhan_SX_3.Enabled = flag;
+            //txtACB_XacNhan_QC_3.Enabled = flag;
             txtDongGoi_GhiChu.Enabled = flag;
+    
+
         }
 
         protected void ACB_XacNhan(object sender, EventArgs e)
