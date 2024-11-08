@@ -488,12 +488,100 @@ namespace Management_Books
                 CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
                 if (!CheckAdmin.Checked)
                 {
-                    ValidateAndExecute(txtACB_XacNhan_SX_1, "SX");
-                    ValidateAndExecute(txtACB_XacNhan_QC_1, "QC");
-                    ValidateAndExecute(txtACB_XacNhan_SX_2, "SX");
-                    ValidateAndExecute(txtACB_XacNhan_QC_2, "QC");
-                    ValidateAndExecute(txtACB_XacNhan_SX_3, "SX");
-                    ValidateAndExecute(txtACB_XacNhan_QC_3, "SX");
+                    //ValidateAndExecute(txtACB_XacNhan_SX_1, "SX");
+                    //ValidateAndExecute(txtACB_XacNhan_QC_1, "QC");
+                    //ValidateAndExecute(txtACB_XacNhan_SX_2, "SX");
+                    //ValidateAndExecute(txtACB_XacNhan_QC_2, "QC");
+                    //ValidateAndExecute(txtACB_XacNhan_SX_3, "SX");
+                    //ValidateAndExecute(txtACB_XacNhan_QC_3, "SX");
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text))
+                    {
+                        int checkSX1 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "SX")
+                        });
+                        if(checkSX1 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_SX_1.Text = "";
+                            return;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_1.Text))
+                    {
+                        int checkQC1 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC1 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_QC_1.Text = "";
+                            return;
+                        }
+                    }
+
+
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text))
+                    {
+                        int checkSX2 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "SX")
+                        });
+                        if (checkSX2 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_SX_2.Text = "";
+                            return;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text))
+                    {
+                        int checkQC2 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC2 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_QC_2.Text = "";
+                            return;
+                        }
+                    }
+
+
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text))
+                    {
+                        int checkSX3 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "SX")
+                        });
+                        if (checkSX3 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_SX_3.Text = "";
+                            return;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text))
+                    {
+                        int checkQC3 = SQLhelper.ExecuteNonQuery("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                        new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                        new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC3 < 0)
+                        {
+                            MsgBox("Bạn Không Có Quyền Thực Hiện Thao Tác!");
+                            txtACB_XacNhan_QC_3.Text = "";
+                            return;
+                        }
+                    }
                 }
             }
         }
