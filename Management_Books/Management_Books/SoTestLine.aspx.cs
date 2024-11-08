@@ -356,7 +356,6 @@ namespace Management_Books
         }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            btnLuu.Visible = false;
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = int.Parse(GridView.DataKeys[rowIndex].Values[0].ToString());
             DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_SoTestLine_By_ID", new SqlParameter("@ID", id));
@@ -717,8 +716,19 @@ namespace Management_Books
             }
         }
 
+        protected void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            btnLuu.Visible = true;
+            btnThemMoi.Visible = false;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            txtMaNhanVien.Text = "";
+            txtTenNhanVien.Text = "";
+        }
         protected void btnEditQuyen_Click(object sender, EventArgs e)
         {
+            btnLuu.Visible = false;
+            btnThemMoi.Visible = true;
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = Convert.ToInt32(GridView1.DataKeys[rowIndex].Value);
             DataTable dt = SQLhelper.GetDataToTable("Books_Kashime_Get_PhanQuyen_SoTestLine_By_ID", new SqlParameter[] {

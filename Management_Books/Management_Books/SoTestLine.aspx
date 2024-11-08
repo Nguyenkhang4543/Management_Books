@@ -381,6 +381,7 @@
                     </div>
                     <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Text="Thêm Mới" Visible="false" OnClick="btnThemMoi_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
                     </div>
