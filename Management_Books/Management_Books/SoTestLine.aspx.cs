@@ -39,14 +39,6 @@ namespace Management_Books
                     {
                         // Cho Phép Đăng Nhập Với Quyền Thao Tác Sổ
                     }
-                    else
-                    {
-                        Response.Redirect("Login.aspx");
-                    }
-                }
-                else
-                {
-                    Response.Redirect("Login.aspx");
                 }
                 if (Session["MaNV"] == null)
                 {
