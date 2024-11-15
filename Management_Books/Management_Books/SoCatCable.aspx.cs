@@ -373,7 +373,7 @@ namespace Management_Books
             {
                 insert = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Insert_SoCatCable", new SqlParameter[]
                 {
-                        new SqlParameter("@ID", ID),
+                        new SqlParameter("@ID",ID),
                         new SqlParameter("@NgayCatCable", txtNgayCatCable.Text.Trim()),
                         new SqlParameter("@MaSP", txtMaSP.Text.Trim()),
                         new SqlParameter("@LotNguyenLieu", txtLotNguyenLieu.Text.Trim()),
