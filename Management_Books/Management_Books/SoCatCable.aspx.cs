@@ -42,9 +42,7 @@ namespace Management_Books
                     lblID.Text = null;
                     if(Session["Quyen"].ToString() == "1")
                     {
-                        taskbar_ImportDuLieuNguon.Visible = true;
-                        taskThaoTac.Visible = true;
-                        taskbarAdmin.Visible = true;
+                        Admin.Visible = true;
                     }
                     Load_GridView_PhanQuyen();
                     Check_Leader();
@@ -88,6 +86,13 @@ namespace Management_Books
                 return false;
             }
         }
+        protected void Admin_Click(object sender, EventArgs e)
+        {
+            taskThaoTac.Visible = false;
+            taskbar_ImportDuLieuNguon.Visible = true;
+            taskbarAdmin.Visible = true;
+        }
+
         protected void btnSamPle_Click(object sender, EventArgs e)
         {
             string filename = "SampleFileCutCable.xlsx";

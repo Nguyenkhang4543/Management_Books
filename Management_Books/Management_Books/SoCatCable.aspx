@@ -17,6 +17,7 @@
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Button ID="Admin" runat="server" Text="Admin" OnClick="Admin_Click" />
                     <asp:Label ID="lblID" Style="display: none;" runat="server"></asp:Label>
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
@@ -36,11 +37,6 @@
         <div runat="server" id="taskThaoTac" visible="true">
         <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
             <label>Sổ Quản Lý Cắt Cable</label>
-        </div>
-        <div runat="server" id="taskbar_ImportDuLieuNguon" visible="false">
-            <asp:Button runat="server" Text="Sample file" OnClick="btnSamPle_Click"/>
-            <asp:Fileupload runat="server" ID="FileUpLoad"/>
-            <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
@@ -388,7 +384,11 @@
         </Triggers>
     </asp:UpdatePanel>
         </div>
-
+        <div runat="server" id="taskbar_ImportDuLieuNguon" visible="false">
+            <asp:Button runat="server" Text="Sample file" OnClick="btnSamPle_Click"/>
+            <asp:Fileupload runat="server" ID="FileUpLoad"/>
+            <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
+        </div>
         <div runat="server" id="taskbarAdmin" visible="false">
             <div style="width:100%;text-align:center;margin-top:15px;margin-bottom:20px">
                     <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Phân Quyền Leader</label>
