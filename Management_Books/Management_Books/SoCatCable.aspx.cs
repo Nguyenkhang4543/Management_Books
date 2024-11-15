@@ -74,30 +74,36 @@ namespace Management_Books
             {
                 DateTime Tu = DateTime.Parse(txtFromDate.Text.ToString()) + new TimeSpan(0, 0, 0);
                 DateTime Den = DateTime.Parse(txtToDate.Text.ToString()) + new TimeSpan(23, 59, 0);
-                string LotNL = "";
-                LotNL = txtLotNL_Search.Text.ToString().Trim();
+                string MaSP = "";
+                MaSP = txtLotNL_Search.Text.ToString().Trim();
                 SqlParameter[] para = new SqlParameter[]
                                   {
                                     new SqlParameter("@Tu", Tu),
                                     new SqlParameter("@Den", Den),
-                                    new SqlParameter("@Lot_NL", LotNL),
+                                    new SqlParameter("@MaSP", MaSP),
                                     new SqlParameter("@MaBP",Session["BoPhan"].ToString()),
                                     new SqlParameter("@Factory",Session["Factory"].ToString()),
                                     new SqlParameter("@Quyen",Session["Quyen"].ToString() )
                                   };
-                DataTable dt = SQLhelper.GetDataToTable("Books_LineCut_Get_ALL_SoCatCable", para);
+                DataTable dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_ALL_SoCatCable", para);
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
                 for (int i = 0; i < GridView1.Rows.Count; i++)
                 {
-                    if (string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLotNL")).Text)
-                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLotDoan")).Text)
-                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblNgayCat")).Text)
-                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLotCat")).Text)
+                    if (string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblNgayCat")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblMaSanPham")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLotNL")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLotTp")).Text)
                         || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblSanPham")).Text)
-                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblKichThuocCat")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLineSX")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblBanVe")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblKichThuocBanVe")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblKichThuocThucTe")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblMayCat")).Text)
                         || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblSoDon")).Text)
                         || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblSoDoan")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblSoLuongSD")).Text)
+                        || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblNguoiThaoTac")).Text)
                         || string.IsNullOrEmpty(((Label)GridView1.Rows[i].FindControl("lblLeaderXacNhan")).Text)
                         
                          )
@@ -116,56 +122,239 @@ namespace Management_Books
         {
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
             int id = int.Parse(GridView1.DataKeys[rowIndex].Values[0].ToString());
-            DataTable dt = SQLhelper.GetDataToTable("Books_LineCut_Get_SoCatCable_By_ID", new SqlParameter("@ID", id));
+            DataTable dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_SoCatCable_By_ID", new SqlParameter("@ID", id));
             if (dt.Rows.Count > 0)
             {
-                txtLotNL.Text = dt.Rows[0].Field<string>("LOT_NL");
-                txtDoan.Text = dt.Rows[0].Field<string>("LOT_Doan");
-                txtNgayCat.Text = dt.Rows[0].Field<string>("NGAYCAT");
-                txtLotCat.Text = dt.Rows[0].Field<string>("LOT_Cat");
-                txtSanPham.Text = dt.Rows[0].Field<string>("SanPham");
-                txtKichThuocCat.Text = dt.Rows[0].Field<string>("KichThuocCat");
-                txtSoDon.Text = dt.Rows[0].Field<string>("So_Don");
-                txtSoDoan.Text = dt.Rows[0].Field<string>("So_Doan");
-                txtLeaderXacNhan.Text = dt.Rows[0].Field<string>("Leader_XacNhan");
-                hdfID.Value = id.ToString();
-                if (!string.IsNullOrEmpty(txtLotNL.Text)
-                        && !string.IsNullOrEmpty(txtDoan.Text)
-                        && !string.IsNullOrEmpty(txtNgayCat.Text)
-                        && !string.IsNullOrEmpty(txtLotCat.Text)
-                        && !string.IsNullOrEmpty(txtSanPham.Text)
-                        && !string.IsNullOrEmpty(txtKichThuocCat.Text)
-                        && !string.IsNullOrEmpty(txtSoDon.Text)
-                        && !string.IsNullOrEmpty(txtSoDoan.Text)
-                        && !string.IsNullOrEmpty(txtLeaderXacNhan.Text)
-                         )
+                if (!string.IsNullOrEmpty(Convert.ToString(dt.Rows[0].Field<DateTime?>("NgayCatCable"))))
                 {
-                    Enable_field(false);
+                    txtNgayCatCable.Text = dt.Rows[0].Field<DateTime>("NgayCatCable").ToString("yyyy-MM-dd") ?? string.Empty;
                 }
-                else
+                txtMaSP.Text = dt.Rows[0].Field<string>("MaSP");
+                txtLotNguyenLieu.Text = dt.Rows[0].Field<string>("LotNguyenLieu");
+                txtLotThanhPham.Text = dt.Rows[0].Field<string>("LotThanhPham");
+                txtTenSanPham.Text = dt.Rows[0].Field<string>("TenSanPham");
+                txtLineSanXuat.Text = dt.Rows[0].Field<string>("LineSanXuat");
+                txtBanVe.Text = dt.Rows[0].Field<string>("BanVe");
+                txtKTBanVe.Text = dt.Rows[0].Field<string>("KichThuocBanVe");
+                txtKTThucTe.Text = dt.Rows[0].Field<string>("KichThuocThucTe");
+                txtMayCat.Text = dt.Rows[0].Field<string>("MayCat");
+                txtSoDonNew.Text = dt.Rows[0].Field<string>("SoDon");
+                txtSoDoanNew.Text = dt.Rows[0].Field<string>("SoDoan");
+                txtSoLuong.Text = dt.Rows[0].Field<string>("SoLuong");
+                txtNguoiThaoTac.Text = dt.Rows[0].Field<string>("NguoiThaoTac");
+                txtLeader.Text = dt.Rows[0].Field<string>("LeaderXacNhan");
+                txtGhiChu.Text = dt.Rows[0].Field<string>("GhiChu");
+                
+                hdfID1.Value = id.ToString();
+                if (string.IsNullOrEmpty(txtLeader.Text))
                 {
                     Enable_field();
                 }
+                else
+                {
+                    Enable();
+                }
             }
-
         }
         private void Enable_field(bool flag = true)
         {
-            txtLotNL.Enabled = flag;
-            txtDoan.Enabled = flag;
-            txtNgayCat.Enabled = flag;
-            txtLotCat.Enabled = flag;
-            txtSanPham.Enabled = flag;
-            txtKichThuocCat.Enabled = flag;
-            txtSoDon.Enabled = flag;
-            txtSoDoan.Enabled = flag;
-            txtLeaderXacNhan.Enabled = flag;
+            txtMaSP.Enabled = flag;
+            txtLotNguyenLieu.Enabled = flag;
+            txtLotThanhPham.Enabled = flag;
+            txtTenSanPham.Enabled = flag;
+            txtLineSanXuat.Enabled = flag;
+            txtBanVe.Enabled = flag;
+            txtKTBanVe.Enabled = flag;
+            txtKTThucTe.Enabled = flag;
+            txtMayCat.Enabled = flag;
+            txtSoDonNew.Enabled = flag;
+            txtSoDoanNew.Enabled = flag;
+            txtSoLuong.Enabled = flag;
+            txtNguoiThaoTac.Enabled = flag;
+            txtLeader.Enabled = flag;
+            txtGhiChu.Enabled = flag;
+        }
+        private void Enable()
+        {
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtNgayCatCable.Text))
+            {
+                txtNgayCatCable.Enabled = true;
+            }
+            else
+            {
+                txtNgayCatCable.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtMaSP.Text))
+            {
+                txtMaSP.Enabled = true;
+            }
+            else
+            {
+                txtMaSP.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtLotNguyenLieu.Text))
+            {
+                txtLotNguyenLieu.Enabled = true;
+            }
+            else
+            {
+                txtLotNguyenLieu.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtLotThanhPham.Text))
+            {
+                txtLotThanhPham.Enabled = true;
+            }
+            else
+            {
+                txtLotThanhPham.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtTenSanPham.Text))
+            {
+                txtTenSanPham.Enabled = true;
+            }
+            else
+            {
+                txtTenSanPham.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtLineSanXuat.Text))
+            {
+                txtLineSanXuat.Enabled = true;
+            }
+            else
+            {
+                txtLineSanXuat.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtBanVe.Text))
+            {
+                txtBanVe.Enabled = true;
+            }
+            else
+            {
+                txtBanVe.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtKTBanVe.Text))
+            {
+                txtKTBanVe.Enabled = true;
+            }
+            else
+            {
+                txtKTBanVe.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtKTThucTe.Text))
+            {
+                txtKTThucTe.Enabled = true;
+            }
+            else
+            {
+                txtKTThucTe.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtMayCat.Text))
+            {
+                txtMayCat.Enabled = true;
+            }
+            else
+            {
+                txtMayCat.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtSoDonNew.Text))
+            {
+                txtSoDonNew.Enabled = true;
+            }
+            else
+            {
+                txtSoDonNew.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtSoDoanNew.Text))
+            {
+                txtSoDoanNew.Enabled = true;
+            }
+            else
+            {
+                txtSoDoanNew.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtSoLuong.Text))
+            {
+                txtSoLuong.Enabled = true;
+            }
+            else
+            {
+                txtSoLuong.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtNguoiThaoTac.Text))
+            {
+                txtNguoiThaoTac.Enabled = true;
+            }
+            else
+            {
+                txtNguoiThaoTac.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtLeader.Text))
+            {
+                txtLeader.Enabled = true;
+            }
+            else
+            {
+                txtLeader.Enabled = false;
+            }
+            /////////////////////////////////////////////////
+
+            /////////////////////////////////////////////////
+            if (!string.IsNullOrEmpty(txtGhiChu.Text))
+            {
+                txtGhiChu.Enabled = true;
+            }
+            else
+            {
+                txtGhiChu.Enabled = false;
+            }
+            /////////////////////////////////////////////////
         }
         private bool CheckData()
         {
             bool kq = true;
-            if (string.IsNullOrEmpty(txtLotNL.Text) || string.IsNullOrEmpty(txtDoan.Text) || string.IsNullOrEmpty(txtNgayCat.Text) || string.IsNullOrEmpty(txtSanPham.Text) || string.IsNullOrEmpty(txtKichThuocCat.Text)
-              || string.IsNullOrEmpty(txtSoDon.Text) || string.IsNullOrEmpty(txtSoDoan.Text))
+            if (string.IsNullOrEmpty(txtNgayCatCable.Text) || string.IsNullOrEmpty(txtMaSP.Text) || string.IsNullOrEmpty(txtLotNguyenLieu.Text) || string.IsNullOrEmpty(txtLotThanhPham.Text) || string.IsNullOrEmpty(txtKTBanVe.Text))
             {
                 kq = false;
             }
@@ -179,25 +368,32 @@ namespace Management_Books
         protected void btnSave_Click(object sender, EventArgs e)
         {
             int insert = 0;
-            string ID = string.IsNullOrEmpty(hdfID.Value) ? null : hdfID.Value;
+            string ID = string.IsNullOrEmpty(hdfID1.Value) ? null : hdfID1.Value;
             if (CheckData() == true)
             {
-                insert = SQLhelper.ExecuteNonQuery("Books_LineCut_Insert_SoCatCable", new SqlParameter[]
+                insert = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Insert_SoCatCable", new SqlParameter[]
                 {
                         new SqlParameter("@ID", ID),
-                        new SqlParameter("@LOT_NL", txtLotNL.Text.Trim()),
-                        new SqlParameter("@LOT_Doan", txtDoan.Text.Trim()),
-                        new SqlParameter("@NGAYCAT", txtNgayCat.Text.Trim()),
-                        new SqlParameter("@LOT_Cat", txtLotCat.Text.Trim()),
-                        new SqlParameter("@SanPham", txtSanPham.Text.Trim()),
-                        new SqlParameter("@KichThuocCat", txtKichThuocCat.Text.Trim()),
-                        new SqlParameter("@So_Don", txtSoDon.Text.Trim()),
-                        new SqlParameter("@So_Doan", txtSoDoan.Text.Trim()),
-                        new SqlParameter("@Leader_XacNhan", txtLeaderXacNhan.Text.Trim()),
-                        new SqlParameter("@MaBP", Session["BoPhan"].ToString()),
-                        new SqlParameter("@Fatory", Session["Factory"].ToString()),
-                        new SqlParameter("@NgayGhiNhan", DateTime.Now.ToString()),
-                        new SqlParameter("@NguoiGhiNhan", Session["Ten"].ToString()),
+                        new SqlParameter("@NgayCatCable", txtNgayCatCable.Text.Trim()),
+                        new SqlParameter("@MaSP", txtMaSP.Text.Trim()),
+                        new SqlParameter("@LotNguyenLieu", txtLotNguyenLieu.Text.Trim()),
+                        new SqlParameter("@LotThanhPham", txtLotThanhPham.Text.Trim()),
+                        new SqlParameter("@TenSanPham", txtTenSanPham.Text.Trim()),
+                        new SqlParameter("@LineSanXuat", txtLineSanXuat.Text.Trim()),
+                        new SqlParameter("@BanVe", txtBanVe.Text.Trim()),
+                        new SqlParameter("@KichThuocBanVe", txtKTBanVe.Text.Trim()),
+                        new SqlParameter("@KichThuocThucTe", txtKTThucTe.Text.Trim()),
+                        new SqlParameter("@MayCat",txtMayCat.Text.Trim()),
+                        new SqlParameter("@SoDon",txtSoDonNew.Text.Trim()),
+                        new SqlParameter("@SoDoan",txtSoDoanNew.Text.Trim()),
+                        new SqlParameter("@SoLuong",txtSoLuong.Text.Trim()),
+                        new SqlParameter("@NguoiThaoTac",txtNguoiThaoTac.Text.Trim()),
+                        new SqlParameter("@LeaderXacNhan", txtLeader.Text.Trim()),
+                        new SqlParameter("@GhiChu",txtGhiChu.Text.Trim()),
+                        new SqlParameter("@NguoiTaoPhieu", Session["Ten"].ToString()),
+                        new SqlParameter("@NgayTaoPhieu", DateTime.Now.ToString()),
+                        new SqlParameter("@BoPhan", Session["BoPhan"].ToString()),
+                        new SqlParameter("@Factory", Session["Factory"].ToString()),
                 });
                 if(insert > 0)
                 {
@@ -218,16 +414,23 @@ namespace Management_Books
 
         private void ResetData()
         {
-            txtLotNL.Text = "";
-            txtDoan.Text = "";
-            txtNgayCat.Text = "";
-            txtLotCat.Text = "";
-            txtSanPham.Text = "";
-            txtKichThuocCat.Text = "";
-            txtSoDon.Text = "";
-            txtSoDoan.Text = "";
-            txtLeaderXacNhan.Text = "";
-            hdfID.Value = "";
+            txtNgayCatCable.Text = "";
+            txtMaSP.Text = "";
+            txtLotNguyenLieu.Text = "";
+            txtLotThanhPham.Text = "";
+            txtTenSanPham.Text = "";
+            txtLineSanXuat.Text = "";
+            txtBanVe.Text = "";
+            txtKTBanVe.Text = "";
+            txtKTThucTe.Text = "";
+            txtMayCat.Text = "";
+            txtSoDonNew.Text = "";
+            txtSoDoanNew.Text = "";
+            txtSoLuong.Text = "";
+            txtNguoiThaoTac.Text = "";
+            txtLeader.Text = "";
+            txtGhiChu.Text = "";
+            hdfID1.Value = "";
         }
     }
 }

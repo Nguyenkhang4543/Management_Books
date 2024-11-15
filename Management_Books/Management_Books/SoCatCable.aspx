@@ -35,7 +35,7 @@
         <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
             <label>Sổ Quản Lý Cắt Cable</label>
         </div>
-        <div style="width:100%;margin-top:10px;">
+       <%-- <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
                 <tr style="text-align:center; ">
                     <td class="TieuDe">
@@ -97,13 +97,15 @@
                 </tr>
             </table>
             <asp:HiddenField runat="server" ID="hdfID" />
-        </div>
-
-             <div style="width:100%;margin-top:10px;">
+        </div>--%>
+        <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
                 <tr style="text-align:center; ">
                     <td class="TieuDe">
                         <asp:Label runat ="server">Ngày cắt Cable</asp:Label>
+                    </td>
+                     <td class="TieuDe">
+                        <asp:Label runat ="server">Mã Sản Phẩm</asp:Label>
                     </td>
                     <td class="TieuDe">
                         <asp:Label runat ="server">Lot Nguyên Liệu</asp:Label>
@@ -150,55 +152,58 @@
                 </tr>
                 <tr style="width:100%; text-align:center">
                     <td>
-                        <asp:Textbox ID="Textbox1" Type="date" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNgayCatCable" Type="date" style="width:90%; height:25px" runat ="server"></asp:Textbox>
 
                     </td>
-                     <td>
-                        <asp:Textbox ID="Textbox2" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                    <td>
+                        <asp:Textbox ID="txtMaSP" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox3" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotNguyenLieu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox4" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLotThanhPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox5" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtTenSanPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox6" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLineSanXuat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox7" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtBanVe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox8" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKTBanVe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="Textbox9" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKTThucTe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                    </td>
+                     <td>
+                        <asp:Textbox ID="txtMayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox10" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDonNew" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox11" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDoanNew" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox12" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoLuong" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox13" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNguoiThaoTac" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox14" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeader" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="Textbox15" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtGhiChu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
 
                 </tr>
             </table>
-            <asp:HiddenField runat="server" ID="HiddenField1" />
+            <asp:HiddenField runat="server" ID="hdfID1" />
         </div>
         <div style="width:100%;text-align:center;margin-top:10px;">
             <asp:Label Font-Size="20px" runat="server">TÌM KIẾM</asp:Label>
@@ -272,27 +277,32 @@
                 <Columns>
                      <asp:TemplateField HeaderText="Ngày Cắt Cable">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblNgayCat" Text='<%# Eval("NGAYCAT")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblNgayCat" Text='<%# Eval("NgayCatCable")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Mã Sản Phẩm">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblMaSanPham" Text='<%# Eval("MaSP")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="LOT NL">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLotNL" Text='<%# Eval("LOT_NL")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLotNL" Text='<%# Eval("LotNguyenLieu")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                        <asp:TemplateField HeaderText="LOT Thành Phẩm Cut">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLotTp" Text='<%# Eval("LOT_TP")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLotTp" Text='<%# Eval("LotThanhPham")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                         <asp:TemplateField HeaderText="Sản Phẩm">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSanPham" Text='<%# Eval("SanPham")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSanPham" Text='<%# Eval("TenSanPham")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                         <asp:TemplateField HeaderText="Line Sx">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLineSx" Text='<%# Eval("LineSx")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLineSX" Text='<%# Eval("LineSanXuat")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                         <asp:TemplateField HeaderText="Bản Vẽ">
@@ -312,22 +322,22 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Máy Cắt">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblMayCat" Text='<%# Eval("May_Cat")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblMayCat" Text='<%# Eval("MayCat")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Số Đơn">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSoDon" Text='<%# Eval("So_Don")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSoDon" Text='<%# Eval("SoDon")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Số Đoạn">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSoDoan" Text='<%# Eval("So_Doan")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSoDoan" Text='<%# Eval("SoDoan")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                    <asp:TemplateField HeaderText="Số Lượng SD">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSoLuongSD" Text='<%# Eval("SoLuongSD")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblSoLuongSD" Text='<%# Eval("SoLuong")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                   <asp:TemplateField HeaderText="Người Thao Tác">
@@ -337,12 +347,17 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Leader <br/> Xác Nhận">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLeaderXacNhan" Text='<%# Eval("Leader_XacNhan")%>'></asp:Label>
+                            <asp:Label runat="server" ID="lblLeaderXacNhan" Text='<%# Eval("LeaderXacNhan")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="GhiChu">
                         <ItemTemplate>
                             <asp:Label runat="server" ID="lblGhiChu" Text='<%# Eval("GhiChu")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="GhiChu">
+                        <ItemTemplate>
+                            <asp:Label runat="server" ID="lblNguoiTaoPhieu" Text='<%# Eval("NguoiTaoPhieu")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>

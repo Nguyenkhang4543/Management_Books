@@ -439,7 +439,6 @@ D:\777. Project_Production\Management_Books\Management_Books\Management_Books\ob
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.CopyComplete
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.dll
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.pdb
-D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.AssemblyReference.cache
 D:\1. Development_App\Management_Books\Management_Books\Management_Books\bin\Management_Books.dll.config
 D:\1. Development_App\Management_Books\Management_Books\Management_Books\bin\Management_Books.dll
 D:\1. Development_App\Management_Books\Management_Books\Management_Books\bin\Management_Books.pdb

@@ -69,238 +69,157 @@ namespace Management_Books
         protected global::System.Web.UI.HtmlControls.HtmlAnchor btnDangXuat;
 
         /// <summary>
-        /// txtLotNL control.
+        /// txtNgayCatCable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLotNL;
+        protected global::System.Web.UI.WebControls.TextBox txtNgayCatCable;
 
         /// <summary>
-        /// txtDoan control.
+        /// txtMaSP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDoan;
+        protected global::System.Web.UI.WebControls.TextBox txtMaSP;
 
         /// <summary>
-        /// txtNgayCat control.
+        /// txtLotNguyenLieu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNgayCat;
+        protected global::System.Web.UI.WebControls.TextBox txtLotNguyenLieu;
 
         /// <summary>
-        /// txtLotCat control.
+        /// txtLotThanhPham control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLotCat;
+        protected global::System.Web.UI.WebControls.TextBox txtLotThanhPham;
 
         /// <summary>
-        /// txtSanPham control.
+        /// txtTenSanPham control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSanPham;
+        protected global::System.Web.UI.WebControls.TextBox txtTenSanPham;
 
         /// <summary>
-        /// txtKichThuocCat control.
+        /// txtLineSanXuat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKichThuocCat;
+        protected global::System.Web.UI.WebControls.TextBox txtLineSanXuat;
 
         /// <summary>
-        /// txtSoDon control.
+        /// txtBanVe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSoDon;
+        protected global::System.Web.UI.WebControls.TextBox txtBanVe;
 
         /// <summary>
-        /// txtSoDoan control.
+        /// txtKTBanVe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSoDoan;
+        protected global::System.Web.UI.WebControls.TextBox txtKTBanVe;
 
         /// <summary>
-        /// txtLeaderXacNhan control.
+        /// txtKTThucTe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLeaderXacNhan;
+        protected global::System.Web.UI.WebControls.TextBox txtKTThucTe;
 
         /// <summary>
-        /// hdfID control.
+        /// txtMayCat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfID;
+        protected global::System.Web.UI.WebControls.TextBox txtMayCat;
 
         /// <summary>
-        /// Textbox1 control.
+        /// txtSoDonNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox1;
+        protected global::System.Web.UI.WebControls.TextBox txtSoDonNew;
 
         /// <summary>
-        /// Textbox2 control.
+        /// txtSoDoanNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox2;
+        protected global::System.Web.UI.WebControls.TextBox txtSoDoanNew;
 
         /// <summary>
-        /// Textbox3 control.
+        /// txtSoLuong control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox3;
+        protected global::System.Web.UI.WebControls.TextBox txtSoLuong;
 
         /// <summary>
-        /// Textbox4 control.
+        /// txtNguoiThaoTac control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox4;
+        protected global::System.Web.UI.WebControls.TextBox txtNguoiThaoTac;
 
         /// <summary>
-        /// Textbox5 control.
+        /// txtLeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox5;
+        protected global::System.Web.UI.WebControls.TextBox txtLeader;
 
         /// <summary>
-        /// Textbox6 control.
+        /// txtGhiChu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox6;
+        protected global::System.Web.UI.WebControls.TextBox txtGhiChu;
 
         /// <summary>
-        /// Textbox7 control.
+        /// hdfID1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox7;
-
-        /// <summary>
-        /// Textbox8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox8;
-
-        /// <summary>
-        /// Textbox9 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox9;
-
-        /// <summary>
-        /// Textbox10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox10;
-
-        /// <summary>
-        /// Textbox11 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox11;
-
-        /// <summary>
-        /// Textbox12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox12;
-
-        /// <summary>
-        /// Textbox13 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox13;
-
-        /// <summary>
-        /// Textbox14 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox14;
-
-        /// <summary>
-        /// Textbox15 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Textbox15;
-
-        /// <summary>
-        /// HiddenField1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
+        protected global::System.Web.UI.WebControls.HiddenField hdfID1;
 
         /// <summary>
         /// txtFromDate control.
