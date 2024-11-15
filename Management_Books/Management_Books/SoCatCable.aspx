@@ -42,69 +42,7 @@
         </asp:ScriptManager>
         <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
             <ContentTemplate>
-       <%-- <div style="width:100%;margin-top:10px;">
-            <table style="width:100%">
-                <tr style="text-align:center; ">
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Lot Nguyên Liệu</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Đoạn</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Ngày Cắt</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Lot Cắt</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Sản Phẩm</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Kích Thước <br /> Cắt Cable</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Số Đơn</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Số Đoạn</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Leader Xác Nhận</asp:Label>
-                    </td>
-                </tr>
-                <tr style="width:100%; text-align:center">
-                    <td>
-                        <asp:Textbox ID="txtLotNL" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtNgayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtLotCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSanPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtKichThuocCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSoDon" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSoDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtLeaderXacNhan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                </tr>
-            </table>
-            <asp:HiddenField runat="server" ID="hdfID" />
-        </div>--%>
+
         <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
                 <tr style="text-align:center; ">
