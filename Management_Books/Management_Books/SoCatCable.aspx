@@ -32,6 +32,8 @@
                 </td>
             </tr>
     </table>
+
+        <div runat="server" id="taskThaoTac" visible="true">
         <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
             <label>Sổ Quản Lý Cắt Cable</label>
         </div>
@@ -40,7 +42,7 @@
             <asp:Fileupload runat="server" ID="FileUpLoad"/>
             <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
         </div>
-  <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
             <ContentTemplate>
@@ -205,7 +207,7 @@
                         <asp:Textbox ID="txtNguoiThaoTac" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtLeader" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeader" Enabled="false" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
                         <asp:Textbox ID="txtGhiChu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
@@ -378,15 +380,70 @@
                 </Columns>
             </asp:GridView>
         </div>
-
-        <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
-        </div>
+     </div>
             </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="txtMaSP" />
             <asp:AsyncPostBackTrigger ControlID="txtKTThucTe" />
         </Triggers>
     </asp:UpdatePanel>
+        </div>
+
+        <div runat="server" id="taskbarAdmin" visible="false">
+            <div style="width:100%;text-align:center;margin-top:15px;margin-bottom:20px">
+                    <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Phân Quyền Leader</label>
+                </div>
+                <div style="width:100%;">
+                <div style="width:600px;border: 2px solid black;margin-top:10px;margin:auto;background-color:blanchedalmond">
+                    <div style="width:100%;border-bottom:2px dashed black">
+                         <div style="width:200px; margin-left:10px;margin-top:10px">
+                            <label>Mã Nhân Viên:</label>
+                        </div>
+                        <div style="width:580px; display:flex; margin-left:10px;margin-top:10px;margin-bottom:10px">
+                        <asp:TextBox ID="txtMaNhanVien" style="width:50%;margin-right:15px" runat="server" AutoPostBack="true" OnTextChanged="txtMaNhanVien_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="txtTenNhanVien" style="width:50%" runat="server" AutoPostBack="true"></asp:TextBox>
+                        <asp:Label ID="Label1" runat="server" style="display:none"></asp:Label>
+                        </div>
+                    </div>
+                    <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Text="Thêm Mới" Visible="false" OnClick="btnThemMoi_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
+                    </div>
+                </div>
+                </div>
+                <br />
+                <div style="width:100%;text-align:center">
+                    <asp:Gridview style="width:100%" runat="server" ID="GridView2" AutoGenerateColumns="false" AutoPostBack="true" DataKeyNames="ID" AllowPaging="True" PageSize="10"
+                        OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+                        HeaderStyle-BackColor="Orange" >
+                        <Columns>
+                            <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Mã Nhân Viên">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("MaNV")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Họ Tên">
+                                <ItemTemplate>
+                                    <asp:Label runat="server"  Text='<%# Eval("HoTen")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button CssClass="button2" ID="btnEdit" Text="Edit" runat="server" OnClick="btnEditQuyen_Click" CommandArgument='<%# Eval("ID") %>' />
+                                </ItemTemplate>
+                    </asp:TemplateField>
+                        </Columns>
+                    </asp:Gridview>
+                    </div>
+        </div>
+     <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
     </form>
 </body>
 </html>
