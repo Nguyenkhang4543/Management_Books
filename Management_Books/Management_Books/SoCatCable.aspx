@@ -35,6 +35,15 @@
         <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
             <label>Sổ Quản Lý Cắt Cable</label>
         </div>
+        <div runat="server" id="taskbar_ImportDuLieuNguon" visible="false">
+            <asp:Button runat="server" Text="Sample file" OnClick="btnSamPle_Click"/>
+            <asp:Fileupload runat="server" ID="FileUpLoad"/>
+            <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
+        </div>
+  <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
+            <ContentTemplate>
        <%-- <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
                 <tr style="text-align:center; ">
@@ -156,7 +165,7 @@
 
                     </td>
                     <td>
-                        <asp:Textbox ID="txtMaSP" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtMaSP" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtMaSP_TextChanged" ></asp:Textbox>
                     </td>
                      <td>
                         <asp:Textbox ID="txtLotNguyenLieu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
@@ -165,19 +174,20 @@
                         <asp:Textbox ID="txtLotThanhPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtTenSanPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtTenSanPham" ReadOnly="true" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtLineSanXuat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLineSanXuat" ReadOnly="true" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtBanVe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtBanVe" ReadOnly="true" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtKTBanVe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKTBanVe" ReadOnly="true" style="width:50%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Label runat="server" ID="lblDoLech"></asp:Label>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtKTThucTe" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtKTThucTe" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtKTThucTe_TextChanged" ></asp:Textbox>
                     </td>
                      <td>
                         <asp:Textbox ID="txtMayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
@@ -371,6 +381,12 @@
 
         <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
         </div>
+            </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="txtMaSP" />
+            <asp:AsyncPostBackTrigger ControlID="txtKTThucTe" />
+        </Triggers>
+    </asp:UpdatePanel>
     </form>
 </body>
 </html>

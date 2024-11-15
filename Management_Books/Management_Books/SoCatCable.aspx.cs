@@ -9,6 +9,15 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Text;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Data.OleDb;
+using System.Data.Common;
+using System.Configuration;
+using System.IO;
+using ClosedXML.Excel;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace Management_Books
 {
@@ -31,7 +40,10 @@ namespace Management_Books
                     //Load_Gridview();
                     btnSearch_Click(null, null);
                     lblID.Text = null;
-
+                    if(Session["Quyen"].ToString() == "1")
+                    {
+                        taskbar_ImportDuLieuNguon.Visible = true;
+                    }
                 }
             }
         }
@@ -57,6 +69,135 @@ namespace Management_Books
         private void MsgBox(string sMessage)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "myalert", "alert(\"" + sMessage.Replace("\r\n", "") + "\");", true);
+        }
+        protected void btnSamPle_Click(object sender, EventArgs e)
+        {
+            string filename = "SampleFileCutCable.xlsx";
+            string folderPath = @"\\Management_Books\Management_Books\Templates";
+            string FilePath = System.IO.Path.Combine(folderPath, filename);
+            System.IO.FileInfo file = new System.IO.FileInfo(FilePath);
+            if (file.Exists)
+            {
+                Response.Clear();
+                Response.ClearHeaders();
+                Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment; filename=" + filename);
+                Response.AddHeader("Content-Type", "application/Excel");
+                Response.ContentType = "application/vnd.xls";
+                Response.AddHeader("Content-Length", file.Length.ToString());
+                Response.WriteFile(file.FullName);
+                Response.End();
+            }
+            else
+            {
+                Response.Write("This file does not exist.");
+            }
+        }
+        protected void btnImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (FileUpLoad.HasFile == true)
+                {
+                    //int Del = SQLhelper.ExecuteNonQuery("Delete_Data_QRCode", null);
+                    foreach (HttpPostedFile postfiles in FileUpLoad.PostedFiles)
+                    {
+                        string path = string.Concat(Server.MapPath("~/DownLoad/" + postfiles.FileName));
+                        postfiles.SaveAs(path);
+                        string conString = string.Empty;
+                        string extension = Path.GetExtension(postfiles.FileName);
+                        conString = ConfigurationManager.ConnectionStrings["Excel07+ConString"].ConnectionString;
+                        //ConvertToDataTable(extension);
+                        conString = string.Format(conString, path);
+                        List<string> listSheet = new List<string>();
+                        using (OleDbConnection con = new OleDbConnection(conString))
+                        {
+                            OleDbCommand cmd = new OleDbCommand("SELECT * FROM [SOURCE$]", con);
+                            con.Open();
+                            // Create DbDataReader to Data Worksheet  
+                            DbDataReader dr = cmd.ExecuteReader();
+                            con.Close();
+                            con.Open();
+                            OleDbCommand cmdExcel = new OleDbCommand();
+                            OleDbDataAdapter oda = new OleDbDataAdapter();
+                            DataTable dt = new DataTable();
+                            cmdExcel.Connection = con;
+                            oda.SelectCommand = cmd;
+                            oda.Fill(dt);
+                            con.Close();
+                            string[] requiredColumns = { "ITEM", "ITEM NAME", "DRAWING", "PRODUCT LINE", "CUTTING SIZE", "DEVIATION" };
+                            foreach (string col in requiredColumns)
+                            {
+                                if (!dt.Columns.Contains(col))
+                                {
+                                    MsgBox("This file is not in the correct format. Please! Select the file to which it is correct");
+                                    return;
+                                }
+                                else
+                                {
+                                    int Del = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Delete_SoCatCable_Nguon", null);
+                                }
+                            }
+
+                            if (dt.Rows.Count > 0)
+                            {
+                                string ITEM = null;
+                                string ITEMNAME = null;
+                                string DRAWING = null;
+                                string PRODUCTLINE = null;
+                                double? CUTTINGSIZE = null;
+                                double? DEVIATION = null;
+
+
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    ITEM = dt.Rows[i][0].ToString();
+                                    ITEMNAME = dt.Rows[i][1].ToString();
+                                    DRAWING = dt.Rows[i][2].ToString();
+                                    PRODUCTLINE = dt.Rows[i][3].ToString();
+                                    if (!string.IsNullOrEmpty(dt.Rows[i][4].ToString()))
+                                    {
+                                        CUTTINGSIZE = double.Parse(dt.Rows[i][4].ToString(), CultureInfo.InvariantCulture);
+                                    }
+                                    if (!string.IsNullOrEmpty(dt.Rows[i][5].ToString()))
+                                    {
+                                        DEVIATION = double.Parse(dt.Rows[i][5].ToString(), CultureInfo.InvariantCulture);
+                                    }
+
+                                    int Ins = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Insert_SoCatCable_Nguon", new SqlParameter[] {
+                                        new SqlParameter("@MaSP",ITEM),
+                                        new SqlParameter("@TenSanPham",ITEMNAME),
+                                        new SqlParameter("@BanVe",DRAWING),
+                                        new SqlParameter("@LineSanXuat",PRODUCTLINE),
+                                        new SqlParameter("@KichThuoc",CUTTINGSIZE),
+                                        new SqlParameter("@DoLech",DEVIATION)
+
+                                        });
+                                    if (Ins > 0)
+                                    {
+                                        MsgBox("Import Successfully!");
+                                    }
+                                    else
+                                    {
+                                        MsgBox("Import Error!");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MsgBox("Please! Select The File You Want To Import");
+                    return;
+                }
+            }
+            catch
+            {
+                //MsgBox("Xảy ra lỗi trong quá trình Import. " + ex.ToString());
+                MsgBox("There's a problem with imports! Please! Reimporting");
+                return;
+            }
         }
         private void Load_Gridview()
         {
@@ -146,7 +287,7 @@ namespace Management_Books
                 txtGhiChu.Text = dt.Rows[0].Field<string>("GhiChu");
                 
                 hdfID1.Value = id.ToString();
-                if (string.IsNullOrEmpty(txtLeader.Text))
+                if (!string.IsNullOrEmpty(txtLeader.Text))
                 {
                     Enable_field();
                 }
@@ -156,8 +297,9 @@ namespace Management_Books
                 }
             }
         }
-        private void Enable_field(bool flag = true)
+        private void Enable_field(bool flag = false)
         {
+            txtNgayCatCable.Enabled = flag;
             txtMaSP.Enabled = flag;
             txtLotNguyenLieu.Enabled = flag;
             txtLotThanhPham.Enabled = flag;
@@ -177,7 +319,7 @@ namespace Management_Books
         private void Enable()
         {
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtNgayCatCable.Text))
+            if (string.IsNullOrEmpty(txtNgayCatCable.Text))
             {
                 txtNgayCatCable.Enabled = true;
             }
@@ -188,7 +330,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtMaSP.Text))
+            if (string.IsNullOrEmpty(txtMaSP.Text))
             {
                 txtMaSP.Enabled = true;
             }
@@ -199,7 +341,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtLotNguyenLieu.Text))
+            if (string.IsNullOrEmpty(txtLotNguyenLieu.Text))
             {
                 txtLotNguyenLieu.Enabled = true;
             }
@@ -210,7 +352,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtLotThanhPham.Text))
+            if (string.IsNullOrEmpty(txtLotThanhPham.Text))
             {
                 txtLotThanhPham.Enabled = true;
             }
@@ -221,7 +363,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtTenSanPham.Text))
+            if (string.IsNullOrEmpty(txtTenSanPham.Text))
             {
                 txtTenSanPham.Enabled = true;
             }
@@ -232,7 +374,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtLineSanXuat.Text))
+            if (string.IsNullOrEmpty(txtLineSanXuat.Text))
             {
                 txtLineSanXuat.Enabled = true;
             }
@@ -243,7 +385,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtBanVe.Text))
+            if (string.IsNullOrEmpty(txtBanVe.Text))
             {
                 txtBanVe.Enabled = true;
             }
@@ -254,7 +396,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtKTBanVe.Text))
+            if (string.IsNullOrEmpty(txtKTBanVe.Text))
             {
                 txtKTBanVe.Enabled = true;
             }
@@ -264,7 +406,7 @@ namespace Management_Books
             }
             /////////////////////////////////////////////////
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtKTThucTe.Text))
+            if (string.IsNullOrEmpty(txtKTThucTe.Text))
             {
                 txtKTThucTe.Enabled = true;
             }
@@ -275,7 +417,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtMayCat.Text))
+            if (string.IsNullOrEmpty(txtMayCat.Text))
             {
                 txtMayCat.Enabled = true;
             }
@@ -286,7 +428,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtSoDonNew.Text))
+            if (string.IsNullOrEmpty(txtSoDonNew.Text))
             {
                 txtSoDonNew.Enabled = true;
             }
@@ -297,7 +439,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtSoDoanNew.Text))
+            if (string.IsNullOrEmpty(txtSoDoanNew.Text))
             {
                 txtSoDoanNew.Enabled = true;
             }
@@ -308,7 +450,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtSoLuong.Text))
+            if (string.IsNullOrEmpty(txtSoLuong.Text))
             {
                 txtSoLuong.Enabled = true;
             }
@@ -319,7 +461,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtNguoiThaoTac.Text))
+            if (string.IsNullOrEmpty(txtNguoiThaoTac.Text))
             {
                 txtNguoiThaoTac.Enabled = true;
             }
@@ -330,7 +472,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtLeader.Text))
+            if (string.IsNullOrEmpty(txtLeader.Text))
             {
                 txtLeader.Enabled = true;
             }
@@ -341,7 +483,7 @@ namespace Management_Books
             /////////////////////////////////////////////////
 
             /////////////////////////////////////////////////
-            if (!string.IsNullOrEmpty(txtGhiChu.Text))
+            if (string.IsNullOrEmpty(txtGhiChu.Text))
             {
                 txtGhiChu.Enabled = true;
             }
@@ -432,5 +574,77 @@ namespace Management_Books
             txtGhiChu.Text = "";
             hdfID1.Value = "";
         }
+
+        protected void txtMaSP_TextChanged(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_SoCatCable_Nguon_By_ITEM", new SqlParameter[]
+            {
+        new SqlParameter("@ITEM", txtMaSP.Text)
+            });
+            if (dt.Rows.Count > 0)
+            {
+                txtTenSanPham.Text = dt.Rows[0].Field<string>("TenSanPham");
+                txtBanVe.Text = dt.Rows[0].Field<string>("BanVe");
+                txtLineSanXuat.Text = dt.Rows[0].Field<string>("LineSanXuat");
+
+                // Kiểm tra giá trị null trước khi chuyển đổi
+                float kichThuoc;
+                if (dt.Rows[0]["KichThuoc"] != DBNull.Value && float.TryParse(dt.Rows[0]["KichThuoc"].ToString(), out kichThuoc))
+                {
+                    // Sử dụng định dạng chuỗi nếu cần
+                    txtKTBanVe.Text = kichThuoc.ToString("F2"); // Hiển thị 2 chữ số thập phân
+                }
+                else
+                {
+                    txtKTBanVe.Text = "N/A"; // Hoặc giá trị mặc định khác
+                }
+
+                float dolech;
+                if (dt.Rows[0]["DoLech"] != DBNull.Value && float.TryParse(dt.Rows[0]["DoLech"].ToString(), out dolech))
+                {
+                    // Sử dụng định dạng chuỗi nếu cần
+                    lblDoLech.Text = dolech.ToString("F2"); // Hiển thị 2 chữ số thập phân
+                }
+                else
+                {
+                    lblDoLech.Text = "N/A"; // Hoặc giá trị mặc định khác
+                }
+            }
+            else
+            {
+                MsgBox("Mã Sản Phẩm Không Tồn Tại!");
+            }
+        }
+
+        protected void txtKTThucTe_TextChanged(object sender, EventArgs e)
+        {
+            // Kiểm tra kích thước thực tế nằm trong khoảng kích thước lệch chuẩn
+            if (float.TryParse(txtKTBanVe.Text, out float kichthuoc) && float.TryParse(lblDoLech.Text, out float dolech))
+            {
+                if (double.TryParse(txtKTThucTe.Text.Trim(), out double KichThuocThucTe) == false)
+                {
+                    MsgBox("Kích thước nhập vào không phải là chữ số");
+                    txtKTThucTe.Focus();
+                    return;
+                }
+
+                if (kichthuoc - dolech < KichThuocThucTe && KichThuocThucTe < kichthuoc + dolech)
+                {
+                    // Dữ Liệu Đúng
+                    MsgBox("Kích thước thực tế nằm trong khoảng cho phép.");
+                }
+                else
+                {
+                    MsgBox("Không Đạt Tiêu Chuẩn Về Độ Lệch!");
+                    txtKTThucTe.Text = "";
+                }
+            }
+            else
+            {
+                MsgBox("Không thể lấy giá trị kích thước hoặc độ lệch.");
+            }
+        }
+
     }
 }
