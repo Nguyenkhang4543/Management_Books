@@ -42,7 +42,12 @@ namespace Management_Books
                     lblID.Text = null;
                     if(Session["Quyen"].ToString() == "1")
                     {
-                        taskbar_ImportDuLieuNguon.Visible = true;
+                        btnadmin.Visible = true;
+                    }
+                    Load_GridView_PhanQuyen();
+                    if (Check_Leader() == true)
+                    {
+                        txtLeader.Visible = true;
                     }
                 }
             }
@@ -56,6 +61,39 @@ namespace Management_Books
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+        protected void btnAdmin_Click(object sender, EventArgs e)
+        {
+            taskbar_ImportDuLieuNguon.Visible = true;
+            taskadmin.Visible = true;
+            taskbarThaoTac.Visible = false;
+            btnHome.Visible = true;
+            btnSave.Visible = false;
+        }
+        protected void btnHome_Click(object sender, EventArgs e)
+        {
+            taskbarThaoTac.Visible = true;
+            taskadmin.Visible = false;
+            taskbar_ImportDuLieuNguon.Visible = false;
+            btnHome.Visible = false;
+            btnSave.Visible = true;
+        }
+
+        private bool Check_Leader()
+        {
+            string MaNV = Session["MaNV"].ToString();
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Check_SoCatCable_Leader", new SqlParameter[] {
+                new SqlParameter("@MaNV",MaNV)
+            });
+            if(dt.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -199,6 +237,200 @@ namespace Management_Books
                 return;
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private void Load_GridView_PhanQuyen()
+        {
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_SoCatCable_Leader");
+
+            if (dt.Rows.Count > 0)
+            {
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+            }
+        }
+        protected void txtMaNhanVien_TextChanged(object sender, EventArgs e)
+        {
+            DataTable dt = SQLhelper.GetDataToTable("Books_Get_ThongTin_NhanVien", new SqlParameter[]
+            {
+                new SqlParameter("@MaNV", txtMaNhanVien.Text)
+            });
+            if (dt.Rows.Count > 0)
+            {
+                txtTenNhanVien.Text = dt.Rows[0].Field<string>("HoTen");
+            }
+            else
+            {
+                MsgBox("Mã Nhân Viên Không Tồn Tại !");
+                return;
+            }
+        }
+        protected void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (CheckDataNull() == true && Check_NhanVien() == true)
+            {
+                int insert = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Insert_SoCatCable_Leader", new SqlParameter[]
+            {
+                new SqlParameter("@MaNV",txtMaNhanVien.Text),
+                new SqlParameter("@HoTen",txtTenNhanVien.Text),
+               
+            });
+                if (insert > 0)
+                {
+                    MsgBox("Lưu Thành Công!");
+                    ResetDataNull();
+                    Load_GridView_PhanQuyen();
+                    return;
+                }
+                else
+                {
+                    MsgBox("Lưu Không Thành Công!");
+                }
+
+            }
+            else
+            {
+                MsgBox("Không Thành Công, Kiểm Tra Lại Dữ Liệu");
+            }
+
+        }
+        private void ResetDataNull()
+        {
+            txtMaNhanVien.Text = "";
+            txtTenNhanVien.Text = "";
+        }
+        private bool CheckDataNull()
+        {
+
+            if (string.IsNullOrEmpty(txtMaNhanVien.Text))
+            {
+                MsgBox("Chưa Chọn Nhân Viên !");
+                return false;
+            }
+            return true;
+        }
+        private bool Check_NhanVien()
+        {
+            int check = 0;
+            check = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Get_SoCatCable_Leader", new SqlParameter[]
+            {
+                new SqlParameter("@MSNV",txtMaNhanVien.Text),
+            });
+            if (check > 0)
+            {
+                MsgBox("Nhân Viên Đã Có Thông Tin");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        protected void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            btnLuu.Visible = true;
+            btnThemMoi.Visible = false;
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            txtMaNhanVien.Text = "";
+            txtTenNhanVien.Text = "";
+        }
+        protected void btnEditQuyen_Click(object sender, EventArgs e)
+        {
+            btnLuu.Visible = false;
+            btnThemMoi.Visible = true;
+            int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
+            int id = Convert.ToInt32(GridView2.DataKeys[rowIndex].Value);
+            DataTable dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_SoCatCable_Leader_By_ID", new SqlParameter[] {
+                         new SqlParameter("@ID", id)
+             });
+            if (dt.Rows.Count > 0)
+            {
+                lblID.Text = dt.Rows[0].Field<int>("ID").ToString();
+                txtMaNhanVien.Text = dt.Rows[0].Field<string>("MaNV");
+                txtTenNhanVien.Text = dt.Rows[0].Field<string>("HoTen");
+            }
+            btnDelete.Visible = true;
+            btnUpdate.Visible = true;
+        }
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+          
+                if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+                {
+                    int update = 0;
+                    update = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Update_SoCatCable_Leader_By_ID", new SqlParameter[] {
+                            new SqlParameter("@ID", id),
+                            new SqlParameter("@MaNV",txtMaNhanVien.Text),
+                            new SqlParameter("@HoTen",txtTenNhanVien.Text),
+
+              });
+                    if (update > 0)
+                    {
+                        MsgBox("Update Thành Công");
+                        ResetDataNull();
+                        Load_GridView_PhanQuyen();
+                        btnDelete.Visible = false;
+                        btnUpdate.Visible = false;
+                    }
+                    else
+                    {
+                        MsgBox("Update Không Thành Công");
+                        return;
+                    }
+                }
+          
+        }
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            {
+                SqlParameter[] prameter = new SqlParameter[]
+                {
+                    new SqlParameter("@ID", id)
+                };
+                int delete = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Delete_SoCatCable_Leader_By_ID", prameter);
+                if (delete > 0)
+                {
+                    MsgBox("Xóa Thành Công!");
+                    ResetDataNull();
+                    Load_GridView_PhanQuyen();
+                    btnDelete.Visible = false;
+                    btnUpdate.Visible = false;
+                }
+                else
+                {
+                    MsgBox("Xóa Không Thành Công!");
+                    Load_GridView_PhanQuyen();
+                }
+            }
+            else
+            {
+                MsgBox("ID không hợp lệ!");
+            }
+        }
+        int stt = 1;
+        public string get_stt()
+        {
+            return Convert.ToString(stt++);
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView2.PageIndex = e.NewPageIndex;   //trang hien tai
+            int trang_thu = e.NewPageIndex;      //the hien trang thu may
+            int so_dong = GridView2.PageSize;       //moi trang co bao nhieu dong
+            stt = trang_thu * so_dong + 1;
+            Load_GridView_PhanQuyen();
+        }
+
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Load_Gridview()
         {
             DataTable dt = new DataTable();
@@ -294,6 +526,11 @@ namespace Management_Books
                 else
                 {
                     Enable();
+                }
+                txtLeader.Visible = true;
+                if(Check_Leader() != true)
+                {
+                    txtLeader.Enabled = false;
                 }
             }
         }
@@ -614,6 +851,7 @@ namespace Management_Books
             else
             {
                 MsgBox("Mã Sản Phẩm Không Tồn Tại!");
+                btnSave.Visible = false;
             }
         }
 
@@ -643,6 +881,7 @@ namespace Management_Books
             else
             {
                 MsgBox("Không thể lấy giá trị kích thước hoặc độ lệch.");
+                btnSave.Visible = false;
             }
         }
 

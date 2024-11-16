@@ -16,7 +16,9 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
-                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" ID="btnSave" Text="Save" OnClick="btnSave_Click" />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" ID="btnHome" Text="Home" Visible="false" OnClick="btnHome_Click" />
+                    <asp:Button CssClass="button2" runat="server" ID="btnadmin" Text="Admin" Visible="false" OnClick="btnAdmin_Click" />
                     <asp:Label ID="lblID" Style="display: none;" runat="server"></asp:Label>
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
@@ -32,81 +34,20 @@
                 </td>
             </tr>
     </table>
-        <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
-            <label>Sổ Quản Lý Cắt Cable</label>
-        </div>
+       <%--------------------------------------------------Import Du Lieu Nguon------------------------------------------------------------%>
         <div runat="server" id="taskbar_ImportDuLieuNguon" visible="false">
             <asp:Button runat="server" Text="Sample file" OnClick="btnSamPle_Click"/>
             <asp:Fileupload runat="server" ID="FileUpLoad"/>
             <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
         </div>
-  <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <div runat="server" id="taskbarThaoTac" visible="true">
+        <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
+            <label>Sổ Quản Lý Cắt Cable</label>
+        </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
             <ContentTemplate>
-       <%-- <div style="width:100%;margin-top:10px;">
-            <table style="width:100%">
-                <tr style="text-align:center; ">
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Lot Nguyên Liệu</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Đoạn</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Ngày Cắt</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Lot Cắt</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Sản Phẩm</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Kích Thước <br /> Cắt Cable</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Số Đơn</asp:Label>
-                    </td>
-                     <td class="TieuDe">
-                        <asp:Label runat ="server">Số Đoạn</asp:Label>
-                    </td>
-                    <td class="TieuDe">
-                        <asp:Label runat ="server">Leader Xác Nhận</asp:Label>
-                    </td>
-                </tr>
-                <tr style="width:100%; text-align:center">
-                    <td>
-                        <asp:Textbox ID="txtLotNL" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtNgayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtLotCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSanPham" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtKichThuocCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSoDon" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtSoDoan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                     <td>
-                        <asp:Textbox ID="txtLeaderXacNhan" style="width:90%; height:25px" runat ="server"></asp:Textbox>
-                    </td>
-                </tr>
-            </table>
-            <asp:HiddenField runat="server" ID="hdfID" />
-        </div>--%>
         <div style="width:100%;margin-top:10px;">
             <table style="width:100%">
                 <tr style="text-align:center; ">
@@ -205,7 +146,7 @@
                         <asp:Textbox ID="txtNguoiThaoTac" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtLeader" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeader" style="width:90%; height:25px" Visible="false" runat ="server"></asp:Textbox>
                     </td>
                        <td>
                         <asp:Textbox ID="txtGhiChu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
@@ -226,63 +167,7 @@
             <asp:TextBox runat="server" ID="txtLotNL_Search" style="height: 25px"></asp:TextBox>
             <asp:Button Cssclass="button2" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
         </div>
-<%--        <div style="width:100%; margin-top:15px">
-            <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#006699" HeaderStyle-ForeColor="White" >
-                <Columns>
-                    <asp:TemplateField HeaderText="LOT NL">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLotNL" Text='<%# Eval("LOT_NL")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Số Bobin">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLotDoan" Text='<%# Eval("LOT_Doan")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Ngày Cắt">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblNgayCat" Text='<%# Eval("NGAYCAT")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="LOT Cắt">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLotCat" Text='<%# Eval("LOT_Cat")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Sản Phẩm">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSanPham" Text='<%# Eval("SanPham")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Kích Thước <br/> Cắt">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblKichThuocCat" Text='<%# Eval("KichThuocCat")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Số Đơn">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSoDon" Text='<%# Eval("So_Don")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Số Đoạn">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblSoDoan" Text='<%# Eval("So_Doan")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Leader <br/> Xác Nhận">
-                        <ItemTemplate>
-                            <asp:Label runat="server" ID="lblLeaderXacNhan" Text='<%# Eval("Leader_XacNhan")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:Button CssClass="button2" ID="btnEdit" Text="Edit" runat="server" OnClick="btnEdit_Click" CommandArgument='<%# Eval("ID") %>' />
-                                </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
-        </div>--%>
-              <div style="width:100%; margin-top:15px">
+        <div style="width:100%; margin-top:15px">
             <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#006699" HeaderStyle-ForeColor="White" >
                 <Columns>
                      <asp:TemplateField HeaderText="Ngày Cắt Cable">
@@ -378,15 +263,70 @@
                 </Columns>
             </asp:GridView>
         </div>
-
-        <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
         </div>
             </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="txtMaSP" />
             <asp:AsyncPostBackTrigger ControlID="txtKTThucTe" />
         </Triggers>
-    </asp:UpdatePanel>
+        </asp:UpdatePanel>
+        </div>
+        <div runat="server" id="taskadmin" visible="false">
+            <div style="width:100%;text-align:center;margin-top:15px;margin-bottom:20px">
+                    <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Phân Quyền Sản Xuất, QC</label>
+                </div>
+                <div style="width:100%;">
+                <div style="width:600px;border: 2px solid black;margin-top:10px;margin:auto;background-color:blanchedalmond">
+                    <div style="width:100%;border-bottom:2px dashed black">
+                         <div style="width:200px; margin-left:10px;margin-top:10px">
+                            <label>Mã Nhân Viên:</label>
+                        </div>
+                        <div style="width:580px; display:flex; margin-left:10px;margin-top:10px;margin-bottom:10px">
+                        <asp:TextBox ID="txtMaNhanVien" style="width:50%;margin-right:15px" runat="server" AutoPostBack="true" OnTextChanged="txtMaNhanVien_TextChanged"></asp:TextBox>
+                        <asp:TextBox ID="txtTenNhanVien" style="width:50%" runat="server" AutoPostBack="true"></asp:TextBox>
+                        <asp:Label ID="Label1" runat="server" style="display:none"></asp:Label>
+                        </div>
+                    </div>
+                    <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Text="Thêm Mới" Visible="false" OnClick="btnThemMoi_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
+                    </div>
+                </div>
+                </div>
+                <br />
+                <div style="width:100%;text-align:center">
+                    <asp:Gridview style="width:100%" runat="server" ID="GridView2" AutoGenerateColumns="false" AutoPostBack="true" DataKeyNames="ID" AllowPaging="True" PageSize="10"
+                        OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+                        HeaderStyle-BackColor="Orange" >
+                        <Columns>
+                            <asp:TemplateField HeaderText="No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Center">
+                            <ItemTemplate>
+                                <%# Container.DataItemIndex + 1 %>
+                            </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="MSNV">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Eval("MaNV")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Họ Tên">
+                                <ItemTemplate>
+                                    <asp:Label runat="server"  Text='<%# Eval("HoTen")%>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button CssClass="button2" ID="btnEdit" Text="Edit" runat="server" OnClick="btnEditQuyen_Click" CommandArgument='<%# Eval("ID") %>' />
+                                </ItemTemplate>
+                    </asp:TemplateField>
+                        </Columns>
+                    </asp:Gridview>
+                </div>
+            </div>
+        </div>
+    <footer><b style="font-size: 18px">NISSEI ELECTRIC MY THO CO., LTD</b></footer>
     </form>
 </body>
 </html>
