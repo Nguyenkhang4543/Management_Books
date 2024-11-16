@@ -42,10 +42,14 @@ namespace Management_Books
                     lblID.Text = null;
                     if(Session["Quyen"].ToString() == "1")
                     {
-                        Admin.Visible = true;
+                        btnadmin.Visible = true;
                     }
                     Load_GridView_PhanQuyen();
-                    Check_Leader();
+                    if (Check_Leader() == true)
+                    {
+                        txtLeader.Visible = true;
+                    }
+                    Load_GridView_PhanQuyen();
                 }
             }
         }
@@ -58,6 +62,39 @@ namespace Management_Books
         protected void btnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+        protected void btnAdmin_Click(object sender, EventArgs e)
+        {
+            taskbar_ImportDuLieuNguon.Visible = true;
+            taskadmin.Visible = true;
+            taskbarThaoTac.Visible = false;
+            btnHome.Visible = true;
+            btnSave.Visible = false;
+        }
+        protected void btnHome_Click(object sender, EventArgs e)
+        {
+            taskbarThaoTac.Visible = true;
+            taskadmin.Visible = false;
+            taskbar_ImportDuLieuNguon.Visible = false;
+            btnHome.Visible = false;
+            btnSave.Visible = true;
+        }
+
+        private bool Check_Leader()
+        {
+            string MaNV = Session["MaNV"].ToString();
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Check_SoCatCable_Leader", new SqlParameter[] {
+                new SqlParameter("@MaNV",MaNV)
+            });
+            if(dt.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         protected void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -72,27 +109,6 @@ namespace Management_Books
         {
             ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "myalert", "alert(\"" + sMessage.Replace("\r\n", "") + "\");", true);
         }
-        private bool Check_Leader()
-        {
-            DataTable dt = new DataTable();
-            dt = SQLhelper.GetDataToTable("Books_LineCut_1_1_Get_SoCatCable_Leader");
-            if (dt.Rows.Count > 0)
-            {
-                txtLeader.Enabled = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        protected void Admin_Click(object sender, EventArgs e)
-        {
-            taskThaoTac.Visible = false;
-            taskbar_ImportDuLieuNguon.Visible = true;
-            taskbarAdmin.Visible = true;
-        }
-
         protected void btnSamPle_Click(object sender, EventArgs e)
         {
             string filename = "SampleFileCutCable.xlsx";
@@ -343,9 +359,7 @@ namespace Management_Books
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (Check_Update() == true)
-            {
-                if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
+            if (!string.IsNullOrEmpty(lblID.Text) && int.TryParse(lblID.Text, out int id))
                 {
                     int update = 0;
                     update = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Update_SoCatCable_Leader_By_ID", new SqlParameter[] {
@@ -367,28 +381,6 @@ namespace Management_Books
                         MsgBox("Update Không Thành Công");
                         return;
                     }
-                }
-            }
-            else
-            {
-                MsgBox("Xảy Ra Lỗi Trong Quá Trình Update!");
-                return;
-            }
-        }
-        private bool Check_Update()
-        {
-            int update = SQLhelper.ExecuteNonQuery("Books_LineCut_1_1_Check_SoCatCable_Leader", new SqlParameter[]
-            {
-                new SqlParameter("@MSNV",txtMaNhanVien.Text),
-            });
-            if (update < 0)
-            {
-                return true;
-            }
-            else
-            {
-                MsgBox("Nhân Viên Đã Có Thông Tin");
-                return false;
             }
         }
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -403,7 +395,7 @@ namespace Management_Books
                 if (delete > 0)
                 {
                     MsgBox("Xóa Thành Công!");
-                    ResetData();
+                    ResetDataNull();
                     Load_GridView_PhanQuyen();
                     btnDelete.Visible = false;
                     btnUpdate.Visible = false;
@@ -437,7 +429,7 @@ namespace Management_Books
         {
 
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Load_Gridview()
         {
             DataTable dt = new DataTable();
@@ -526,7 +518,6 @@ namespace Management_Books
                 txtGhiChu.Text = dt.Rows[0].Field<string>("GhiChu");
                 
                 hdfID1.Value = id.ToString();
-                Check_Leader();
                 if (!string.IsNullOrEmpty(txtLeader.Text))
                 {
                     Enable_field();
@@ -534,6 +525,11 @@ namespace Management_Books
                 else
                 {
                     Enable();
+                }
+                txtLeader.Visible = true;
+                if(Check_Leader() != true)
+                {
+                    txtLeader.Enabled = false;
                 }
             }
         }
@@ -854,6 +850,7 @@ namespace Management_Books
             else
             {
                 MsgBox("Mã Sản Phẩm Không Tồn Tại!");
+                btnSave.Visible = false;
             }
         }
 
@@ -883,6 +880,7 @@ namespace Management_Books
             else
             {
                 MsgBox("Không thể lấy giá trị kích thước hoặc độ lệch.");
+                btnSave.Visible = false;
             }
         }
 
