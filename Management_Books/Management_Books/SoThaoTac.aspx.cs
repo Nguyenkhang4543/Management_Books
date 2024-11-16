@@ -43,6 +43,14 @@ namespace Management_Books
                         SetInitialRow();
 
                     }
+                    if (Check_NguoiXacNhan() == true)
+                    {
+                        foreach (GridViewRow row in GridView1.Rows)
+                        {
+                            TextBox OkeDon = (TextBox)row.FindControl("txtOkDon");
+                            OkeDon.Enabled = true;
+                        }
+                    }
                 }
             }
         }
@@ -64,6 +72,22 @@ namespace Management_Books
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        }
+        private bool Check_NguoiXacNhan()
+        {
+            string MaNV = Session["MaNV"].ToString();
+            DataTable dt = new DataTable();
+            dt = SQLhelper.GetDataToTable("Books_Kashime_1_1_Check_SoCatCable_NguoiXacNhan", new SqlParameter[] {
+                new SqlParameter("@MaNV",MaNV)
+            });
+            if (dt.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         private void MsgBox(string sMessage)
         {
@@ -875,10 +899,18 @@ namespace Management_Books
                          new SqlParameter("@XacNhanDon",txtOkDon),
                     });
                         NO_Phieu++;
+                        if(insert > 0 && insert_datadetail > 0)
+                        {
+                            MsgBox("lưu Thành Công!");
+                            Load_Data_ID_Phieu(ID_Phieu);
+                        }
+                        else
+                        {
+                            MsgBox("Dữ Liệu Xảy Ra Lỗi");
+                        }
                     }
-                    MsgBox("lưu Thành Công!");
-                    Load_Data_ID_Phieu(ID_Phieu);
                 }
+                NO_Phieu = 1;
             }
             else
             {
@@ -886,7 +918,7 @@ namespace Management_Books
                 {
                     string TrangThai = "Drawing";
                     string ID_Phieu_Update = ThaoTacDuLieu.Decrypt_V1(lblID_Phieu.Text, "NisseiTL1LGMyTho");
-                    int insert = SQLhelper.ExecuteNonQuery("Books_Kashime_Update_SoThaoTac_Data", new SqlParameter[] {
+                    int update = SQLhelper.ExecuteNonQuery("Books_Kashime_Update_SoThaoTac_Data", new SqlParameter[] {
                         new SqlParameter("@ID_Phieu",ID_Phieu_Update),
                         new SqlParameter("@Line",txtLine.Text),
                         new SqlParameter("@BanVe",txtBanVe.Text),
@@ -906,7 +938,6 @@ namespace Management_Books
                         new SqlParameter("@Sleeve4",txtSlevee4.Text),
                         new SqlParameter("@Sleeve5",txtSlevee5.Text),
                         new SqlParameter("@TrangThai",TrangThai),
-                        new SqlParameter("@NguoiNhap",Session["Ten"].ToString())
                 });
                     foreach (GridViewRow row in GridView1.Rows)
                     {
@@ -1067,11 +1098,19 @@ namespace Management_Books
                          new SqlParameter("@XacNhanDon",txtOkDon),
                     });
                         NO_Phieu++;
+                        if(update > 0 && Update_Detail > 0)
+                        {
+                            MsgBox("Cập Nhật Thành Công!");
+                            Load_Data_ID_Phieu(ID_Phieu_Update);
+                        }
+                        else
+                        {
+                            MsgBox("Cập Nhật Dữ Liệu Không Thành Công!");
+                        }
                     }
                     NO_Phieu = 1;
-                    MsgBox("Cập Nhật Thành Công!");
-                    Load_Data_ID_Phieu(ID_Phieu_Update);
                 }
+                NO_Phieu = 1;
             }
             Check_Finished();
         }
@@ -1264,6 +1303,7 @@ namespace Management_Books
                     txtSlevee5.Text = dt.Rows[0].Field<string>("Sleeve5") ?? string.Empty;
                 }
             }
+            Enable_Data();
 
             DataTable dtCurrentTable = SQLhelper.GetDataToTable("Books_Kashime_Get_SoThaoTac_Detail_By_ID_Phieu", new SqlParameter[] {
                 SQLhelper.CreateParameter("@ID_Phieu", ID_Phieu_Decrypt),
@@ -1371,7 +1411,26 @@ namespace Management_Books
                 box38.Text = dtCurrentTable.Rows[i][39].ToString();
                 rowIndex++;
 
-                if (!string.IsNullOrEmpty(box38.Text))
+                if (!string.IsNullOrEmpty(box1.Text)
+                    && !string.IsNullOrEmpty(box2.Text)
+                    && !string.IsNullOrEmpty(box3.Text)
+                    && !string.IsNullOrEmpty(box4.Text)
+                    && !string.IsNullOrEmpty(box5.Text)
+                    && !string.IsNullOrEmpty(box6.Text)
+                    && !string.IsNullOrEmpty(box7.Text)
+                    && !string.IsNullOrEmpty(box8.Text)
+                    )
+                {
+                    box1.Enabled = false;
+                    box2.Enabled = false;
+                    box3.Enabled = false;
+                    box4.Enabled = false;
+                    box5.Enabled = false;
+                    box6.Enabled = false;
+                    box7.Enabled = false;
+                    box8.Enabled = false;
+                }
+                    if (!string.IsNullOrEmpty(box38.Text))
                 {
                     box1.Enabled = false;
                     box2.Enabled = false;
@@ -1415,6 +1474,58 @@ namespace Management_Books
                 }
             }
             SetPreviousData();
+        }
+        private void Enable_Data()
+        {
+            txtLine.Enabled = false;
+            txtBanVe.Enabled = false;
+            txtMaSanPham.Enabled = false;
+            txtTenSanPham.Enabled = false;
+            txtNgayThaoTac.Enabled = false;
+            txtNguoiDamNhiem.Enabled = false;
+            txtHoiMayDap.Enabled = false;
+            if (!string.IsNullOrEmpty(txtCable1.Text))
+            {
+                txtCable1.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtCable2.Text))
+            {
+                txtCable2.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtCable3.Text))
+            {
+                txtCable3.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtCable4.Text))
+            {
+                txtCable4.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtCable5.Text))
+            {
+                txtCable5.Enabled = false;
+            }
+
+            if (!string.IsNullOrEmpty(txtSlevee1.Text))
+            {
+                txtSlevee1.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtSlevee2.Text))
+            {
+                txtSlevee2.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtSlevee3.Text))
+            {
+                txtSlevee3.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtSlevee4.Text))
+            {
+                txtSlevee4.Enabled = false;
+            }
+            if (!string.IsNullOrEmpty(txtSlevee5.Text))
+            {
+                txtSlevee5.Enabled = false;
+            }
+
         }
     }
 }

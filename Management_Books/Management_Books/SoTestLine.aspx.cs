@@ -60,6 +60,10 @@ namespace Management_Books
         {
             Response.Redirect("Home.aspx");
         }
+        protected void btnAddNew_Click(object sender, EventArgs e)
+        {
+            Add_New_Phieu();
+        }
         protected void btnAdminMain_Click(object sender, EventArgs e)
         {
             lblTenDanhNhapAdmin.Text = convertToUnSign3(Session["Ten"].ToString());
@@ -346,6 +350,77 @@ namespace Management_Books
             txtDongGoi_GhiChu.Text = "";
             hdfID.Value = "";
         }
+        private void Add_New_Phieu()
+        {
+            txtSo_Line.Text = "";
+            txtNgay_SX.Text = "";
+            txtThoiGianDoi_SP.Text = "";
+            txtSP_DangThaoTac.Text = "";
+            txtSP_TienHanhDoi.Text = "";
+            txtKTConLai_1.Text = "";
+            txtKTConLai_2.Text = "";
+            txtThuGomConLai_1.Text = "";
+            txtThuGomConLai_2.Text = "";
+            txtGiaoTP_QC_1.Text = "";
+            txtGiaoTP_QC_2.Text = "";
+            txtKTPhePham_1.Text = "";
+            txtKTPhePham_2.Text = "";
+            txtACB_XacNhan_SX_1.Text = "";
+            txtACB_XacNhan_QC_1.Text = "";
+            txtDapCable_GhiChu.Text = "";
+            txtKTCDC_A_1.Text = "";
+            txtKTCDC_A_2.Text = "";
+            txtKTCD_DTA_1.Text = "";
+            txtKTCD_DTA_2.Text = "";
+            txtKTND_A1.Text = "";
+            txtKTND_A2.Text = "";
+            txtACB_XacNhan_SX_2.Text = "";
+            txtACB_XacNhan_QC_2.Text = "";
+            txtQC_GhiChu.Text = "";
+            txtKTTaibar_A_1.Text = "";
+            txtKTTaibar_A_2.Text = "";
+            txtKTDongGoi_A_1.Text = "";
+            txtKTDongGoi_A_2.Text = "";
+            txtACB_XacNhan_SX_3.Text = "";
+            txtACB_XacNhan_QC_3.Text = "";
+            txtDongGoi_GhiChu.Text = "";
+            hdfID.Value = "";
+
+            Check_ACB_XacNhan();
+
+            txtSo_Line.Enabled = true;
+            txtNgay_SX.Enabled = true;
+            txtThoiGianDoi_SP.Enabled = true;
+            txtSP_DangThaoTac.Enabled = true;
+            txtSP_TienHanhDoi.Enabled = true;
+            txtKTConLai_1.Enabled = true;
+            txtKTConLai_2.Enabled = true;
+            txtThuGomConLai_1.Enabled = true;
+            txtThuGomConLai_2.Enabled = true;
+            txtGiaoTP_QC_1.Enabled = true;
+            txtGiaoTP_QC_2.Enabled = true;
+            txtKTPhePham_1.Enabled = true;
+            txtKTPhePham_2.Enabled = true;
+            //txtACB_XacNhan_SX_1.Enabled = flag;
+            //txtACB_XacNhan_QC_1.Enabled = flag;
+            txtDapCable_GhiChu.Enabled = true;
+            txtKTCDC_A_1.Enabled = true;
+            txtKTCDC_A_2.Enabled = true;
+            txtKTCD_DTA_1.Enabled = true;
+            txtKTCD_DTA_2.Enabled = true;
+            txtKTND_A1.Enabled = true;
+            txtKTND_A2.Enabled = true;
+            //txtACB_XacNhan_SX_2.Enabled = true;
+            //txtACB_XacNhan_QC_2.Enabled = true;
+            txtQC_GhiChu.Enabled = true;
+            txtKTTaibar_A_1.Enabled = true;
+            txtKTTaibar_A_2.Enabled = true;
+            txtKTDongGoi_A_1.Enabled = true;
+            txtKTDongGoi_A_2.Enabled = true;
+            //txtACB_XacNhan_SX_3.Enabled = flag;
+            //txtACB_XacNhan_QC_3.Enabled = flag;
+            txtDongGoi_GhiChu.Enabled = true;
+        }
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             int rowIndex = ((sender as Button).NamingContainer as GridViewRow).RowIndex;
@@ -479,45 +554,145 @@ namespace Management_Books
                     txtDongGoi_GhiChu.Text = dt.Rows[0].Field<string>("DongGoi_GhiChu") ?? string.Empty;
                 }
                 hdfID.Value = id.ToString();
+
                 if (!string.IsNullOrEmpty(txtSo_Line.Text)
-                    &&!string.IsNullOrEmpty(txtNgay_SX.Text)
-                    && !string.IsNullOrEmpty(txtThoiGianDoi_SP.Text)
-                    && !string.IsNullOrEmpty(txtSP_DangThaoTac.Text)
-                    && !string.IsNullOrEmpty(txtSP_TienHanhDoi.Text)
-                    && !string.IsNullOrEmpty(txtKTConLai_1.Text)
-                    && !string.IsNullOrEmpty(txtKTConLai_2.Text)
-                    && !string.IsNullOrEmpty(txtThuGomConLai_1.Text)
-                    && !string.IsNullOrEmpty(txtThuGomConLai_2.Text)
-                    //&& !string.IsNullOrEmpty(txtGiaoTP_QC_1.Text)
-                    //&& !string.IsNullOrEmpty(txtGiaoTP_QC_2.Text)
-                    && !string.IsNullOrEmpty(txtKTPhePham_1.Text)
-                    && !string.IsNullOrEmpty(txtKTPhePham_2.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text)
-                    && !string.IsNullOrEmpty(txtACB_XacNhan_QC_1.Text)
-                    && !string.IsNullOrEmpty(txtKTCDC_A_1.Text)
+                   && !string.IsNullOrEmpty(txtNgay_SX.Text)
+                   && !string.IsNullOrEmpty(txtThoiGianDoi_SP.Text)
+                   && !string.IsNullOrEmpty(txtSP_DangThaoTac.Text)
+                   && !string.IsNullOrEmpty(txtSP_TienHanhDoi.Text)
+                   && !string.IsNullOrEmpty(txtKTConLai_1.Text)
+                   && !string.IsNullOrEmpty(txtKTConLai_2.Text)
+                   && !string.IsNullOrEmpty(txtThuGomConLai_1.Text)
+                   && !string.IsNullOrEmpty(txtThuGomConLai_2.Text)
+                   && !string.IsNullOrEmpty(txtGiaoTP_QC_1.Text)
+                   && !string.IsNullOrEmpty(txtGiaoTP_QC_2.Text)
+                   && !string.IsNullOrEmpty(txtKTPhePham_1.Text)
+                   && !string.IsNullOrEmpty(txtKTPhePham_2.Text))
+                {
+                    Enable_KhoiTao();
+                    Check_ACB_Admin_XacNhan();
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_1.Text))
+                    {
+                        txtACB_XacNhan_SX_1.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkSX = new DataTable();
+                        checkSX = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "SX")
+                        });
+                        if (checkSX.Rows.Count > 0)
+                        {
+                            txtACB_XacNhan_SX_1.Enabled = true;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_1.Text))
+                    {
+                        txtACB_XacNhan_QC_1.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkQC = new DataTable();
+                        checkQC = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC.Rows.Count > 0)
+                        {
+                            txtACB_XacNhan_QC_1.Enabled = true;
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(txtKTCDC_A_1.Text)
                     && !string.IsNullOrEmpty(txtKTCDC_A_2.Text)
                     && !string.IsNullOrEmpty(txtKTCD_DTA_1.Text)
                     && !string.IsNullOrEmpty(txtKTCD_DTA_2.Text)
                     && !string.IsNullOrEmpty(txtKTND_A1.Text)
-                    && !string.IsNullOrEmpty(txtKTND_A2.Text)
-                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text)
-                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text)
-                    && !string.IsNullOrEmpty(txtKTTaibar_A_1.Text)
+                    && !string.IsNullOrEmpty(txtKTND_A2.Text))
+                {
+                    CongDoanQC();
+                    Check_ACB_Admin_XacNhan();
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_2.Text))
+                    {
+                        txtACB_XacNhan_SX_2.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkSX = new DataTable();
+                        checkSX = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "SX")
+                        });
+                        if (checkSX.Rows.Count > 0)
+                        {
+                            txtACB_XacNhan_SX_2.Enabled = true;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_2.Text))
+                    {
+                        txtACB_XacNhan_QC_2.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkQC = new DataTable();
+                        checkQC = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC.Rows.Count > 0)
+                        {
+                            txtACB_XacNhan_QC_2.Enabled = true;
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(txtKTTaibar_A_1.Text)
                     && !string.IsNullOrEmpty(txtKTTaibar_A_2.Text)
                     && !string.IsNullOrEmpty(txtKTDongGoi_A_1.Text)
-                    && !string.IsNullOrEmpty(txtKTDongGoi_A_2.Text)
-                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text)
-                    //&& !string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text)
-                    )
+                    && !string.IsNullOrEmpty(txtKTDongGoi_A_2.Text))
                 {
-                    Enable_Field(false);
-                }
-                else
-                {
-                    Enable_Field();
+                    CongDoanDongGoi();
                     Check_ACB_Admin_XacNhan();
-                    Check_ACB_XacNhan();
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_SX_3.Text))
+                    {
+                        txtACB_XacNhan_SX_3.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkSX = new DataTable();
+                        checkSX = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "SX")
+                        });
+                        if (checkSX.Rows.Count > 0)
+                        {
+                         txtACB_XacNhan_SX_3.Enabled = true;
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(txtACB_XacNhan_QC_3.Text))
+                    {
+                        txtACB_XacNhan_QC_3.Enabled = false;
+                    }
+                    else
+                    {
+                        DataTable checkQC = new DataTable();
+                        checkQC = SQLhelper.GetDataToTable("Book_Kashime_Check_ACB_Xac_Nhan_SoTestLine", new SqlParameter[]
+                        {
+                            new SqlParameter("@MSNV", Session["MaNV"].ToString()),
+                            new SqlParameter("@BoPhan", "QC")
+                        });
+                        if (checkQC.Rows.Count > 0)
+                        {
+                            txtACB_XacNhan_QC_3.Enabled = true;
+                        }
+                    }
                 }
+                
             }
         }
         private void Enable_Field(bool flag = true)
@@ -558,6 +733,40 @@ namespace Management_Books
             txtDongGoi_GhiChu.Enabled = flag;
     
 
+        }
+
+        private void Enable_KhoiTao()
+        {
+            txtSo_Line.Enabled = false;
+            txtNgay_SX.Enabled = false;
+            txtThoiGianDoi_SP.Enabled = false;
+            txtSP_DangThaoTac.Enabled = false;
+            txtSP_TienHanhDoi.Enabled = false;
+            txtKTConLai_1.Enabled = false;
+            txtKTConLai_2.Enabled = false;
+            txtThuGomConLai_1.Enabled = false;
+            txtThuGomConLai_2.Enabled = false;
+            txtGiaoTP_QC_1.Enabled = false;
+            txtGiaoTP_QC_2.Enabled = false;
+            txtKTPhePham_1.Enabled = false;
+            txtKTPhePham_2.Enabled = false;
+        }
+        private void CongDoanQC()
+        {
+
+            txtKTCDC_A_1.Enabled = false;
+            txtKTCDC_A_2.Enabled = false;
+            txtKTCD_DTA_1.Enabled = false;
+            txtKTCD_DTA_2.Enabled = false;
+            txtKTND_A1.Enabled = false;
+            txtKTND_A2.Enabled = false;
+        }
+        private void CongDoanDongGoi()
+        {
+            txtKTTaibar_A_1.Enabled = false;
+            txtKTTaibar_A_2.Enabled = false;
+            txtKTDongGoi_A_1.Enabled = false;
+            txtKTDongGoi_A_2.Enabled = false;
         }
 
         protected void ACB_XacNhan(object sender, EventArgs e)
@@ -834,6 +1043,8 @@ namespace Management_Books
         {
 
         }
+
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

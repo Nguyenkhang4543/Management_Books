@@ -265,7 +265,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="OK Đơn<br />ロット">
                             <ItemTemplate>
-                                <asp:TextBox style="width:50px" ID="txtOkDon" runat="server"></asp:TextBox>
+                                <asp:TextBox style="width:50px" ID="txtOkDon" Enabled="false" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
