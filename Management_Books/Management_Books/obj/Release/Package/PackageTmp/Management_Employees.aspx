@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Management Employees</title>
     <link rel="shortcut icon" type="image/x-icon" href="../Nissei.ico" />
-    <link rel="stylesheet" href="../Css/style.css" />
+    <link rel="stylesheet" href="Css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
 </head>
 <body>
@@ -97,7 +97,7 @@
                 </div>
                 </div>
                 <br />
-                <div>
+                <div style="width:100%;text-align:center">
                     <asp:TextBox runat="server" ID="txtNoiDung"  style="width:200px;height:40px" PlaceHolder="Search MaNV"></asp:TextBox>
                     <asp:Button runat="server" Text="Search" style="width:60px;height:40px;border-radius:4px;background-color:aquamarine" ID="btnSearch" OnClick="btnSearch_Click"/>
                 </div>

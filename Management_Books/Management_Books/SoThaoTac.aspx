@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Management Books</title>
     <link rel="shortcut icon" type="image/x-icon" href="Nissei.ico" />
-    <link rel="stylesheet" href="../Css/style.css" />
+    <link rel="stylesheet" href="Css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
     <style type="text/css">
 

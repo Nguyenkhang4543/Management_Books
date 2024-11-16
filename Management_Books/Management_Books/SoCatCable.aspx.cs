@@ -112,7 +112,7 @@ namespace Management_Books
         protected void btnSamPle_Click(object sender, EventArgs e)
         {
             string filename = "SampleFileCutCable.xlsx";
-            string folderPath = @"\\Management_Books\Management_Books\Templates";
+            string folderPath = @"\\sv114\UPDATE_PGM_WEB\APP_NEM\Management_Books\Templates";
             string FilePath = System.IO.Path.Combine(folderPath, filename);
             System.IO.FileInfo file = new System.IO.FileInfo(FilePath);
             if (file.Exists)
