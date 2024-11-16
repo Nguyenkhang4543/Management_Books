@@ -514,3 +514,4 @@ D:\1. Development_App\Management_Books\Management_Books\Management_Books\obj\Deb
 D:\1. Development_App\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.pdb
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bin\ClosedXML.dll
 D:\777. Project_Production\Management_Books\Management_Books\Management_Books\bin\EPPlus.dll
+D:\777. Project_Production\Management_Books\Management_Books\Management_Books\obj\Debug\Management_Books.csproj.AssemblyReference.cache

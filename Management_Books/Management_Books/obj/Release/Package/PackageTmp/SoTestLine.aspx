@@ -20,6 +20,7 @@
             <tr>
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click" />
+                    <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Add New" ID="btnAddNew" OnClick="btnAddNew_Click"/>
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Admin" Visible="false" ID="btnAdminMain" OnClick="btnAdminMain_Click" />
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
