@@ -144,6 +144,11 @@ namespace Management_Books
             Response.Redirect("SoCatCable.aspx");
         }
 
+        protected void btnBarcode_Tab_Click(object sender, EventArgs e)
+        {
+            barcode_tab.Visible = true;
+        }
+
         ///////////////////////////// Sổ Quản Lý Kashime /////////////////////////////////////////
 
     }

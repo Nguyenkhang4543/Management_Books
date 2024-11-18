@@ -70,6 +70,7 @@ namespace Management_Books
             taskbarThaoTac.Visible = false;
             btnHome.Visible = true;
             btnSave.Visible = false;
+            btnLabelImport.Visible = true;
         }
         protected void btnHome_Click(object sender, EventArgs e)
         {
@@ -78,6 +79,7 @@ namespace Management_Books
             taskbar_ImportDuLieuNguon.Visible = false;
             btnHome.Visible = false;
             btnSave.Visible = true;
+            btnLabelImport.Visible = false;
         }
 
         private bool Check_Leader()
@@ -850,7 +852,7 @@ namespace Management_Books
             else
             {
                 MsgBox("Mã Sản Phẩm Không Tồn Tại!");
-                btnSave.Visible = false;
+                txtMaSP.Text = "";
             }
         }
 
@@ -880,7 +882,6 @@ namespace Management_Books
             else
             {
                 MsgBox("Không thể lấy giá trị kích thước hoặc độ lệch.");
-                btnSave.Visible = false;
             }
         }
 

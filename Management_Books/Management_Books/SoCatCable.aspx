@@ -6,9 +6,87 @@
 <head runat="server">
     <title>Management Books</title>
     <link rel="shortcut icon" type="image/x-icon" href="Nissei.ico" />
-    <link rel="stylesheet" href="./Css/style.css" />
+    <link rel="stylesheet" href="Css/style.css" />
+    <script src="Scripts/materialize.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+    <style>
+        
+        .button2 {
+            background-color: #006699;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            border:black;
+        }
+
+            .button2:hover {
+                color: red;
+                background-color: #bbdeee;
+            }
+        .button3 {
+            background-color: #e99e40;
+            border: none;
+            color: black;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            width:100px;
+            height:40px;
+            border:2px solid red;
+            font-weight:bold;
+        }
+
+            .button3:hover {
+                color: white;
+                background-color: #84b2dc;
+                border:2px solid black;
+            }
+
+        .button6 {
+            width: 100px;
+            background-color:green;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            margin-left: 50px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid black;
+        }
+
+            .button6:hover {
+                color: white;
+                background-color: #138496;
+            }
+    </style>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input[type="text"], input[type="date"]');
+            inputs.forEach(function (input, index) {
+                input.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        var nextInput = inputs[index + 1];
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </head>
+    
 <body>
     <form id="form1" runat="server">
         <div style="width:100%">
@@ -35,12 +113,16 @@
             </tr>
     </table>
        <%--------------------------------------------------Import Du Lieu Nguon------------------------------------------------------------%>
-        <div runat="server" id="taskbar_ImportDuLieuNguon" visible="false">
-            <asp:Button runat="server" Text="Sample file" OnClick="btnSamPle_Click"/>
-            <asp:Fileupload runat="server" ID="FileUpLoad"/>
-            <asp:Button runat="server" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
+        <br />
+        <div runat="server" id="btnLabelImport" visible="false" enableviewstate="true">
+            <label style="margin-left:20px; font-size:20px;font-weight:bold">Import Data Source:</label>
         </div>
-        <div runat="server" id="taskbarThaoTac" visible="true">
+        <div runat="server" id="taskbar_ImportDuLieuNguon" enableviewstate="true" style= "width:480px;margin-top:10px; margin-left:20px;border: 1px solid black" visible="false">
+            <asp:Button runat="server" CssClass="button6" Text="Sample file"  OnClick="btnSamPle_Click"/>
+            <asp:Fileupload runat="server" ID="FileUpLoad" style="background-color:aliceblue"/>
+            <asp:Button runat="server" CssClass="button6" Text="Import" ID="btnImport" OnClick="btnImport_Click"></asp:Button>
+        </div>
+        <div runat="server" id="taskbarThaoTac" visible="true" >
         <div style="width:100%; text-align:center; font-size:25px;margin-top:10px;font-weight:bold; color:orangered">
             <label>Sổ Quản Lý Cắt Cable</label>
         </div>
@@ -49,7 +131,7 @@
         <asp:UpdatePanel runat="server" ID="UpdatePanel" UpdateMode="Conditional">
             <ContentTemplate>
         <div style="width:100%;margin-top:10px;">
-            <table style="width:100%">
+            <table style="width:100%;">
                 <tr style="text-align:center; ">
                     <td class="TieuDe">
                         <asp:Label runat ="server">Ngày cắt Cable</asp:Label>
@@ -102,11 +184,11 @@
                 </tr>
                 <tr style="width:100%; text-align:center">
                     <td>
-                        <asp:Textbox ID="txtNgayCatCable" Type="date" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNgayCatCable" ClientIDMode="Static" Type="date" style="width:90%; height:25px;" runat ="server"></asp:Textbox>
 
                     </td>
                     <td>
-                        <asp:Textbox ID="txtMaSP" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtMaSP_TextChanged" ></asp:Textbox>
+                        <asp:Textbox ID="txtMaSP" ClientIDMode="Static" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtMaSP_TextChanged" ></asp:Textbox>
                     </td>
                      <td>
                         <asp:Textbox ID="txtLotNguyenLieu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
@@ -128,28 +210,28 @@
                         <asp:Label runat="server" ID="lblDoLech"></asp:Label>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtKTThucTe" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtKTThucTe_TextChanged" ></asp:Textbox>
+                        <asp:Textbox ID="txtKTThucTe" ClientIDMode="Static" style="width:90%; height:25px" runat ="server" AutoPostBack="true" OnTextChanged="txtKTThucTe_TextChanged" ></asp:Textbox>
                     </td>
                      <td>
-                        <asp:Textbox ID="txtMayCat" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtMayCat" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtSoDonNew" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDonNew" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtSoDoanNew" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoDoanNew" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtSoLuong" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtSoLuong" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtNguoiThaoTac" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtNguoiThaoTac" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtLeader" style="width:90%; height:25px" Visible="false" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtLeader" ClientIDMode="Static" style="width:90%; height:25px" Visible="false" runat ="server"></asp:Textbox>
                     </td>
                        <td>
-                        <asp:Textbox ID="txtGhiChu" style="width:90%; height:25px" runat ="server"></asp:Textbox>
+                        <asp:Textbox ID="txtGhiChu" ClientIDMode="Static" style="width:90%; height:25px" runat ="server"></asp:Textbox>
                     </td>
 
                 </tr>
@@ -159,13 +241,13 @@
         <div style="width:100%;text-align:center;margin-top:10px;">
             <asp:Label Font-Size="20px" runat="server">TÌM KIẾM</asp:Label>
         </div>
-        <div style="width:100%;text-align:center">
+        <div style="width:100%;text-align:center" enableviewstate="true">
             <asp:Label Font-Size="20px"  runat="server">From Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtFromDate"></asp:TextBox>
             <asp:Label Font-Size="20px" runat="server">To Date: </asp:Label>
             <asp:TextBox runat="server" style="height: 25px" type="Date" ID="txtToDate"></asp:TextBox>
             <asp:TextBox runat="server" ID="txtLotNL_Search" style="height: 25px"></asp:TextBox>
-            <asp:Button Cssclass="button2" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
+            <asp:Button Cssclass="button3" runat="server"  OnClick="btnSearch_Click" Text="Search"/>
         </div>
         <div style="width:100%; margin-top:15px">
             <asp:GridView runat="server" style="width:100%; text-align:center" AutoGenerateColumns="false" ID="GridView1" DataKeyNames="ID" HeaderStyle-BackColor="#006699" HeaderStyle-ForeColor="White" >
@@ -177,7 +259,7 @@
                     </asp:TemplateField>
                      <asp:TemplateField HeaderText="Mã Sản Phẩm">
                         <ItemTemplate>
-                            <asp:Label runat="server" ID="lblMaSanPham" Text='<%# Eval("MaSP")%>'></asp:Label>
+                            <asp:Label runat="server"  ID="lblMaSanPham" Text='<%# Eval("MaSP")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="LOT NL">
@@ -271,9 +353,9 @@
         </Triggers>
         </asp:UpdatePanel>
         </div>
-        <div runat="server" id="taskadmin" visible="false">
+        <div runat="server" id="taskadmin" visible="false" enableviewstate="true">
             <div style="width:100%;text-align:center;margin-top:15px;margin-bottom:20px">
-                    <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Phân Quyền Sản Xuất, QC</label>
+                    <label style="font-size:25px; border:1px solid black;font-weight:bold;background-color:aqua;color:red" >Phân Quyền Leader Xác Nhận</label>
                 </div>
                 <div style="width:100%;">
                 <div style="width:600px;border: 2px solid black;margin-top:10px;margin:auto;background-color:blanchedalmond">
@@ -287,9 +369,9 @@
                         <asp:Label ID="Label1" runat="server" style="display:none"></asp:Label>
                         </div>
                     </div>
-                    <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
-                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
-                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:forestgreen; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Text="Thêm Mới" Visible="false" OnClick="btnThemMoi_Click"></asp:Button>
+                   <div style="width:600px;text-align:center; margin-left:10px;margin-top:10px; margin-bottom:10px">
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:aliceblue;background-color:#4c8aa9; border-radius:5px;cursor:pointer" ID="btnLuu" runat="server" Text="Lưu" OnClick="btnLuu_Click"></asp:Button>
+                        <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:#4c8aa9; border-radius:5px;cursor:pointer" ID="btnThemMoi" runat="server" Text="Thêm Mới" Visible="false" OnClick="btnThemMoi_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:black;background-color:yellow; border-radius:5px;cursor:pointer" ID="btnUpdate" runat="server" Text="Update" Visible="false" OnClick="btnUpdate_Click"></asp:Button>
                         <asp:Button type="submit" style="width:80px;height:35px;font-weight:bold;color:white;background-color:red; border-radius:5px;cursor:pointer" ID="btnDelete" runat="server" Text="Xóa" Visible="false" OnClick="btnDelete_Click"></asp:Button>
                     </div>

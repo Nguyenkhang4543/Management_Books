@@ -403,20 +403,28 @@ namespace Management_Books
         }
         protected void btnSearch_Click(object sender,EventArgs e)
         {
-            string NoiDung = txtNoiDung.Text.Trim();
-            DataTable dtSearch = new DataTable();
-            dtSearch = SQLhelper.GetDataToTable("Books_Get_Search_ThongTinNhanVien", new SqlParameter[] { 
+            if (!string.IsNullOrEmpty(txtNoiDung.Text))
+            {
+                string NoiDung = txtNoiDung.Text.Trim();
+                DataTable dtSearch = new DataTable();
+                dtSearch = SQLhelper.GetDataToTable("Books_Get_Search_ThongTinNhanVien", new SqlParameter[] {
                 new SqlParameter("@NoiDung",NoiDung)
             });
-            if(dtSearch.Rows.Count > 0)
-            {
-                GridView1.DataSource = dtSearch;
-                GridView1.DataBind();
+                if (dtSearch.Rows.Count > 0)
+                {
+                    GridView1.DataSource = dtSearch;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    MsgBox("Nội Dung Tìm Kiếm Không Tồn Tại");
+                }
             }
             else
             {
-                MsgBox("Nội Dung Tìm Kiếm Không Tồn Tại");
+                MsgBox("Chưa Nhập Nội Dung!");
             }
+            
         }
     }
 }
