@@ -8,6 +8,66 @@
     <link rel="shortcut icon" type="image/x-icon" href="../Nissei.ico" />
     <link rel="stylesheet" href="Css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+       <style type="text/css">
+        
+        .button2 {
+            background-color: #006699;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            border:black;
+        }
+
+            .button2:hover {
+                color: red;
+                background-color: #bbdeee;
+            }
+        .button3 {
+            background-color: #e99e40;
+            border: none;
+            color: black;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            width:100px;
+            height:40px;
+            border:2px solid red;
+            font-weight:bold;
+        }
+
+            .button3:hover {
+                color: white;
+                background-color: #84b2dc;
+                border:2px solid black;
+            }
+
+        .button6 {
+            width: 100px;
+            background-color:green;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            margin-left: 50px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid black;
+        }
+
+            .button6:hover {
+                color: white;
+                background-color: #138496;
+            }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -99,7 +159,7 @@
                 <br />
                 <div style="width:100%;text-align:center">
                     <asp:TextBox runat="server" ID="txtNoiDung"  style="width:200px;height:40px" PlaceHolder="Search MaNV"></asp:TextBox>
-                    <asp:Button runat="server" Text="Search" style="width:60px;height:40px;border-radius:4px;background-color:aquamarine" ID="btnSearch" OnClick="btnSearch_Click"/>
+                    <asp:Button runat="server" Text="Search" style="width:60px;height:40px;border-radius:4px;background-color:aquamarine;cursor:pointer" ID="btnSearch" OnClick="btnSearch_Click"/>
                 </div>
                 <br />
                 <div style="width:100%;text-align:center">

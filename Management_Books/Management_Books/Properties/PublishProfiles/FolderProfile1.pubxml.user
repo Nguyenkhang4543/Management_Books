@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>\\sv114\UPDATE_PGM_WEB\APP_NEM\Management_Books</_PublishTargetUrl>
-    <History>True|2024-11-16T05:59:44.4659047Z;True|2024-11-16T11:40:15.9070832+07:00;True|2024-11-16T11:32:58.9232592+07:00;True|2024-11-16T11:19:43.5565455+07:00;</History>
+    <History>True|2024-11-18T02:06:17.9672134Z;True|2024-11-18T08:29:25.3876895+07:00;True|2024-11-16T16:33:29.1449516+07:00;True|2024-11-16T15:52:23.9372974+07:00;True|2024-11-16T15:48:05.0301106+07:00;True|2024-11-16T15:33:46.7887651+07:00;True|2024-11-16T14:11:32.0074395+07:00;True|2024-11-16T14:00:51.3657740+07:00;True|2024-11-16T12:59:44.4659047+07:00;True|2024-11-16T11:40:15.9070832+07:00;True|2024-11-16T11:32:58.9232592+07:00;True|2024-11-16T11:19:43.5565455+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -21,16 +21,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2024 11:32:59</publishTime>
     </File>
     <File Include="bin/ClosedXML.dll">
-      <publishTime>04/22/2020 15:44:40</publishTime>
+      <publishTime>11/16/2024 13:11:51</publishTime>
     </File>
     <File Include="bin/EPPlus.dll">
-      <publishTime>11/19/2021 10:09:08</publishTime>
+      <publishTime>11/16/2024 13:11:51</publishTime>
     </File>
     <File Include="bin/Management_Books.dll">
-      <publishTime>11/16/2024 12:59:42</publishTime>
+      <publishTime>11/18/2024 09:06:15</publishTime>
     </File>
     <File Include="bin/Management_Books.pdb">
-      <publishTime>11/16/2024 12:59:42</publishTime>
+      <publishTime>11/18/2024 09:06:15</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>11/15/2024 11:32:59</publishTime>
@@ -237,7 +237,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2024 11:32:58</publishTime>
     </File>
     <File Include="Css/style.css">
-      <publishTime>11/15/2024 11:32:58</publishTime>
+      <publishTime>11/16/2024 13:45:08</publishTime>
     </File>
     <File Include="Css/style_Login.css">
       <publishTime>11/15/2024 11:32:58</publishTime>
@@ -264,7 +264,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2024 11:32:58</publishTime>
     </File>
     <File Include="Home.aspx">
-      <publishTime>11/16/2024 11:40:02</publishTime>
+      <publishTime>11/18/2024 09:03:55</publishTime>
+    </File>
+    <File Include="Images/Barcode_Enter.png">
+      <publishTime>11/16/2024 16:06:53</publishTime>
+    </File>
+    <File Include="Images/Barcode_Tab.png">
+      <publishTime>11/16/2024 16:06:44</publishTime>
     </File>
     <File Include="Images/NISSEI.png">
       <publishTime>11/15/2024 11:32:58</publishTime>
@@ -273,7 +279,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2024 11:32:58</publishTime>
     </File>
     <File Include="Management_Employees.aspx">
-      <publishTime>11/16/2024 12:59:23</publishTime>
+      <publishTime>11/16/2024 14:09:12</publishTime>
     </File>
     <File Include="Nissei.ico">
       <publishTime>11/15/2024 11:32:58</publishTime>
@@ -375,25 +381,25 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/15/2024 11:32:58</publishTime>
     </File>
     <File Include="SoCatCable.aspx">
-      <publishTime>11/16/2024 09:16:56</publishTime>
+      <publishTime>11/18/2024 09:02:04</publishTime>
     </File>
     <File Include="SoTestLine.aspx">
-      <publishTime>11/16/2024 11:07:08</publishTime>
+      <publishTime>11/18/2024 09:03:04</publishTime>
     </File>
     <File Include="SoThaoTac.aspx">
-      <publishTime>11/16/2024 12:31:48</publishTime>
+      <publishTime>11/18/2024 09:03:14</publishTime>
     </File>
     <File Include="SoThaoTac_Main.aspx">
-      <publishTime>11/16/2024 12:31:34</publishTime>
+      <publishTime>11/18/2024 09:03:24</publishTime>
     </File>
     <File Include="Templates/SampleFileCutCable.xlsx">
-      <publishTime>11/16/2024 06:44:02</publishTime>
+      <publishTime>11/16/2024 13:11:51</publishTime>
     </File>
     <File Include="ViewSwitcher.ascx">
       <publishTime>11/15/2024 11:32:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/16/2024 11:40:14</publishTime>
+      <publishTime>11/16/2024 13:11:51</publishTime>
     </File>
   </ItemGroup>
 </Project>

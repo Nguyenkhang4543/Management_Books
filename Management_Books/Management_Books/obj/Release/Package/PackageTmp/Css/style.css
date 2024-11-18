@@ -86,9 +86,10 @@ table, th, td {
     border-radius: 8px;
 }
 
-.button2:hover {
-    color: red;
-}
+    .button2:hover {
+        color: red;
+        background-color: #337159
+    }
 
 .button3 {
     width: 170px;
@@ -151,6 +152,26 @@ table, th, td {
 }
 
     .button5:hover {
+        color: black;
+        background-color: #138496;
+    }
+
+.button6 {
+    width: 170px;
+    height: 50px;
+    background-color: #8d308d;
+    border: none;
+    color: black;
+    padding: 8px;
+    font-size: 16px;
+    margin-left: 50px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+    .button6:hover {
         color: black;
         background-color: #138496;
     }

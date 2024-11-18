@@ -8,8 +8,65 @@
     <link rel="shortcut icon" type="image/x-icon" href="Nissei.ico" />
     <link rel="stylesheet" href="Css/style.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-    <style type="text/css">
+       <style type="text/css">
+        
+        .button2 {
+            background-color: #006699;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            border:black;
+        }
 
+            .button2:hover {
+                color: red;
+                background-color: #bbdeee;
+            }
+        .button3 {
+            background-color: #e99e40;
+            border: none;
+            color: black;
+            padding: 8px;
+            font-size: 16px;
+            left: 10px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            width:100px;
+            height:40px;
+            border:2px solid red;
+            font-weight:bold;
+        }
+
+            .button3:hover {
+                color: white;
+                background-color: #84b2dc;
+                border:2px solid black;
+            }
+
+        .button6 {
+            width: 100px;
+            background-color:green;
+            border: none;
+            color: white;
+            padding: 8px;
+            font-size: 16px;
+            margin-left: 50px;
+            margin: 2px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid black;
+        }
+
+            .button6:hover {
+                color: white;
+                background-color: #138496;
+            }
         .font {
             font-weight: bold;
             text-align: center;
@@ -24,8 +81,23 @@
         .textbox2{
             width:90%;
         }
-      
     </style>
+   <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input[type="text"], input[type="date"]');
+            inputs.forEach(function (input, index) {
+                input.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        var nextInput = inputs[index + 1];
+                        if (nextInput) {
+                            nextInput.focus();
+                        }
+                    }
+                });
+            });
+        });
+   </script>
 </head>
 <body>
     <form id="form1" runat="server">

@@ -131,6 +131,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\Barcode_Enter.png" />
+    <Content Include="Images\Barcode_Tab.png" />
     <Content Include="Images\NISSEI.png" />
     <Content Include="Login.aspx" />
     <Content Include="Management_Employees.aspx" />
