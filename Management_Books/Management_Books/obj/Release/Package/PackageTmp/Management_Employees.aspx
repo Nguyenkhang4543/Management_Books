@@ -108,7 +108,7 @@
                         <div style="width:580px;display:flex; margin-left:10px;margin-top:10px; margin-bottom:10px">
                         <asp:Dropdownlist runat="server" style="width:50%;margin-right:15px" AutoPostBack="true" ID="ddlBoPhan" OnSelectedIndexChanged="ddlLoaiSo_IndexChanged"></asp:Dropdownlist>
                         <asp:Dropdownlist ID="ddlLoaiSo" style="width:50%" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMa_So" ></asp:Dropdownlist>
-                        <asp:Label ID="lblMa_So" AutoPostBack="true" runat="server"></asp:Label>
+                        <asp:Label ID="lblMa_So" AutoPostBack="true" style="display:none" runat="server"></asp:Label>
                         <asp:Label ID="lblID" runat="server" style="display:none"></asp:Label>
                         </div>
                     </div>

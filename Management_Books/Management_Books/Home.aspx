@@ -81,7 +81,7 @@
 
         .button_home3:hover {
             color: black;
-            background-color: #82c7ff;
+            background-color: #e99e40;
         }
     </style>
 
@@ -150,10 +150,10 @@
         <asp:button Cssclass="button_home2" type="submit" runat="server" Text="Sổ ..." ID="btnSoThaoTac26" Visible="false" />
     </div>
     <div style="margin-top:10px;width:100%;">
-        <asp:label runat="server" ID="Label1" style="margin-left:15px;font-size:25px; font-weight:bold;color:dodgerblue">Other :</asp:label>
+        <asp:label runat="server" ID="lblOther" Visible="false" style="margin-left:15px;font-size:25px; font-weight:bold;color:dodgerblue">Other :</asp:label>
     </div>
      <div style ="padding: 0 10px 10px 10px; text-align: center;">
-        <asp:button Cssclass="button_home3" type="submit" runat="server" Text="Barcode Tab" ID="btnBarcode_Tab" OnClick="btnBarcode_Tab_Click" />
+        <asp:button Cssclass="button_home3" type="submit" runat="server" Text="Barcode Tab" ID="btnBarcode_Tab" Visible="false" OnClick="btnBarcode_Tab_Click" />
     </div>
     <br />
     <br />

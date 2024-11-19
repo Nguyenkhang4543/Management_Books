@@ -19,31 +19,50 @@ namespace Management_Books
         {
             if (!IsPostBack)
             {
-                string MaNV = Session["MaNV"].ToString();
-                DataTable dt = new DataTable();
-                dt = SQLhelper.GetDataToTable("Check_PhanQuyen_TheoSo", new SqlParameter[] {
-                    new SqlParameter("@MaNV", MaNV)
-                });
+                //string MaNV = Session["MaNV"].ToString();
+                //DataTable dt = new DataTable();
+                //dt = SQLhelper.GetDataToTable("Check_PhanQuyen_TheoSo", new SqlParameter[] {
+                //    new SqlParameter("@MaNV", MaNV)
+                //});
 
-                if (dt.Rows.Count > 0)
-                {
-                    string maSo = dt.Rows[0]["Ma_So"].ToString();
-                    bool allbooks = Convert.ToBoolean(dt.Rows[0]["ALL_Books"]);
+                //if (dt.Rows.Count > 0)
+                //{
+                //    string maSo = dt.Rows[0]["Ma_So"].ToString();
+                //    bool allbooks = Convert.ToBoolean(dt.Rows[0]["ALL_Books"]);
 
-                    if (allbooks)
-                    {
-                        btnAdminMain.Visible = true;
-                        btnMainBack.Visible = true;
-                    }
-                    else if (maSo == "3")
-                    {
-                        // Cho Phép Đăng Nhập Với Quyền Thao Tác Sổ
-                    }
-                }
+                //    if (allbooks)
+                //    {
+                //        btnAdminMain.Visible = true;
+                //        btnMainBack.Visible = true;
+                //    }
+                //    else if (maSo == "3")
+                //    {
+                //        // Cho Phép Đăng Nhập Với Quyền Thao Tác Sổ
+                //    }
+                //}
+                //if (Session["MaNV"] == null)
+                //{
+                //    Response.Redirect("Login.aspx");
+                //}
                 if (Session["MaNV"] == null)
                 {
                     Response.Redirect("Login.aspx");
                 }
+                else if (QuyenTruyCapAdmin())
+                {
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    txtFromDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    txtToDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                    Check_ACB_Admin_XacNhan();
+                    Check_ACB_XacNhan();
+                    btnSearch_Click(null, null);
+                    Load_GridView_PhanQuyen();
+                }
+                else if (!QuyenTruyCapTheoPhanQuyen())
+                {
+                    Response.Redirect("Login.aspx");
+                }
+               
                 else
                 {
                     lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
@@ -63,6 +82,42 @@ namespace Management_Books
         protected void btnAddNew_Click(object sender, EventArgs e)
         {
             Add_New_Phieu();
+        }
+        private bool QuyenTruyCapAdmin()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
+                return CheckAdmin.Checked;
+            }
+
+            return false;
+        }
+
+        private bool QuyenTruyCapTheoPhanQuyen()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                foreach (DataRow row in dtPhanQuyenXem.Rows)
+                {
+                    int maSo = Convert.ToInt32(row["Ma_So"]);
+                    if (maSo == 3)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         protected void btnAdminMain_Click(object sender, EventArgs e)
         {

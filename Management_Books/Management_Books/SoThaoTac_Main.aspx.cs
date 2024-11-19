@@ -31,6 +31,46 @@ namespace Management_Books
                 {
                     Response.Redirect("Login.aspx");
                 }
+                else if (QuyenTruyCapAdmin())
+                {
+
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    lblCurrPage.Text = "1";
+                    Load_Gridview();
+
+                    if (Session["Quyen"].ToString() == "1")
+                    {
+                        btnadmin.Visible = true;
+                    }
+                    Load_GridView_PhanQuyen();
+                    DataTable dt = new DataTable();
+                    SqlParameter[] prams = new SqlParameter[] {
+                                    new SqlParameter("@NoiDung","")};
+                    dt = SQLhelper.GetDataToTable("Books_Kashime_SoThaoTac_SearchViewList", prams);
+                    if (dt.Rows.Count > 0)
+                    {
+                        double a = dt.Rows.Count;
+                        double tong = (a / 20);
+                        lblTotal.Text = ((int)Math.Ceiling(tong)).ToString();
+                        if (tong > 1)
+                        {
+                            btnLast.Enabled = true;
+                            btnNext.Enabled = true;
+                        }
+                        else
+                        {
+                            btnLast.Enabled = false;
+                            btnNext.Enabled = false;
+                        }
+                        btnPrevious.Enabled = false;
+                        btnFirst.Enabled = false;
+                    }
+
+                }
+                else if (!QuyenTruyCapTheoPhanQuyen())
+                {
+                    Response.Redirect("Login.aspx");
+                }
                 else
                 {
 
@@ -65,6 +105,7 @@ namespace Management_Books
                         btnPrevious.Enabled = false;
                         btnFirst.Enabled = false;
                     }
+
                 }
             }
         }
@@ -94,6 +135,42 @@ namespace Management_Books
             taskMain.Visible = true;
             btnadmin.Visible = true;
             btnHome.Visible = false;
+        }
+        private bool QuyenTruyCapAdmin()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
+                return CheckAdmin.Checked;
+            }
+
+            return false;
+        }
+
+        private bool QuyenTruyCapTheoPhanQuyen()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                foreach (DataRow row in dtPhanQuyenXem.Rows)
+                {
+                    int maSo = Convert.ToInt32(row["Ma_So"]);
+                    if (maSo == 2)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         protected void btnCreate_Click(object sender, EventArgs e)
         {
