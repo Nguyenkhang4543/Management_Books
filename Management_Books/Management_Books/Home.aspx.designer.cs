@@ -357,13 +357,13 @@ namespace Management_Books
         protected global::System.Web.UI.WebControls.Button btnSoThaoTac26;
 
         /// <summary>
-        /// Label1 control.
+        /// lblOther control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblOther;
 
         /// <summary>
         /// btnBarcode_Tab control.

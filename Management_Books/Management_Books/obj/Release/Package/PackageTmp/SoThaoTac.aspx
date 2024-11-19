@@ -112,6 +112,7 @@
                 <td style="border-style:none; border-spacing: unset; text-align: left; background-color:#006699; width:15%" >
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Back" ID="btnBack" OnClick="btnBack_Click"  />
                     <asp:Button CssClass="button2" runat="server" Style="margin-left: 8px" Text="Save" ID="btnSave" OnClick="btnSave_Click"  />
+                     <asp:Checkbox runat="server" style="display:none" ID="CheckAdmin"></asp:Checkbox>
                 </td>
                 <td style="border-spacing: unset; font-family: 'times New Roman', Times, serif; background-color: #006699; font-size: 30px; text-align: center; border: none; font-weight: bold;">
                     <p style="padding: 0; margin: 0; color: #FFFFFF;">MANAGEMENT BOOKS PRODUCTION</p>

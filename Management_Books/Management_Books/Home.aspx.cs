@@ -42,9 +42,14 @@ namespace Management_Books
                         lblSoKashime.Visible = true;
                         btnSoThaoTac.Visible = true;
                         btnSoTestLine.Visible = true;
+
                         ////////////////////////////////// So Line Cut //////////////////////////////////
                         lblSoLineCut.Visible = true;
                         btnSoCatCable.Visible = true;
+
+                        ////////////////////////////////// ---Other--- //////////////////////////////////
+                        lblOther.Visible = true;
+                        btnBarcode_Tab.Visible = true;
 
                         ////////////////////////////////// So Test //////////////////////////////////
                         btnSoThaoTac1.Visible = true;
@@ -87,16 +92,20 @@ namespace Management_Books
                             {
                                 btnSoThaoTac.Visible = true;
                                 lblSoKashime.Visible = true;
+                                btnBarcode_Tab.Visible = true;
                             }
                             if (maSo == 3)
                             {
                                 btnSoTestLine.Visible = true;
                                 lblSoKashime.Visible = true;
+                                btnBarcode_Tab.Visible = true;
+                                lblOther.Visible = true;
                             }
                             if (maSo == 4)
                             {
                                 btnSoCatCable.Visible = true;
                                 lblSoLineCut.Visible = true;
+                                btnBarcode_Tab.Visible = true;
                             }
                         }
                     }

@@ -25,7 +25,38 @@ namespace Management_Books
         {
             if (!IsPostBack)
             {
+                //if (Session["MaNV"] == null)
+                //{
+                //    Response.Redirect("Login.aspx");
+                //}
                 if (Session["MaNV"] == null)
+                {
+                    Response.Redirect("Login.aspx");
+                }
+                else if (QuyenTruyCapAdmin())
+                {
+                    lblTenDanhNhap.Text = convertToUnSign3(Session["Ten"].ToString());
+                    lblID_Phieu.Text = Request.QueryString["IDPhieu"];
+                    if (!string.IsNullOrEmpty(lblID_Phieu.Text))
+                    {
+                        string Decrpyt = ThaoTacDuLieu.Decrypt_V1(lblID_Phieu.Text, "NisseiTL1LGMyTho");
+                        Load_Data_ID_Phieu(Decrpyt);
+                    }
+                    else
+                    {
+                        SetInitialRow();
+
+                    }
+                    if (Check_NguoiXacNhan() == true)
+                    {
+                        foreach (GridViewRow row in GridView1.Rows)
+                        {
+                            TextBox OkeDon = (TextBox)row.FindControl("txtOkDon");
+                            OkeDon.Enabled = true;
+                        }
+                    }
+                }
+                else if (!QuyenTruyCapTheoPhanQuyen())
                 {
                     Response.Redirect("Login.aspx");
                 }
@@ -72,6 +103,43 @@ namespace Management_Books
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        }
+
+        private bool QuyenTruyCapAdmin()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                CheckAdmin.Checked = dtPhanQuyenXem.Rows[0].Field<bool>("ALL_Books");
+                return CheckAdmin.Checked;
+            }
+
+            return false;
+        }
+
+        private bool QuyenTruyCapTheoPhanQuyen()
+        {
+            DataTable dtPhanQuyenXem = SQLhelper.ExecuteDataTable("Check_PhanQuyen", new SqlParameter[]
+            {
+        new SqlParameter("@MSNV", Session["MaNV"].ToString())
+            });
+
+            if (dtPhanQuyenXem.Rows.Count > 0)
+            {
+                foreach (DataRow row in dtPhanQuyenXem.Rows)
+                {
+                    int maSo = Convert.ToInt32(row["Ma_So"]);
+                    if (maSo == 2)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         private bool Check_NguoiXacNhan()
         {
